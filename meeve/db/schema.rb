@@ -20,15 +20,35 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.date    "end",                      :null => false
     t.integer "flag"
   end
+  
+  create_table "tags", :primary_key => "tid", :force => true do |t|
+  	t.string "tag",		:null => false
+  end
+  
+  create_table "event_tags", :id => false, :force => true do |t|
+  	t.integer "tfid",	:null => false
+  	t.integer "efid",	:null => false
+  end
 
-  create_table "user_event", :primary_key => "ue_id", :force => true do |t|
+  add_index "event_tags", ["tfid"], :name => "tfid"
+  add_index "event_tags", ["efid"], :name => "efid"
+  
+  create_table "view_events", :id => false, :force => true do |t|
+  	t.integer "efid",	:null => false
+  	t.integer "afid",	:null => false
+  end
+  
+  add_index "view_evnets", ["efid"], :name => "efid"
+  add_index "view_evnets", ["afid"], :name => "afid"
+
+  create_table "user_events", :primary_key => "ue_id", :force => true do |t|
     t.integer		"recur_type",  			:null => false
     t.integer 		"recur_interval", 		:null => false
     t.binary    	"recur_data",  			:null => false
     t.date          "recur_end",        	:null => false
-    t.integer 		"eid"
+    t.integer 		"eid",					:null => false
   end
   
-  add_index "user_event", ["eid"], :name => "eid"
+  add_index "user_events", ["eid"], :name => "eid"
 
 end
