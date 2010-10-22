@@ -26,10 +26,11 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   end
 
   create_table "user_event", :primary_key => "ue_id", :force => true do |t|
-    t.string  "title",  :default => "",   :null => false
-    t.boolean "active", :default => true, :null => false
-    t.text    "body",                     :null => false
-    t.integer "eid"
+    t.integer		"recur_type",  			:null => false
+    t.integer 		"recur_interval", 		:null => false
+    t.binary    	"recur_data",  			:null => false
+    t.date          "recur_end",                   				:null => false
+    t.integer 		"eid"
   end
   
   add_index "user_event", ["eid"], :name => "eid"
