@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   	t.integer "afid",	:null => false
   end
   
-  add_index "view_evnets", ["efid"], :name => "efid"
-  add_index "view_evnets", ["afid"], :name => "afid"
+  add_index "view_events", ["efid"], :name => "efid"
+  add_index "view_events", ["afid"], :name => "afid"
 
   create_table "user_events", :primary_key => "ue_id", :force => true do |t|
     t.integer		"recur_type",  			:null => false
