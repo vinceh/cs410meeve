@@ -14,11 +14,24 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
 
   create_table "events", :primary_key => "eid", :force => true do |t|
     t.string  "pic"
-    t.string  "desc",     :null => false
-    t.string  "location", :null => false
-    t.date    "start",    :null => false
-    t.date    "end",      :null => false
+    t.string  "desc",     :default => "", :null => false
+    t.string  "location", :default => "", :null => false
+    t.date    "start",                    :null => false
+    t.date    "end",                      :null => false
     t.integer "flag"
   end
+
+  create_table "testtable", :id => false, :force => true do |t|
+    t.integer "random"
+  end
+
+  create_table "user_event", :primary_key => "ue_id", :force => true do |t|
+    t.string  "title",  :default => "",   :null => false
+    t.boolean "active", :default => true, :null => false
+    t.text    "body",                     :null => false
+    t.integer "eid"
+  end
+  
+  add_index "user_event", ["eid"], :name => "eid"
 
 end
