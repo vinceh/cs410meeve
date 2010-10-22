@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   	t.boolean "active", :default => true, :null => false
   	t.string "email", :default => ""
   	t.string "phone_number", :default => ""
-  	t.booelan "facebook", :default => false, :null => false
+  	t.boolean "facebook", :default => false, :null => false
   end
   
   create_table "follows", :id => false, :force => true do |t|
