@@ -21,15 +21,11 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.integer "flag"
   end
 
-  create_table "testtable", :id => false, :force => true do |t|
-    t.integer "random"
-  end
-
   create_table "user_event", :primary_key => "ue_id", :force => true do |t|
     t.integer		"recur_type",  			:null => false
     t.integer 		"recur_interval", 		:null => false
     t.binary    	"recur_data",  			:null => false
-    t.date          "recur_end",                   				:null => false
+    t.date          "recur_end",        	:null => false
     t.integer 		"eid"
   end
   
