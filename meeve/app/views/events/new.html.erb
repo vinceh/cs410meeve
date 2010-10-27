@@ -1,0 +1,7 @@
+<% form_for @event do |f| %>
+Desciption: <%= f.text_field :desc %><br>
+Location: <%= f.text_field :location %><br>
+Start: <%= date_select 'event', :start %><br>
+End: <%= date_select 'event', :end %>
+<%= f.submit 'Create' %>
+<% end %>

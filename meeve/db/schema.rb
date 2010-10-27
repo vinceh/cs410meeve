@@ -11,6 +11,26 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20101022022539) do
+  
+  create_table "accounts", :primary_key => "aid", :force => true do |t|
+  	t.string "login_name", :null => false
+  	t.string "password", :null => false
+  	t.string "first_name", :default => "", :null => false
+  	t.string "last_name", :default => "", :null => false
+  	t.date "birthdate", :null => false
+  	t.boolean "active", :default => true, :null => false
+  	t.string "email", :default => ""
+  	t.string "phone_number", :default => ""
+  	t.boolean "facebook", :default => false, :null => false
+  end
+  
+  create_table "follows", :id => false, :force => true do |t|
+  	t.integer "follower", :null => false
+  	t.integer "followee", :null => false
+  end
+  
+  add_index "follows", ["follower"], :name => "follower"
+  add_index "follows", ["followee"], :name => "followee"
 
   create_table "events", :primary_key => "eid", :force => true do |t|
     t.string  "pic"
@@ -47,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.binary    	"recur_data",  			:null => false
     t.date          "recur_end",        	:null => false
     t.integer 		"eid",					:null => false
+    t.integer		"aid",					:null => false
   end
   
   add_index "user_events", ["eid"], :name => "eid"
