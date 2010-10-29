@@ -11,7 +11,6 @@ class AccountsController < ApplicationController
 
   def new
     @account = Account.new
- 
     
     if request.post?
       @account = Account.new(params[:account])
@@ -19,26 +18,22 @@ class AccountsController < ApplicationController
       @account.facebook = 0
 
       if @account.save
-        @account.update_attribute(params[:account])  
+        # @account.update_attribute(params[:account])  
         flash[:success] = "Your account has been successfully created!"
         redirect_to :action => :index
-      
-  
       end
     end
   end
   
- 
-  
   def edit
     @account = Account.find(params[:aid])
     
-    if request.post? && @account.update_attributes(params[:account])
-      flash[:success] = 'Account was successfully updated.'
-      redirect_to :action => :index
+    if request.put?
+    	@account = Account.find(params[:aid])
+    	@account.update_attributes(params[:account])
+		flash[:success] = 'Account was successfully updated.'
+    	redirect_to :action => :index  
     end
   end
-
-  
  
 end

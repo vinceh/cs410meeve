@@ -5,25 +5,25 @@
 	<fieldset>
 		<legend>Account information</legend>
 		<ul>
+			
+			<% if pass %>
+				<li>
+					<%= form.label :password, "Password"%>
+					<%= form.password_field :password %>
+				</li>
+				<li>
+					<%= form.label :password_confirmation, "Confirm Password"%>
+					<%= form.password_field :password_confirmation %>
+	 			</li>
+ 			<% end %>
 			<li>
-				<%= form.label :password, "Password <span class=\"mandatory\">*</span>"%>
-				<%= form.password_field :password %>
-			</li>
-			<li>
-				<%= form.label :password_confirmation, "Confirm Password <span class=\"mandatory\">*</span>"%>
-				<%= form.password_field :password_confirmation %>
- 			</li>
-			<li>
-				<%= form.label :first_name, "First Name: <span class=\"mandatory\">*</span>"%>
+				<%= form.label :first_name, "First Name:"%>
 				<%= form.text_field :first_name %>
 			</li>
 			<li>
-				<%= form.label :last_name, "Last Name: <span class=\"mandatory\">*</span>"%>
+				<%= form.label :last_name, "Last Name:"%>
 				<%= form.text_field :last_name %>
 			</li>
-			
-		
-			
 			
 		</ul>
 	</fieldset>
@@ -31,11 +31,7 @@
 		<legend>User information</legend>
 		<ul>
 			<li>
-				<%= form.label :birthdate, "Date of Birth: <span class=\"mandatory\">*</span>"%>
-				<%= form.date_select :birthdate, :start_year => Time.now.year-80, :end_year => Time.now.year-10 %>
-			</li>
-			<li>
-				<%= form.label :email, "E-mail: <span class=\"mandatory\">*</span>"%>
+				<%= form.label :email, "E-mail: "%>
 				<%= form.text_field :email %>
 			</li>
 			<li>

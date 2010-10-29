@@ -3,8 +3,8 @@
 @page_heading 	= 'Register'
 %>
 <% form_for @account, :url => {:action => :new} do |f| %>
-		
-	<%= render :partial => "form_account_info", :locals => {:form => f}%>
+	<%= render "shared/error_messages", :target => @account %>
+	<%= render :partial => "form_account_info", :locals => {:form => f, :pass => true}%>
 	
 	<p><%= f.submit 'Create' %></p>
 <% end %>

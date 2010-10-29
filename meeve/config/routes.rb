@@ -1,4 +1,10 @@
 Meeve::Application.routes.draw do
+	
+  resources :tests
+
+  # resources :accounts
+  
+  match ':controller(/:action(/:id))'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
