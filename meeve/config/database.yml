@@ -4,6 +4,7 @@ development:
   adapter: mysql
   database: meeve_db
   user: root
+  password: carina		
   pool: 5
   timeout: 5000
 

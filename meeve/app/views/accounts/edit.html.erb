@@ -1,0 +1,13 @@
+<%
+@page_title 	= 'Edit Account'
+@page_heading 	= 'Edit Account'
+%>
+
+
+<% form_for @account, :url => {:action => :edit, :aid => @account.aid} do |f| %>
+
+	<%= render :partial => "form_account_info", :locals => {:form => f, :pass => false}%>
+	<p><%= f.submit 'Update' %></p>
+<% end %>
+
+<%= link_to 'Back',  :action => :index %>

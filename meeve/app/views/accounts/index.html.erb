@@ -1,0 +1,42 @@
+<%
+@page_title 	= 'Accounts'
+@page_heading 	= 'Accounts'
+%>
+
+
+<p>Number of accounts: <%=@accounts.count%></p>
+<table>
+  <tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>E-mail</th>
+	<th>Phone Number</th>
+	<th>BirthDate</th>
+  </tr>
+
+<% @accounts.each do |accounts| %>
+  <tr>
+    <td>
+		<%=accounts.last_name %>
+	</td>
+	<td>
+		<%=accounts.first_name %>
+	</td>
+	<td>
+		<a href="<%=accounts.email %>"><%=h accounts.email %></a>
+	</td>
+	<td>
+		<%=accounts.phone_number %>
+	</td>
+	<td>
+		<%=accounts.birthdate %>
+	</td>
+	
+    <td>
+    <%= link_to 'Edit', :action => :edit, :aid => accounts.aid %></td>
+  </tr>
+<% end %>
+</table>
+<br>
+<%= link_to 'Create account', :action => :new %><br>
+
