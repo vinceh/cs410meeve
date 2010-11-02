@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   	t.boolean "facebook", :default => false, :null => false
   end
   
+# A relationship table
   create_table "follows", :id => false, :force => true do |t|
   	t.integer "follower", :null => false
   	t.integer "followee", :null => false
@@ -33,18 +34,19 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   add_index "follows", ["followee"], :name => "followee"
 
   create_table "events", :primary_key => "eid", :force => true do |t|
-    t.string  "pic"
-    t.string  "desc",     :default => "", :null => false
-    t.string  "location", :default => "", :null => false
-    t.date    "start",                    :null => false
-    t.date    "end",                      :null => false
-    t.integer "flag"
+    t.string    "pic"
+    t.string    "desc",     :default => "", :null => false
+    t.string    "location", :default => "", :null => false
+    t.datetime  "start_date",               :null => false
+    t.datetime  "end_date",                 :null => false
+    t.integer   "flag"
   end
   
   create_table "tags", :primary_key => "tid", :force => true do |t|
   	t.string "tag",		:null => false
   end
   
+# A relationship table
   create_table "event_tags", :id => false, :force => true do |t|
   	t.integer "tfid",	:null => false
   	t.integer "efid",	:null => false
@@ -53,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   add_index "event_tags", ["tfid"], :name => "tfid"
   add_index "event_tags", ["efid"], :name => "efid"
   
+# A relationship table
   create_table "view_events", :id => false, :force => true do |t|
   	t.integer "efid",	:null => false
   	t.integer "afid",	:null => false

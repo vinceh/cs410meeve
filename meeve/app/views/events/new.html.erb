@@ -1,7 +1,8 @@
-<% form_for @event do |f| %>
-Desciption: <%= f.text_field :desc %><br>
-Location: <%= f.text_field :location %><br>
-Start: <%= date_select 'event', :start %><br>
-End: <%= date_select 'event', :end %>
+<% form_for @event, :url => { :acion => :new} do |f| %>
+
+	<%= render "shared/error_messages", :target => @event %>
+	<%= render "form_event_info", :form => f %>
+	<%= link_to "< Back", :action => :index %>
+	
 <%= f.submit 'Create' %>
 <% end %>

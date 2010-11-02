@@ -1,12 +1,12 @@
 <h1>Events</h1>
 
 <% @events.each do |event| %>
-<%= event.desc %><br>
-<%= event.location %><br>
-<%= event.start %><br>
-<%= event.end %><br>
-<%= link_to 'Edit', :action => 'edit', :id => event %>
+	<%= event.desc %><br>
+	<%= event.location %><br>
+	<%= event.start_date %><br>
+	<%= event.end_date %><br>
+	<%= link_to 'Edit', :action => :edit, :eid => event.eid %>
 <br>
 <% end %>
 
-<%= link_to 'Create', new_event_path %><br>
+<%= link_to 'Create', :action => :new %><br>
