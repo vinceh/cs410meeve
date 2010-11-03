@@ -1,7 +1,5 @@
 Meeve::Application.routes.draw do
 	
-  resources :tests
-
   # resources :accounts
   
   match ':controller(/:action(/:id))'

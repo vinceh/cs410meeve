@@ -1,0 +1,20 @@
+<%
+# Partial that generates a login form
+# Parameters: object_name, username_field_name, password_field_name
+%>
+<% form_tag do -%>
+	<fieldset>
+		<legend>Login</legend>
+		<ul>
+			<li>
+				<%= label 			object_name, "Email"%>
+				<%= text_field 		object_name, username_field_name %>
+			</li>
+			<li>
+				<%= label 			object_name, "Password"%>
+				<%= password_field 	object_name, password_field_name %>
+			</li>
+			<li><%= submit_tag "Log in" %></li>
+		</ul>
+	</fieldset>
+<% end -%>

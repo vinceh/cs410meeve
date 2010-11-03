@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   	t.string "password", :null => false
   	t.string "first_name", :default => "", :null => false
   	t.string "last_name", :default => "", :null => false
-  	t.date "birthdate", :null => false
   	t.boolean "active", :default => true, :null => false
   	t.string "email", :default => ""
   	t.string "phone_number", :default => ""
