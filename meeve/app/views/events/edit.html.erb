@@ -1,5 +1,8 @@
 <% form_for @event, :url => { :action => :edit, :eid => @event.eid } do |f| %>
+
 	<%= render :partial => "form_event_info", :locals => {:form => f} %>
-<%= link_to "< Back", :action => :index %>
+	
+<%= link_to "Back", :action => :index %>
 <%= f.submit 'Create' %>
+
 <% end %>

@@ -30,4 +30,17 @@ class EventsController < ApplicationController
       redirect_to(:action => "index")
     end
   end
+  
+  def remove
+    @event = Event.find(params[:eid])
+    
+    if request.put?
+      @event = Event.find(params[:eid])
+      if (@event != nil)
+        @event.destroy
+        flash[:success] = "Your event has been successfully removed."
+        redirect_to(:action => "index")
+      end
+    end
+  end
 end

@@ -6,4 +6,4 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-Event.create(:desc => 'Jake\'s BBQ', :location => 'UBC', :start_date => Time.now, :end_date => Time.now)
+Event.create(:title => 'Party', :desc => 'Jake\'s BBQ', :location => 'UBC', :start_date => Time.now, :end_date => Time.now)

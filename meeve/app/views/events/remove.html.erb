@@ -1,0 +1,5 @@
+<% form_for @event, :url => { :action => :remove, :eid => @event.eid } do |f| %>
+Are you sure you want to remove this event from the pool?
+<%= f.submit 'Yes' %>
+<%= link_to "No", :action => :index %>
+<% end %>

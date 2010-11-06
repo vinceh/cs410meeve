@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
 
   create_table "events", :primary_key => "eid", :force => true do |t|
     t.string    "pic"
+    t.string    "title",                    :null => false
     t.string    "desc",     :default => "", :null => false
     t.string    "location", :default => "", :null => false
     t.datetime  "start_date",               :null => false

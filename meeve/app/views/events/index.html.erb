@@ -1,12 +1,15 @@
 <h1>Events</h1>
 
 <% @events.each do |event| %>
+
+	<h3><%= event.title %></h3>
 	<%= event.desc %><br>
-	<%= event.location %><br>
-	<%= event.start_date %><br>
-	<%= event.end_date %><br>
+	Where: <%= event.location %><br>
+	From: <%= event.start_date %><br>
+	Until: <%= event.end_date %><br>
+	
 	<%= link_to 'Edit', :action => :edit, :eid => event.eid %>
-<br>
+	<%= link_to 'Remove', :action => :remove, :eid => event.eid %><br>
 <% end %>
 
 <%= link_to 'Create', :action => :new %><br>
