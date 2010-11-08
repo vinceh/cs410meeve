@@ -1,7 +1,8 @@
 class CommentController < ApplicationController
   def new
-    @comment = Comment.new
-    
+    @event = Event.find(params[:eid])
+    @comment = @event.comments.create(params[:comment])
+    redirect_to(:action => "events/index")
     
   end
 

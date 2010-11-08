@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
 # Comment table
 
   create_table "comments", :primary_key => "cid", :force => true do |t|
+    t.string   "commenter", :null => false
     t.string   "body",      :null => false
     t.datetime "timestamp", :null => false
     t.integer  "eid",       :null => false
