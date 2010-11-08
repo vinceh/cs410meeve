@@ -1,5 +1,9 @@
 Meeve::Application.routes.draw do
 	
+  get "comment/new"
+
+  get "comment/remove"
+
   # resources :accounts
   
   match ':controller(/:action(/:id))'
