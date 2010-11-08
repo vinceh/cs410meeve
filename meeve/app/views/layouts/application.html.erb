@@ -7,7 +7,16 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-				
+
+<% flash.each  do |key, msg| %>
+				<div class="flash_<%=key%>">
+					<div class="flash_close_button">
+						<a href="#" onclick="$('.flash_<%=key%>').hide(); return false">X</a>
+					</div>
+					<%=msg%>
+				</div>
+<% end %>	
+
 <%= yield %>
 
 </body>

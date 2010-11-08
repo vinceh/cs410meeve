@@ -1,0 +1,25 @@
+<fieldset>
+	<legend>Event Information</legend>
+	<ul>
+		<li>
+			<%= form.label :title, "Title:" %>
+			<%= form.text_field :title %>
+		</li>
+		<li>
+			<%= form.label :desc, "Description:" %>
+			<%= form.text_field :desc %>
+		</li>
+		<li>
+			<%= form.label :location, "Location:" %>
+			<%= form.text_field :location %>
+		</li>
+		<li>
+			<%= form.label :start_date, "Start Date:" %>
+			<%= form.datetime_select :start_date %>			
+		</li>
+		<li>
+			<%= form.label :end_date, "End Date:" %>
+			<%= form.datetime_select :end_date %>
+		</li>
+	</ul>
+</fieldset>

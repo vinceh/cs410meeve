@@ -1,0 +1,6 @@
+Welcome to meeve!! :)
+
+<%= link_to 'Register',  :controller => :accounts, :action => :new %>
+<%= link_to 'Forgot password?',  :action => :recover_password %>
+
+<%= render :partial => 'main/login_form', :locals => { :object_name => 'account', :username_field_name => 'email', :password_field_name => 'password' }%>
