@@ -4,7 +4,7 @@ development:
   adapter: mysql
   database: meeve_db
   user: root
-  password: carina		
+  password: a1231618		
   pool: 5
   timeout: 5000
 

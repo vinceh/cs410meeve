@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   
   add_index "view_events", ["efid"], :name => "efid"
   add_index "view_events", ["afid"], :name => "afid"
+  
+# Comment table
+
+  create_table "comments", :primary_key => "cid", :force => true do |t|
+    t.string   "body",      :null => false
+    t.datetime "timestamp", :null => false
+    t.integer  "eid",       :null => false
+  end
 
   create_table "user_events", :primary_key => "ue_id", :force => true do |t|
     t.integer		"recur_type",  			:null => false
