@@ -1,5 +1,5 @@
 <h1>Events</h1>
-
+<%= link_to 'Create an Event', :action => :new %><br>
 <% @events.each do |event| %>
 
 	<h3><%= event.title %></h3>
@@ -10,6 +10,25 @@
 	
 	<%= link_to 'Edit', :action => :edit, :eid => event.eid %>
 	<%= link_to 'Remove', :action => :remove, :eid => event.eid %><br>
+	
+	<h2>Add a comment:</h2>
+	<%= form_for([event, event.comments.build]) do |f| %>
+	
+ 	<div class="field">
+	    <%= f.label :commenter %><br />
+	    <%= f.text_field :commenter %>
+ 	</div>
+  	<div class="field">
+	    <%= f.label :body %><br />
+	    <%= f.text_area :body %>
+ 	 </div>
+	 <div class="hidden_field">
+	 	<%= f.label :timestamp %>
+		<%= f.text_field :timestamp  %>
+	</div>
+  	<div class="actions">
+   	 	<%= f.submit %>
+ 	</div>
+	<% end %>
+	
 <% end %>
-
-<%= link_to 'Create', :action => :new %><br>
