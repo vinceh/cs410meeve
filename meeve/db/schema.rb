@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   add_index "follows", ["follower"], :name => "follower"
   add_index "follows", ["followee"], :name => "followee"
 
-  create_table "events", :primary_key => "eid", :force => true do |t|
+  create_table "events", :primary_key => "event_id", :force => true do |t|
     t.string    "pic"
     t.string    "title",                    :null => false
     t.string    "desc",     :default => "", :null => false
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.string   "commenter", :null => false
     t.string   "body",      :null => false
     t.datetime "timestamp", :null => false
-    t.integer  "eid",       :null => false
+    t.integer  "event_id",      :null => false
   end
 
   create_table "user_events", :primary_key => "ue_id", :force => true do |t|
