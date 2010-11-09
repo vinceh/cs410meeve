@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  set_primary_key :eid
+  set_primary_key :event_id
   
   validates_presence_of :desc, :location, :start_date, :end_date
   
