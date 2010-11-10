@@ -1,0 +1,4 @@
+var commenter = $("input#comment_commenter").val();
+var body = $("input#comment_body").val();
+var id = <%= @comment.cid %>;
+$("div.comment_block").append("<b>" + commenter + "</b> " + body + " <a href=\"/comments/remove?cid=" + id + "\">x</a><br/>")

@@ -1,0 +1,46 @@
+<table>
+  <tr>
+    <th>Last Name</th>
+    <td>
+    	<%=@friend.last_name %>
+    </td>
+  </tr>
+  
+  <tr>
+  	<th>First Name</th>
+  	<td>
+		<%=@friend.first_name %>
+	</td>
+  </tr>
+  
+  <tr>
+    <th>E-mail</th>
+    <td>
+		<a href="<%=@friend.email %>"><%=h @friend.email %></a>
+	</td>
+  </tr>
+  
+  <tr>
+  	<th>Phone Number</th>
+  	<td>
+		<%=@friend.phone_number %>
+	</td>
+  </tr>
+  
+
+</table>
+
+	
+<br>
+	
+	
+<% if (nil == @alrdy_follow) %> 
+	<%= link_to 'Follow', :action => :follow, :aid => @friend.aid %>
+<% else %>
+	<%= link_to 'Unfollow', :action => :unfollow, :aid => @friend.aid %>
+<% end %>
+
+
+
+<br>
+<%= link_to 'Back', :action => :show %><br>

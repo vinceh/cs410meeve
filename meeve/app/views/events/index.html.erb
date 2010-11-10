@@ -1,34 +1,34 @@
+<title></title>
+
 <h1>Events</h1>
 <%= link_to 'Create an Event', :action => :new %><br>
+<%= flash[:msg] unless flash[:msg] == nil%>
 <% @events.each do |event| %>
 
 	<h3><%= event.title %></h3>
 	<%= event.desc %><br>
-	Where: <%= event.location %><br>
-	From: <%= event.start_date %><br>
-	Until: <%= event.end_date %><br>
+	Where: <%= event.location %><br/>
+	From: <%= event.start_date %><br/>
+	Until: <%= event.end_date %><br/>
 	
-	<%= link_to 'Edit', :action => :edit, :eid => event.eid %>
-	<%= link_to 'Remove', :action => :remove, :eid => event.eid %><br>
+	<%= link_to 'Edit', :action => :edit, :eid => event.event_id %>
+	<%= link_to 'Remove', :action => :remove, :eid => event.event_id %><br>
 	
-	<h2>Add a comment:</h2>
-	<%= form_for([event, event.comments.build]) do |f| %>
-	
- 	<div class="field">
-	    <%= f.label :commenter %><br />
-	    <%= f.text_field :commenter %>
- 	</div>
-  	<div class="field">
-	    <%= f.label :body %><br />
-	    <%= f.text_area :body %>
- 	 </div>
-	 <div class="hidden_field">
-	 	<%= f.label :timestamp %>
-		<%= f.text_field :timestamp  %>
+	<div class="comment_block">
+		<% event.comments.each do |c| %>
+			<%= content_tag :div, :id => "comment" + c.cid.to_s do %>
+				<b><%= c.commenter %></b>
+				<%= c.body %>
+				<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %><br/>
+			<% end %>
+		<% end %>
 	</div>
-  	<div class="actions">
-   	 	<%= f.submit %>
- 	</div>
-	<% end %>
 	
+	<%= form_for([event, event.comments.build], :remote => true ) do |f| %>
+		    <%= f.hidden_field :commenter, :value => "Guest" %>
+		    <%= f.text_field :body, :value => "Write a comment..." %>
+		 	<%= f.hidden_field :timestamp, :value => Time.now %>
+		  	<br/>
+		    <%= f.submit "Comment" %>
+	<% end %>	
 <% end %>
