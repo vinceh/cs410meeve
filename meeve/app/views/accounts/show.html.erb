@@ -1,13 +1,24 @@
-<p>
-  <b>First name:</b>
-  <%=h @account.first_name %>
-</p>
+<p>Number of accounts: <%=@accts.count%></p>
+<table>
+  <tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+   
+  </tr>
 
-<p>
-  <b>Last name:</b>
-  <%=h @account.last_name %>
-</p>
+<% @accts.each do |accts| %>
+  <tr>
+    <td>
+		<%=accts.last_name %>
+	</td>
+	<td>
+		<%=accts.first_name %>
+	</td>
+	<td>
+    <%= link_to 'view profile', :action => :friend_profile, :aid => accts.aid %>
+    </td>
+  </tr>
+<% end %>
+</table>
 
-
-<%= link_to 'Back',  :action => :index %>
-
+<%= link_to 'Back', :controller => :main, :action => :profile %>
