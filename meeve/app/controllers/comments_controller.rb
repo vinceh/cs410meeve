@@ -4,7 +4,12 @@ class CommentsController < ApplicationController
     if request.post?
         @event = Event.find(params[:event_id])
         @comment = @event.comments.create(params[:comment])
-        redirect_to :controller => :events 
+     end
+
+    if request.xhr?  
+      render "comments/create"     
+    else
+      redirect_to :controller => :events
     end
   end
 
@@ -12,9 +17,13 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:cid])
     if @comment != nil
       @comment.destroy
-      redirect_to :controller => :events
     end
     
+    if request.xhr?
+      render "comments/remove"
+    else
+      redirect_to :controller => :events
+    end    
   end
 
 end
