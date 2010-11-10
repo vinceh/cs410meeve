@@ -26,7 +26,7 @@
 	
 	<%= form_for([event, event.comments.build], :remote => true ) do |f| %>
 		    <%= f.hidden_field :commenter, :value => "Guest" %>
-		    <%= f.text_field :body, :value => "Write a comment..." %>
+		    <%= f.text_field :body, :class => "commentBox" %>
 		 	<%= f.hidden_field :timestamp, :value => Time.now %>
 		  	<br/>
 		    <%= f.submit "Comment" %>
