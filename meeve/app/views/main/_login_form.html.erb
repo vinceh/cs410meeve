@@ -3,18 +3,18 @@
 # Parameters: object_name, username_field_name, password_field_name
 %>
 <% form_tag do -%>
-	<fieldset>
-		<legend>Login</legend>
-		<ul>
-			<li>
-				<%= label 			object_name, "Email"%>
+	<div class="login_form">
+			<div>
+				<%= label 			object_name, "Email:"%>
 				<%= text_field 		object_name, username_field_name %>
-			</li>
-			<li>
-				<%= label 			object_name, "Password"%>
+			</div>
+			<div>
+				<%= label 			object_name, "Password:"%>
 				<%= password_field 	object_name, password_field_name %>
-			</li>
-			<li><%= submit_tag "Log in" %></li>
-		</ul>
-	</fieldset>
+			</div>
+			<div id="submit">
+				<%= link_to 'Forgot password?',  :action => :recover_password %>
+				<%= submit_tag "Log in", :id => "login_submit" %>
+			</div>
+	</div>
 <% end -%>
