@@ -23,16 +23,18 @@
 		padding: 5px 0px 5px 0px;
 		width: 200px;
 		border-radius: 10px;
-		border: 1px solid #d6ab29;
+		/*border: 1px solid #d6ab29;*/
 		font-family: arial;
 		font-size: 30px;
-		background: #ffcc33;
+		/*background: #ffcc33;*/
+		background: -webkit-gradient(linear, left top, left bottom, from(#deb22c), to(#f5c32c));
 		float: right;
 		margin-right: 100px;
 	}
 	
 	.main_container #sign_up:hover {
-		background: #f5c32c;
+		/*background: #f5c32c;*/
+		background: -webkit-gradient(linear, left top, left bottom, from(#ca9f1d), to(#edbc26));
 		cursor: pointer;
 	}
 	
