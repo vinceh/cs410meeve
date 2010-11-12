@@ -1,27 +1,28 @@
-Welcome to meeve!! :)
+<div class="main_container">
 
-<%= link_to 'Register',  :controller => :accounts, :action => :new %>
-<%= link_to 'Forgot password?',  :action => :recover_password %>
+	<%= render :partial => 'main/login_form', :locals => { :object_name => 'account', :username_field_name => 'email', :password_field_name => 'password' }%>
+	<%= image_tag("logo/meeve2.png") %>
+	
+	<p id="main_para"> Meeve is a spontaneous, fun, and easy.  Decide how <b>you</b> want to spend your time.  Connet with friends and have fun.</p>
+		<%= button_to 'Sign Up!',  {:controller => :accounts, :action => :new}, :id => "sign_up" %>
+	
 
-<%= render :partial => 'main/login_form', :locals => { :object_name => 'account', :username_field_name => 'email', :password_field_name => 'password' }%>
-
-
-<h1>Meeve</h1>
-    <p><fb:login-button autologoutlink="true"></fb:login-button></p>
-    
-
-    <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({appId: '165057366850273', status: true, cookie: true,
-                 xfbml: true});
-      };
-      (function() {
-        var e = document.createElement('script');
-        e.type = 'text/javascript';
-        e.src = document.location.protocol +
-          '//connect.facebook.net/en_US/all.js';
-        e.async = true;
-        document.getElementById('fb-root').appendChild(e);
-      }());
-    </script>
+	    <p><fb:login-button autologoutlink="true"></fb:login-button></p>
+	    
+	
+	    <div id="fb-root"></div>
+	    <script>
+	      window.fbAsyncInit = function() {
+	        FB.init({appId: '165057366850273', status: true, cookie: true,
+	                 xfbml: true});
+	      };
+	      (function() {
+	        var e = document.createElement('script');
+	        e.type = 'text/javascript';
+	        e.src = document.location.protocol +
+	          '//connect.facebook.net/en_US/all.js';
+	        e.async = true;
+	        document.getElementById('fb-root').appendChild(e);
+	      }());
+	    </script>
+</div>

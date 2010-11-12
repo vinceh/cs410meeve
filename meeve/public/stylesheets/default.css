@@ -1,0 +1,105 @@
+.main_container {
+	font-family: "Trebuchet MS";
+	font-size: 14px;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	display: block;
+	height: 400px;
+}
+	.main_container img {
+		margin: 0 50px 50px 0px;
+	}
+
+	.main_container #main_para {
+		font-family: "Calibri";
+		font-size: 20px;
+		margin: 0px 50px 0px 50px;
+	}
+	
+	.main_container #sign_up {
+		color: #383838;
+		padding: 5px 0px 5px 0px;
+		width: 200px;
+		border-radius: 10px;
+		/*border: 1px solid #d6ab29;*/
+		font-family: arial;
+		font-size: 30px;
+		/*background: #ffcc33;*/
+		background: -webkit-gradient(linear, left top, left bottom, from(#deb22c), to(#f5c32c));
+		float: right;
+		margin-right: 100px;
+	}
+	
+	.main_container #sign_up:hover {
+		/*background: #f5c32c;*/
+		background: -webkit-gradient(linear, left top, left bottom, from(#ca9f1d), to(#edbc26));
+		cursor: pointer;
+	}
+	
+.login_form {
+	display: block;
+	float: left;
+	width: 350px;
+}
+	.login_form a {
+		font-size: 12px;
+		text-decoration: none;
+		display: inline;
+	}
+	
+	.login_form a:hover {
+		text-decoration: underline;
+		
+	}
+	.login_form #submit {
+		display: inline-block;
+		float: right;
+		margin: 5px 57px 0px 0px;
+		width: 185px;
+	}
+	.login_form #login_submit {
+		font-family: verdana;
+		font-weight: bold;
+		color: white;
+		background: #669999;
+		border-radius: 3px;
+		width: 80px;
+		display: block;
+		float: right;
+		border: none;
+	}
+	
+	#login_submit:hover {
+		background: #5c8c8c;
+		cursor: pointer;
+	}
+	
+	.login_form div {
+		margin-bottom: 6px;
+	}
+	.login_form li {
+		list-style-type: none;
+		border: 1px solid yellow;
+	}
+	.login_form input {
+		background: #EAEAEA;
+		border: 1px solid #9E9B9B;
+		border-radius: 1px;
+		padding: 3px;
+		margin: 0px;
+		width: 160px;
+	}
+	.login_form label {
+		display: block;
+		text-align: right;
+		vertical-align: text-middle;
+		float: left;
+		padding: 2px 5px 0px 0px;
+		width: 120px;
+	}
+	
+h1 {
+	color: #66CC99	;
+}
