@@ -48,8 +48,8 @@ class MainController < ApplicationController
   	@own_temp = Account.find_by_aid(session[:id])
   	@temp.delete(@own_temp)
   	
-  	
-  	@splited = (params[:search][:search_input]).split
+  	@after_lowercase = (params[:search][:search_input]).downcase
+  	@splited = @after_lowercase.split
   	@first_s = params[:search]
   	@second_s = params[:search_input]
  
@@ -63,20 +63,30 @@ class MainController < ApplicationController
   			flash[:error] = "I need at least one argument!!"
   			redirect_to :action => :profile
   			
-  	#implement regular expression(partially matching)
+  			
+  			
+  			
+  			
+  			
+  			
+  	# CAN ANYONE FIX THE REGULAR EXPRESSION STUFF BELOW??????  WHERE HAVE I GONE WRONG????
+  	
+  	
+  	
+  	
   	
   	
   	elsif (@splited.size() == 1)  	
   		@temp.each do |re| 
-  			if (re.first_name == @splited[0])
+  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/)
   				@result.push(re)
-  			elsif (re.last_name == @splited[0] && false == @result.include?(re))
+  			elsif (re.last_name.downcase ~= /.+#{@splited[0]}.+/ && false == @result.include?(re))
   				@result.push(re)
   			end
   		end
   	elsif (@splited.size() == 2)	
   		@temp.each do |re|
-  			if (re.first_name == @splited[0] || re.last_name == @splited[1])
+  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/ || re.last_name.downcase ~= /.+#{@splited[1]}.+/)
   				@result.push(re)
   			end
   		end
