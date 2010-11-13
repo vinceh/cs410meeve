@@ -38,8 +38,8 @@
                 this.show_hint();
                 return false;
             }
-        });
-        //
+        }); // end bind
+        
         this.parent("form").bind("ajax:loading",function(e,data,status,xhr) {
             $(this).find("input").attr("disabled",true);
         });
@@ -57,5 +57,5 @@
 })(jQuery);
 
 $(window).load(function () {
-    $(".commentBox").hintedInput("write a comment...");
+    $(".commentBox").hintedInput("Write a comment...");
 });
