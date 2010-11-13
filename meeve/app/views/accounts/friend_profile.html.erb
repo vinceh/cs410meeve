@@ -35,12 +35,14 @@
 	
 	
 <% if (nil == @alrdy_follow) %> 
-	<%= link_to 'Follow', :action => :follow, :aid => @friend.aid %>
+	
+	<div id="linksz">
+	<%= link_to 'Follow', {:action => :follow, :aid => @friend.aid}, :remote => true, :id => "follow_link" %>
 <% else %>
-	<%= link_to 'Unfollow', :action => :unfollow, :aid => @friend.aid %>
+	<%= link_to 'Unfollow', {:action => :unfollow, :aid => @friend.aid}, :remote => true, :id => "unfollow_link" %>
 <% end %>
 
-
+</div>
 
 <br>
-<%= link_to 'Back', :action => :show %><br>
+<%= link_to 'Back', :controller => :main, :action => :searching, :search => @first_s, :search_input => @second_s %><br>

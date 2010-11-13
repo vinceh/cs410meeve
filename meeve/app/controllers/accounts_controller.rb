@@ -5,17 +5,12 @@ class AccountsController < ApplicationController
   def index
     @accounts = Account.all
   end
-  
-  def show
 
-	@accts = Account.all
-	@acct = Account.find(session[:id])
-	@accts.delete(@acct)
-   
-  end
   
   def friend_profile
   	@friend = Account.find(params[:aid])
+  	@first_s = params[:search]
+  	@second_s = params[:search_input]
   	
   	@alrdy_follow = Follow.find_by_follower_and_followee(session[:id], @friend.aid)
   	
@@ -32,7 +27,13 @@ class AccountsController < ApplicationController
 	  	#@follow.update_attribute(:followee, params[:aid])
 	  	@fol_name = Account.find(params[:aid])
 	  	flash[:success] = "You are now following" + @fol_name.first_name + " " + @fol_name.last_name + "."
-	  	redirect_to :action => :show
+	  	
+	  	
+	  	#if request.xhr?
+	  		render 'accounts/follow'
+  		#else
+	  	#	redirect_to :controller => :main, :action => :searching
+  		#end
   	end
   	
   end
@@ -40,11 +41,21 @@ class AccountsController < ApplicationController
   def unfollow
   	
   		@fol = Follow.find_by_follower_and_followee(session[:id], params[:aid])
-  		if @fol != nil
-  			@fol.destroy
+  		if @fol == nil
+  			flash[:error] = "wtf????"
+  		else
+  			@sql = "DELETE FROM follows WHERE follower = "+@fol.follower.to_s+" AND followee = "+@fol.followee.to_s
+      		ActiveRecord::Base.connection.execute(@sql)
+      		
+      		#if request.xhr?
+      			render 'accounts/unfollow'
+  			#else
+  				#redirect_to :controller => :main, :action => :searching
+  			#end
   		end
   		
-  		redirect_to :action => :friend_profile, :aid => params[:aid]
+  		
+  		
   	
   end
 

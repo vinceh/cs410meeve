@@ -1,0 +1,3 @@
+$("a#unfollow_link").remove()
+var aid = <%= @fol.followee %>
+$("div#linksz").append("<a id=\"follow_link\", href=\"/accounts/follow?aid=" + aid + "\" data-remote=\"true\">Follow</a>")

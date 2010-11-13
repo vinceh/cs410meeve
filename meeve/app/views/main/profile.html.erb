@@ -1,5 +1,24 @@
-Hi, welcome to your profile.  It's empty :)
+Hi, welcome to your profile. 
+
 
 <%= link_to 'Logout',  :action => :logout %>
 <%= link_to 'Account',  :controller => :accounts, :action => :edit %>
-<%= link_to 'Follow', :controller => :accounts, :action => :show %>
+
+
+<% form_tag(:action => :searching) do -%>
+	
+	<fieldset>
+	<legend>Search People</legend>
+	<ul>
+		<%= text_field :search, :search_input %>
+		<%= submit_tag "Find" %>
+	</ul>
+	</fieldset>
+<% end -%>
+
+
+
+
+
+
+
