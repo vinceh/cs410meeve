@@ -5,14 +5,14 @@
 <%= flash[:msg] unless flash[:msg] == nil%>
 <% @events.each do |event| %>
 
-	<h3><%= event.title %></h3>
+	<b><%= event.title %></b>	
+	<%= link_to 'Edit', :action => :edit, :eid => event.event_id %>
+	<%= link_to 'Remove', :action => :remove, :eid => event.event_id %><br/>
+	
 	<%= event.desc %><br>
 	Where: <%= event.location %><br/>
 	From: <%= event.start_date %><br/>
 	Until: <%= event.end_date %><br/>
-	
-	<%= link_to 'Edit', :action => :edit, :eid => event.event_id %>
-	<%= link_to 'Remove', :action => :remove, :eid => event.event_id %><br>
 	
 	<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
 		<% event.comments.each do |c| %>
@@ -30,5 +30,6 @@
 		 	<%= f.hidden_field :timestamp, :value => Time.now %>
 		  	<br/>
 		    <%= f.submit "Comment", :class => "submit" %>
-	<% end %>	
+	<% end %>
+	<br/>
 <% end %>
