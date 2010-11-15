@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+   
+  </tr>
+
+<% @hits.each do |me| %>
+  <tr>
+    <td>
+		<%=me.last_name %>
+	</td>
+	<td>
+		<%=me.first_name %>
+	</td>
+  </tr>
+<% end %>
+</table>

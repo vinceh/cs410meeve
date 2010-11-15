@@ -62,31 +62,19 @@ class MainController < ApplicationController
   	elsif (@splited.size() == 0)
   			flash[:error] = "I need at least one argument!!"
   			redirect_to :action => :profile
+  			/(jon){1}/
   			
-  			
-  			
-  			
-  			
-  			
-  			
-  	# CAN ANYONE FIX THE REGULAR EXPRESSION STUFF BELOW??????  WHERE HAVE I GONE WRONG????
-  	
-  	
-  	
-  	
-  	
-  	
-  	elsif (@splited.size() == 1)  	
+   	elsif (@splited.size() == 1)  	
   		@temp.each do |re| 
-  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/)
+  			if (re.first_name.downcase =~ /#{@splited[0]}{1}/)
   				@result.push(re)
-  			elsif (re.last_name.downcase ~= /.+#{@splited[0]}.+/ && false == @result.include?(re))
+  			elsif (re.last_name.downcase =~ /#{@splited[0]}{1}/ && false == @result.include?(re))
   				@result.push(re)
   			end
   		end
   	elsif (@splited.size() == 2)	
   		@temp.each do |re|
-  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/ || re.last_name.downcase ~= /.+#{@splited[1]}.+/)
+  			if (re.first_name.downcase =~ /#{@splited[0]}{1}/ || re.last_name.downcase =~ /#{@splited[1]}{1}/)
   				@result.push(re)
   			end
   		end

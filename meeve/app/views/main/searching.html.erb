@@ -23,13 +23,13 @@
 	<% @alrdy_follow = Follow.find_by_follower_and_followee(session[:id], result.aid) %>
 	
 	<td>
-	<div id="linksz">
+	<%= content_tag :div, :id => "linksz" + result.aid.to_s do %>
 		<% if (nil == @alrdy_follow) %> 
 			<%= link_to 'Follow', {:controller => :accounts, :action => :follow, :aid => result.aid}, :remote => true, :id => "follow_link" %>
 		<% else %>
 			<%= link_to 'Unfollow', {:controller => :accounts, :action => :unfollow, :aid => result.aid}, :remote => true, :id => "unfollow_link" %>
-<% end %>
-	</div>
+		<% end %>
+	<% end %>
 	</td>
 	<td>
     <%= link_to 'view profile', :controller => :accounts, :action => :friend_profile, :aid => result.aid, :search => @first_s, :search_input => @second_s %>
