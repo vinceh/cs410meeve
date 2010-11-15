@@ -2,10 +2,9 @@
 @page_title 	= 'Register'
 @page_heading 	= 'Register'
 %>
+<div class="signup_form">
 <% form_for @account, :url => {:action => :new} do |f| %>
 	<%= render "shared/error_messages", :target => @account %>
 	<%= render :partial => "form_account_info", :locals => {:form => f, :pass => true}%>
-	
-	<p><%= f.submit 'Create' %></p>
 <% end %>
-<%= link_to 'Back',  :controller => :main, :action => :index %>
+</div>

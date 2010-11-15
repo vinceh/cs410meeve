@@ -4,10 +4,13 @@
 	<%= image_tag("logo/meeve2.png") %>
 	
 	<p id="main_para"> Meeve is a spontaneous, fun, and easy.  Decide how <b>you</b> want to spend your time.  Connet with friends and have fun.</p>
-		<%= button_to 'Sign Up!',  {:controller => :accounts, :action => :new}, :id => "sign_up" %>
+		<%= button_to 'Sign Up!',  {:controller => :accounts, :action => :new}, :method => :get, :id => "sign_up" %>
 	
 
-	    <p><fb:login-button autologoutlink="true"></fb:login-button></p>
+		
+	   <!--  FACEBOOK STUFF DEAL WITH LATER!
+	   	
+	   	<p><fb:login-button autologoutlink="true"></fb:login-button></p>
 	    
 	
 	    <div id="fb-root"></div>
@@ -24,5 +27,5 @@
 	        e.async = true;
 	        document.getElementById('fb-root').appendChild(e);
 	      }());
-	    </script>
+    </script> -->
 </div>

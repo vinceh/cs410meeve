@@ -1,3 +1,7 @@
+<%= javascript_tag "$(document).ready(function() { initialize() });" %>
+
+<div id="map_canvas" style="width:50%; height:50%"></div>
+
 <% form_for @event, :url => { :acion => :new} do |f| %>
 
 	<%= render "shared/error_messages", :target => @event %>

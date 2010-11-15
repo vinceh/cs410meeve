@@ -39,8 +39,76 @@ class MainController < ApplicationController
     end
   end
   
-  def profile
+  def profile	
+  	
   end
+  
+  def searching
+  	@temp = Account.all
+  	@own_temp = Account.find_by_aid(session[:id])
+  	@temp.delete(@own_temp)
+  	
+  	@after_lowercase = (params[:search][:search_input]).downcase
+  	@splited = @after_lowercase.split
+  	@first_s = params[:search]
+  	@second_s = params[:search_input]
+ 
+
+  	@result = Array.new
+  	
+ 	if (@splited.size() > 2)
+  			flash[:error] = "Too many arguments... follow this format : first_name last_name"
+  			redirect_to :action => :profile
+  	elsif (@splited.size() == 0)
+  			flash[:error] = "I need at least one argument!!"
+  			redirect_to :action => :profile
+  			
+  			
+  			
+  			
+  			
+  			
+  			
+  	# CAN ANYONE FIX THE REGULAR EXPRESSION STUFF BELOW??????  WHERE HAVE I GONE WRONG????
+  	
+  	
+  	
+  	
+  	
+  	
+  	elsif (@splited.size() == 1)  	
+  		@temp.each do |re| 
+  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/)
+  				@result.push(re)
+  			elsif (re.last_name.downcase ~= /.+#{@splited[0]}.+/ && false == @result.include?(re))
+  				@result.push(re)
+  			end
+  		end
+  	elsif (@splited.size() == 2)	
+  		@temp.each do |re|
+  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/ || re.last_name.downcase ~= /.+#{@splited[1]}.+/)
+  				@result.push(re)
+  			end
+  		end
+  	
+  	end
+  	
+  	
+  	
+  	if @result == nil
+  			flash[:error] = "no match"
+  			redirect_to :action => :profile
+  	end
+
+  	
+  	
+  		
+
+	
+	
+	
+  end
+  
   
   def change_password
   	@account = Account.find(session[:id])

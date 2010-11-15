@@ -1,4 +1,5 @@
-var commenter = $("input#comment_commenter").val();
-var body = $("input#comment_body").val();
+var commenter = "<%= @comment.commenter %>";
+var body = "<%= @comment.body %>";
 var id = <%= @comment.cid %>;
-$("div.comment_block").append("<div id=\"comment" + id + "\"><b>" + commenter + "</b> " + body + " <a href=\"/comments/remove?cid=" + id + "\" data-remote=\"true\">x</a><br/></div>")
+var eid = <%= @comment.event_id %>;
+$("div#comment_block_" + eid).append("<div id=\"comment" + id + "\"><b>" + commenter + "</b> " + body + " <a href=\"/comments/remove?cid=" + id + "\" data-remote=\"true\">x</a><br/></div>")

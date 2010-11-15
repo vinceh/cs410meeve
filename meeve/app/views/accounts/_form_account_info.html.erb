@@ -1,46 +1,51 @@
 <%
 # Partial for the part of the form that contains account information
 %>
+<table>
+	<tbody>
+		<tr>
+			<th><%= form.label "Email"%></th>
+			<td><%= form.text_field :email %></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td id="hint">You will use this to log in</td>
+		</tr>
+		<% if pass %>
+			<tr>
+				<th><%= form.label :password, "Password"%></th>
+				<td><%= form.password_field :password %></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td id="hint">At least 6 characters</td>
+			</tr>
+			<tr>
+				<th><%= form.label :password_confirmation, "Confirm password"%></th>
+				<td><%= form.password_field :password_confirmation %></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td id="hint">Re-type your password</td>
+			</tr>
+		<% end %>
+		<tr>
+			<th><%= form.label :first_name, "First name"%></th>
+			<td><%= form.text_field :first_name %></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td id="hint">So people can search you more easily</td>
+		</tr>
+		<tr>
+			<th><%= form.label :last_name, "Last name"%></th>
+			<td><%= form.text_field :last_name %></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><%= form.submit 'Create', :id => "signup_submit" %></td>
+		</tr>
+	</tbody>
+</table>
 
-	<fieldset>
-		<legend>Account information</legend>
-		<ul>
-			
-			<% if pass %>
-				<li>
-					<%= form.label :password, "Password"%>
-					<%= form.password_field :password %>
-				</li>
-				<li>
-					<%= form.label :password_confirmation, "Confirm Password"%>
-					<%= form.password_field :password_confirmation %>
-	 			</li>
- 			<% end %>
-			<li>
-				<%= form.label :first_name, "First Name:"%>
-				<%= form.text_field :first_name %>
-			</li>
-			<li>
-				<%= form.label :last_name, "Last Name:"%>
-				<%= form.text_field :last_name %>
-			</li>
-			
-		</ul>
-	</fieldset>
-	<fieldset>
-		<legend>User information</legend>
-		<ul>
-			<li>
-				<%= form.label :email, "E-mail: "%>
-				<%= form.text_field :email %>
-			</li>
-			<li>
-				<%= form.label :phone_number, "Phone Number: "%>
-				<%= form.text_field :phone_number %>
-			</li>
-			
-			
-		</ul>
-	</fieldset>
-	
 	

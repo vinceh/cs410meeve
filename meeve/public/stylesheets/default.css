@@ -1,3 +1,44 @@
+.signup_form {
+	border: 1px solid blue;
+	width: 750px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	font-family: 'Lucida Grande', sans-serif;
+}
+	.signup_form #signup_submit {
+		
+		width: 150px;
+	}
+	
+	.signup_form th {
+		text-align: right;
+		font-weight: normal;
+		width: 200px;
+		color: #585858 ;
+		padding: 6px 10px 6px 0px;
+		font-size: 16px;
+		/*letter-spacing: 0.06em;*/
+	}
+	
+	.signup_form td {
+	}
+	
+	.signup_form input {
+		width: 200px;
+		font-size: 18px;
+		height: 36px;
+		border-radius: 5px;
+		border: 1px solid #A0A0A0 ;
+	}
+	
+	.signup_form #hint {
+		font-family: verdana;
+		font-size: 10px;
+		padding: 2px 0px 12px 6px;
+		color: #505050 ;
+	}
+
 .main_container {
 	font-family: "Trebuchet MS";
 	font-size: 14px;
@@ -101,5 +142,9 @@
 	}
 	
 h1 {
-	color: #66CC99	;
+	color: #66CC99;
 }
+
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
