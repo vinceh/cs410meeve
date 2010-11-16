@@ -43,4 +43,14 @@ class EventsController < ApplicationController
       end
     end
   end
+  
+  def show
+    @event = Event.find(params[:eid])
+    
+    if request.xhr?
+      render "events/show"
+    else
+      redirect_to :controller => :events
+    end    
+  end
 end

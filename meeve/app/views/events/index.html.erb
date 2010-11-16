@@ -1,10 +1,13 @@
 <title></title>
+<link rel="stylesheet" href="/css/event.css">
+
 
 <h1>Events</h1>
 <%= link_to 'Create an Event', :action => :new %><br>
 <%= flash[:msg] unless flash[:msg] == nil%>
 <% @events.each do |event| %>
 
+	<%= link_to event.title, {:action => :show, :eid => event.event_id}, :remote => true %>
 	<b><%= event.title %></b>	
 	<%= link_to 'Edit', :action => :edit, :eid => event.event_id %>
 	<%= link_to 'Remove', :action => :remove, :eid => event.event_id %><br/>
