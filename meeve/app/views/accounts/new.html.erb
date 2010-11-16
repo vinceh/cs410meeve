@@ -1,10 +1,18 @@
+<div class="form_container">
+
 <%
 @page_title 	= 'Register'
 @page_heading 	= 'Register'
 %>
+<div class="bar"></div>
 <div class="signup_form">
+	<div id="signup_title"><span id="spon">mpontaneous.</span> <span id="simp">mimple.</span>  <span id="meeve">meeve.</span> </div>
 <% form_for @account, :url => {:action => :new} do |f| %>
-	<%= render "shared/error_messages", :target => @account %>
-	<%= render :partial => "form_account_info", :locals => {:form => f, :pass => true}%>
+	<%= render :partial => "form_account_info", :locals => {:target => @account, :form => f, :pass => true}%>
 <% end %>
+
+<%= image_tag("piglet.png", :id => "piglet" ) %>
+</div>
+<div class="bar"></div>
+
 </div>

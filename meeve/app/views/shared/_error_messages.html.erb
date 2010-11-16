@@ -1,4 +1,8 @@
-<% if target.errors.any? %>  
+<% if target.errors.any? %> 
+	<%= target.errors[:first_name].size.to_s+" "+target.errors[:first_name][0]%>
+	<% target.errors.each do |val| %> 
+		<%= val[1] %> 
+	<% end %>
 	<div id="errorExplanation">  
 		
 	  	<h2><%= pluralize(target.errors.count, "error") %> prohibited this record from being saved:</h2>  

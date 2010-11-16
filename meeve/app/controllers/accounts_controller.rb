@@ -71,8 +71,8 @@ class AccountsController < ApplicationController
       	
       	@account.update_attribute(:password, hash(@account.password))
         # @account.update_attribute(params[:account])  
-        flash[:success] = "Your account has been successfully created!"
-        redirect_to :controller => :main, :action => :index
+        session[:id] = @account.aid
+  		redirect_to :controller => :main, :action => :profile
       end
     end
   end

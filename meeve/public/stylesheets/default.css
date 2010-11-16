@@ -1,21 +1,62 @@
+body.signup {
+	/*background: url("../images/background3.png");*/
+}
+
+.signup {
+	margin: 0px 0px 0px 0px;
+}
 .signup_form {
-	border: 1px solid blue;
+
+	border-radius: 8px;
+	background: white;
 	width: 750px;
+	margin-top: 80px;
+	margin-bottom: 100px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 100px;
 	font-family: 'Lucida Grande', sans-serif;
+	
 }
-	.signup_form #signup_submit {
+	.signup_form #piglet {
+		position: relative;
+		left: 480px;
+		bottom: 350px;
 		
-		width: 150px;
+	}
+	.signup_form #spon {
+		color: #ed5fbc;
+	}
+	.signup_form #simp {
+		color: #5fb6ed;
+	}
+	.signup_form #meeve {
+		color: #66cc99;
+		font-family: "Arial Rounded MT Bold";
+	}
+	.signup_form #signup_title {
+		font: 40px "Arial";
+		margin: 20px 0px 30px 50px;
+	}
+	.signup_form #signup_submit {
+		margin: 15px 0px 30px 0px;
+		padding: 7px 15px;
+		font: 16px arial;
+		height: auto;
+		width: auto;
+		border: 1px solid #C8C8C8 ;
+		background: url('../images/button3.png');
+	}
+	.signup_form #signup_submit:hover {
+		
+		border: 1px solid #707070 ;
+		cursor: pointer;
 	}
 	
 	.signup_form th {
 		text-align: right;
 		font-weight: normal;
 		width: 200px;
-		color: #585858 ;
+		color: #303030  ;
 		padding: 6px 10px 6px 0px;
 		font-size: 16px;
 		/*letter-spacing: 0.06em;*/
@@ -25,11 +66,25 @@
 	}
 	
 	.signup_form input {
+		outline-style: none;
+		padding: 3px 6px 3px 6px;
 		width: 200px;
 		font-size: 18px;
-		height: 36px;
+		height: 30px;
 		border-radius: 5px;
 		border: 1px solid #A0A0A0 ;
+	}
+	
+	.signup_form input:focus {
+		border: 1px solid black;
+		border-radius: 5px;
+	}
+	
+	.signup_form #signup_error {
+		font-family: verdana;
+		font-size: 10px;
+		padding: 2px 0px 0px 6px;
+		color: red ;
 	}
 	
 	.signup_form #hint {
@@ -70,7 +125,7 @@
 		/*background: #ffcc33;*/
 		background: -webkit-gradient(linear, left top, left bottom, from(#deb22c), to(#f5c32c));
 		float: right;
-		margin-right: 100px;
+		margin-right: 100px;			
 	}
 	
 	.main_container #sign_up:hover {
@@ -104,7 +159,7 @@
 		font-family: verdana;
 		font-weight: bold;
 		color: white;
-		background: #669999;
+		background: #5fb6ed;
 		border-radius: 3px;
 		width: 80px;
 		display: block;
@@ -113,7 +168,7 @@
 	}
 	
 	#login_submit:hover {
-		background: #5c8c8c;
+		background: #44abec;
 		cursor: pointer;
 	}
 	
@@ -125,9 +180,10 @@
 		border: 1px solid yellow;
 	}
 	.login_form input {
+		outline-style: none;
 		background: #EAEAEA;
 		border: 1px solid #9E9B9B;
-		border-radius: 1px;
+		border-radius: 2px;
 		padding: 3px;
 		margin: 0px;
 		width: 160px;
@@ -144,7 +200,3 @@
 h1 {
 	color: #66CC99;
 }
-
-  html { height: 100% }
-  body { height: 100%; margin: 0px; padding: 0px }
-  #map_canvas { height: 100% }

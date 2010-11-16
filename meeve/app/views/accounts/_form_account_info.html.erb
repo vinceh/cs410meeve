@@ -6,6 +6,8 @@
 		<tr>
 			<th><%= form.label "Email"%></th>
 			<td><%= form.text_field :email %></td>
+			<%= render("shared/signup_error", :error => "Email "+target.errors[:email][0]) if !target.errors[:password] %>
+			<!-- <%= render "shared/error_messages", :target => target %> -->
 		</tr>
 		<tr>
 			<th></th>
@@ -15,6 +17,7 @@
 			<tr>
 				<th><%= form.label :password, "Password"%></th>
 				<td><%= form.password_field :password %></td>
+				<%= render("shared/signup_error", :error => "Password "+target.errors[:password][0]) if !target.errors[:password].empty? %>
 			</tr>
 			<tr>
 				<th></th>
@@ -32,6 +35,7 @@
 		<tr>
 			<th><%= form.label :first_name, "First name"%></th>
 			<td><%= form.text_field :first_name %></td>
+			<%= render "shared/signup_error", :error => "First name "+target.errors[:first_name][0] if !target.errors[:first_name].empty? %>
 		</tr>
 		<tr>
 			<th></th>
@@ -40,10 +44,11 @@
 		<tr>
 			<th><%= form.label :last_name, "Last name"%></th>
 			<td><%= form.text_field :last_name %></td>
+			<%= render "shared/signup_error", :error => "Last name "+target.errors[:last_name][0] if !target.errors[:last_name].empty? %>
 		</tr>
 		<tr>
 			<th></th>
-			<td><%= form.submit 'Create', :id => "signup_submit" %></td>
+			<td><%= form.submit 'Create my account', :id => "signup_submit" %></td>
 		</tr>
 	</tbody>
 </table>

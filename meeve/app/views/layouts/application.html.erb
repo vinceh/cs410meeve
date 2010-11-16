@@ -17,7 +17,11 @@
 
   <%= csrf_meta_tag %>
 </head>
+<% if controller.action_name == 'accounts' || controller.action_name == 'new' %>
+<body class="signup">
+<% else %>
 <body>
+<% end %>
 
 <% flash.each  do |key, msg| %>
 				<div class="flash_<%=key%>">
