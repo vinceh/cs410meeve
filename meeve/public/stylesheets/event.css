@@ -5,6 +5,9 @@
  * @author attila@google.com (Attila Bodis)
  */
 
+#map_canvas { 
+	height: 400px; width: 600px 
+}
 
 .modal-dialog {
   background: #c1d9ff;

@@ -53,39 +53,39 @@ class MainController < ApplicationController
   #	@first_s = params[:search]
   #	@second_s = params[:search_input]
   
-  	@result = Array.new
+  #	@result = Array.new
+#  	
+ #	if (@splited.size() > 2)
+ # 			flash[:error] = "Too many arguments... follow this format : first_name last_name"
+ # 			redirect_to :action => :profile
+ # 	elsif (@splited.size() == 0)
+ # 			flash[:error] = "I need at least one argument!!"
+ # 			redirect_to :action => :profile
+ # 			/(jon){1}/
+ # 			
+ #  	elsif (@splited.size() == 1)  	
+ # 		@temp.each do |re| 
+ # 			if (re.first_name.downcase =~ /#{@splited[0]}{1}/)
+ # 				@result.push(re)
+ # 			elsif (re.last_name.downcase =~ /#{@splited[0]}{1}/ && false == @result.include?(re))
+ # 				@result.push(re)
+ # 			end
+ # 		end
+ # 	elsif (@splited.size() == 2)	
+ # 		@temp.each do |re|
+ # 			if (re.first_name.downcase =~ /#{@splited[0]}{1}/ || re.last_name.downcase =~ /#{@splited[1]}{1}/)
+ # 				@result.push(re)
+ # 			end
+ # 		end
+ # 	
+ # 	end
   	
- 	if (@splited.size() > 2)
-  			flash[:error] = "Too many arguments... follow this format : first_name last_name"
-  			redirect_to :action => :profile
-  	elsif (@splited.size() == 0)
-  			flash[:error] = "I need at least one argument!!"
-  			redirect_to :action => :profile
-  			/(jon){1}/
-  			
-   	elsif (@splited.size() == 1)  	
-  		@temp.each do |re| 
-  			if (re.first_name.downcase =~ /#{@splited[0]}{1}/)
-  				@result.push(re)
-  			elsif (re.last_name.downcase =~ /#{@splited[0]}{1}/ && false == @result.include?(re))
-  				@result.push(re)
-  			end
-  		end
-  	elsif (@splited.size() == 2)	
-  		@temp.each do |re|
-  			if (re.first_name.downcase =~ /#{@splited[0]}{1}/ || re.last_name.downcase =~ /#{@splited[1]}{1}/)
-  				@result.push(re)
-  			end
-  		end
-  	
-  	end
   	
   	
-  	
-  	if @result == nil
-  			flash[:error] = "no match"
-  			redirect_to :action => :profile
-  	end
+  #	if @result == nil
+  #			flash[:error] = "no match"
+  #			redirect_to :action => :profile
+  #	end
 
   #end
   
