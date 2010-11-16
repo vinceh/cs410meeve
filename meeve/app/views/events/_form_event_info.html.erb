@@ -16,11 +16,11 @@
 		</li>
 		<li>
 			<%= form.label :start_date, "Start Date:" %>
-			<%= form.datetime_select :start_date %>			
+			<%= form.datetime_select :start_date, :start_year => Time.now.year , :minute_step => 15 %>			
 		</li>
 		<li>
 			<%= form.label :end_date, "End Date:" %>
-			<%= form.datetime_select :end_date %>
+			<%= form.datetime_select :end_date, :start_year => Time.now.year , :minute_step => 15 %>
 		</li>
 	</ul>
 </fieldset>
