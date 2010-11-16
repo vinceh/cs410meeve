@@ -54,10 +54,30 @@ class AccountsController < ApplicationController
   			#end
   		end
   		
+  	  	
+  end
+
+  def matching
+  	
+  	@hits = Array.new
+  	
+  	@following = Follow.find_by_follower(session[:id])
+  	if @following == nil
+  		flash[:error] = "No one to match your schedule to. You MUST be following someone first to use this function."
+  	else
+  		@following.each do |people| 
+  			@events = Event.find_by_user_id(people.followee)
+  			@events.each do |eve|
+  				if (!(@eve.start_date <= Time.now && Time.now < @eve.end_date))
+  					@hits.push(Account.find_by_aid(people.followee))
+  				end
+  			end
+  		end
   		
-  		
+  	end
   	
   end
+
 
   def new
     @account = Account.new
@@ -71,8 +91,8 @@ class AccountsController < ApplicationController
       	
       	@account.update_attribute(:password, hash(@account.password))
         # @account.update_attribute(params[:account])  
-        flash[:success] = "Your account has been successfully created!"
-        redirect_to :controller => :main, :action => :index
+        session[:id] = @account.aid
+  		redirect_to :controller => :main, :action => :profile
       end
     end
   end

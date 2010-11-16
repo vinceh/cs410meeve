@@ -10,8 +10,8 @@ class MainController < ApplicationController
   		if user != nil
   			
   			if user.password == hash(params[:account][:password])
-  				redirect_to :action => :profile
   				session[:id] = user.aid
+  				redirect_to :action => :profile
   			else
   				flash[:error] = "Invalid login	"
   				redirect_to :action => :index, :email => params[:account][:email]
@@ -43,71 +43,51 @@ class MainController < ApplicationController
   	
   end
   
-  def searching
-  	@temp = Account.all
-  	@own_temp = Account.find_by_aid(session[:id])
-  	@temp.delete(@own_temp)
+  #def searching
+  #	@temp = Account.all
+  #	@own_temp = Account.find_by_aid(session[:id])
+  #	@temp.delete(@own_temp)
+  #	
+  #	@after_lowercase = (params[:search][:search_input]).downcase
+  #	@splited = @after_lowercase.split
+  #	@first_s = params[:search]
+  #	@second_s = params[:search_input]
+  
+  #	@result = Array.new
+#  	
+ #	if (@splited.size() > 2)
+ # 			flash[:error] = "Too many arguments... follow this format : first_name last_name"
+ # 			redirect_to :action => :profile
+ # 	elsif (@splited.size() == 0)
+ # 			flash[:error] = "I need at least one argument!!"
+ # 			redirect_to :action => :profile
+ # 			/(jon){1}/
+ # 			
+ #  	elsif (@splited.size() == 1)  	
+ # 		@temp.each do |re| 
+ # 			if (re.first_name.downcase =~ /#{@splited[0]}{1}/)
+ # 				@result.push(re)
+ # 			elsif (re.last_name.downcase =~ /#{@splited[0]}{1}/ && false == @result.include?(re))
+ # 				@result.push(re)
+ # 			end
+ # 		end
+ # 	elsif (@splited.size() == 2)	
+ # 		@temp.each do |re|
+ # 			if (re.first_name.downcase =~ /#{@splited[0]}{1}/ || re.last_name.downcase =~ /#{@splited[1]}{1}/)
+ # 				@result.push(re)
+ # 			end
+ # 		end
+ # 	
+ # 	end
   	
-  	@after_lowercase = (params[:search][:search_input]).downcase
-  	@splited = @after_lowercase.split
-  	@first_s = params[:search]
-  	@second_s = params[:search_input]
- 
+  	
+  	
+  #	if @result == nil
+  #			flash[:error] = "no match"
+  #			redirect_to :action => :profile
+  #	end
 
-  	@result = Array.new
-  	
- 	if (@splited.size() > 2)
-  			flash[:error] = "Too many arguments... follow this format : first_name last_name"
-  			redirect_to :action => :profile
-  	elsif (@splited.size() == 0)
-  			flash[:error] = "I need at least one argument!!"
-  			redirect_to :action => :profile
-  			
-  			
-  			
-  			
-  			
-  			
-  			
-  	# CAN ANYONE FIX THE REGULAR EXPRESSION STUFF BELOW??????  WHERE HAVE I GONE WRONG????
-  	
-  	
-  	
-  	
-  	
-  	
-  	elsif (@splited.size() == 1)  	
-  		@temp.each do |re| 
-  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/)
-  				@result.push(re)
-  			elsif (re.last_name.downcase ~= /.+#{@splited[0]}.+/ && false == @result.include?(re))
-  				@result.push(re)
-  			end
-  		end
-  	elsif (@splited.size() == 2)	
-  		@temp.each do |re|
-  			if (re.first_name.downcase ~= /.+#{@splited[0]}.+/ || re.last_name.downcase ~= /.+#{@splited[1]}.+/)
-  				@result.push(re)
-  			end
-  		end
-  	
-  	end
-  	
-  	
-  	
-  	if @result == nil
-  			flash[:error] = "no match"
-  			redirect_to :action => :profile
-  	end
-
-  	
-  	
-  		
-
-	
-	
-	
-  end
+  #end
   
   
   def change_password
