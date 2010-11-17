@@ -2,13 +2,13 @@ class CommentsController < ApplicationController
 
   def create
     if request.post?
-        @event = Event.find(params[:event_id])
-        @comment = Comment.new(params[:comment])
-        @comment.save
+
         @user = Account.find(session[:id])
      end
 
     if request.xhr?  
+    	@comment = Comment.new(params[:comment])
+        @comment.save
       render "comments/create"     
     else
       redirect_to :controller => :main, :action => :profile

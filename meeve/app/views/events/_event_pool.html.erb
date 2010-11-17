@@ -1,5 +1,5 @@
-<title></title>
 
+<div class="event_pool">
 <h1>Events</h1>
 <%= link_to 'Create an Event', :controller => :events, :action => :new %><br>
 <%= flash[:msg] unless flash[:msg] == nil%>
@@ -7,9 +7,10 @@
 
 	<%= link_to event.title, {:controller => :events, :action => :show_event, :eid => event.event_id}, :remote => true %>
 	<b><%= event.title %></b>	
+	<br/>
+	<!--
 	<%= link_to 'Edit', :controller => :events, :action => :edit, :eid => event.event_id %>
-	<%= link_to 'Remove', :controller => :events, :action => :destroy, :eid => event.event_id %><br/>
-	
+	<%= link_to 'Remove', :controller => :events, :action => :destroy, :eid => event.event_id %>
 	<%= event.desc %><br>
 	Where: <%= event.location %><br/>
 	From: <%= event.start_date %><br/>
@@ -33,5 +34,6 @@
 		  	<br/>
 		    <%= f.submit "Comment", :class => "submit" %>
 	<% end %>
-	<br/>
+	<br/> -->
 <% end %>
+</div>

@@ -1,8 +1,16 @@
 <link rel="stylesheet" href="/css/event.css">
-
+<div class="profile_bar">
+	
+</div>
 Hi, welcome to your profile. 
-
-<%= render :partial => "events/event_pool" %>
+<div class="profile_main">
+	<%= render :partial => "events/event_pool" %>
+</div>
+<div class="profile_right">
+	<% @following.each do |follow| %>
+		<li><%= follow.first_name %></li>
+	<% end %>
+</div>
 
 <%= form_tag(:action => :searching) do -%>
 	
