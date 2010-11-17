@@ -1,17 +1,16 @@
 Meeve::Application.routes.draw do
 	
-  resources :events do
-    resources :comments
-  end
-  
-  get "comment/new"
-
-  get "comment/remove"
+#  resources :events do
+#    resources :comments
+#  end
+#  
+#  get "comment/new"
+#  get "comment/remove"
 
   # resources :accounts
   
   match ':controller(/:action(/:id))'
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

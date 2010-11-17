@@ -40,7 +40,9 @@ class MainController < ApplicationController
   end
   
   def profile	
-  	
+  	@events = Event.all
+    @user = Account.find(session[:id])
+    @comment = Comment.new
   end
   
   #def searching

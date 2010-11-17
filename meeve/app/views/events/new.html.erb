@@ -1,10 +1,8 @@
 <%= javascript_tag "$(document).ready(function() { initialize() });" %>
 
-<% form_for @event, :url => { :acion => :new} do |f| %>
-
+<%= form_for @event, :url => { :action => :new } do |f| %>
 	<%= render "shared/error_messages", :target => @event %>
 	<%= render "form_event_info", :form => f %>
-	<%= link_to "Back", :action => :index %>
-	
 <%= f.submit 'Create' %>
 <% end %>
+<%= button_to "Back", {:controller => :main, :action => :profile} %>

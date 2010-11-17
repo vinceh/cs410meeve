@@ -1,11 +1,10 @@
+<link rel="stylesheet" href="/css/event.css">
+
 Hi, welcome to your profile. 
 
+<%= render :partial => "events/event_pool" %>
 
-<%= link_to 'Logout',  :action => :logout %>
-<%= link_to 'Account',  :controller => :accounts, :action => :edit %>
-
-
-<% form_tag(:action => :searching) do -%>
+<%= form_tag(:action => :searching) do -%>
 	
 	<fieldset>
 	<legend>Search People</legend>
