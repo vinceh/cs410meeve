@@ -1,15 +1,10 @@
 var title = "<%= @event.title %>";
-var desc = "<%= @event.desc %>";
-var loc = "<%= @event.location %>";
-var startDT = "<%= @event.start_date %>";
-var endDT = "<%= @event.end_date %>";
+var content = "<%= escape_javascript(render "comments/comment_box", :event => @event) %>";
+var foo = "<p>123</p>"
 
 var dialog = new goog.ui.Dialog(null, true);
 
-    dialog.setContent("Description: " + desc + "<br/>" +
-						"Where: " + loc + "<br/>" +
-						"From: " + startDT + "<br/>" +
-						"Until: " + endDT + "<br/>");
+    dialog.setContent(content);
     dialog.setTitle(title);
  
     dialog.setButtonSet(goog.ui.Dialog.ButtonSet.OK);

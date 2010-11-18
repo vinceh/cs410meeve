@@ -33,12 +33,13 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   add_index "follows", ["followee"], :name => "followee"
 
   create_table "events", :primary_key => "event_id", :force => true do |t|
+    t.integer   "account_id",                   :null => false
     t.string    "pic"
-    t.string    "title",                    :null => false
-    t.string    "desc",     :default => "", :null => false
-    t.string    "location", :default => "", :null => false
-    t.datetime  "start_date",               :null => false
-    t.datetime  "end_date",                 :null => false
+    t.string    "title",                        :null => false
+    t.string    "desc",     :default => "",     :null => false
+    t.string    "location", :default => "",     :null => false
+    t.datetime  "start_datetime",               :null => false
+    t.datetime  "end_datetime",                 :null => false
     t.integer   "flag"
   end
   
@@ -54,16 +55,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
 
   add_index "event_tags", ["tfid"], :name => "tfid"
   add_index "event_tags", ["efid"], :name => "efid"
-  
-# A relationship table
-  create_table "view_events", :id => false, :force => true do |t|
-  	t.integer "efid",	:null => false
-  	t.integer "afid",	:null => false
-  end
-  
-  add_index "view_events", ["efid"], :name => "efid"
-  add_index "view_events", ["afid"], :name => "afid"
-  
+
 # Comment table
 
   create_table "comments", :primary_key => "cid", :force => true do |t|

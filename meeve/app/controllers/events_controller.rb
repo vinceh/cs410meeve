@@ -42,7 +42,10 @@ class EventsController < ApplicationController
   end
   
   def show_event
+    
+    @user = Account.find(session[:id])
     @event = Event.find(params[:eid])
+    @comment = Comment.new
     
     if request.xhr?
       render "events/show_event"
