@@ -6,15 +6,6 @@
 			<%= form.text_field :title %>
 		</li>
 		<li>
-			<%= form.label :desc, "Description:" %>
-			<%= form.text_field :desc %>
-		</li>
-		<li>
-			<%= form.label :location, "Location:" %>
-			<%= form.text_field :location %>
-			<div id="map_canvas"></div>
-		</li>
-		<li>
 			<script type="text/javascript">
 			$(function() {
 					  $('#event_start_date').datetime({
@@ -39,6 +30,15 @@
 			</script>
 			<%= form.label :end_date, "End Date:" %>
 			<%= form.text_field :end_date, :value => @datetime.to_s %>
+		</li>
+		<li>
+			<%= form.label :desc, "Description:" %>
+			<%= form.text_field :desc %>
+		</li>
+		<li>
+			<%= form.label :location, "Location:" %>
+			<%= form.text_field :location %>
+			<div id="map_canvas"></div>
 		</li>
 	</ul>
 </fieldset>
