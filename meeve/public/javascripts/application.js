@@ -68,7 +68,7 @@ $(window).load(function () {
             $(this).find("textarea").trigger("success");
         });
 
-        this.autoResize();
+        //this.autoResize();
         
         return this;
     }

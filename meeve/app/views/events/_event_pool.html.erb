@@ -1,14 +1,18 @@
-
+<script type="text/javascript">
+	$("#close_event_box").click( function() {
+		dialog.setVisible(false);
+		goog.events.removeAll()
+	});
+</script>
 <div class="event_pool">
 <h1>Events</h1>
-<%= link_to 'Create an Event', :controller => :events, :action => :new %><br>
+<h3><%= link_to 'Create an Event', :controller => :events, :action => :new %></h3>
 <%= flash[:msg] unless flash[:msg] == nil%>
 <% @events.each do |event| %>
 
 	<%= link_to event.title, {:controller => :events, :action => :show_event, :eid => event.event_id}, :remote => true %>
 	<br/>
-	<%= event.desc %><br/>
+	<%= event.desc %><br/><br/>
 
-	
 <% end %>
 </div>
