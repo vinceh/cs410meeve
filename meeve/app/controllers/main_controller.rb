@@ -40,7 +40,10 @@ class MainController < ApplicationController
   end
   
   def profile	
-  	
+  	@events = findAllEvents(session[:id])
+  	@following = findAllFollowing(session[:id])
+    @user = Account.find(session[:id])
+    @comment = Comment.new
   end
   
   #def searching
@@ -114,5 +117,20 @@ class MainController < ApplicationController
   def logout
   	session[:id] = nil
   	redirect_to :action => :index
+  end
+  
+  private
+  
+  def findAllFollowing( id )
+  	follow = Follow.find_all_by_follower(id)
+  	returnee = Array.new
+  	follow.each { |f|
+  		returnee.push(Account.find(f.followee))
+  	}
+  	return returnee
+  end
+  	 
+  def findAllEvents( id )
+  	Event.all
   end
 end

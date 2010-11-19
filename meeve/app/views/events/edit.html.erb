@@ -1,8 +1,6 @@
-<% form_for @event, :url => { :action => :edit, :eid => @event.eid } do |f| %>
-
-	<%= render :partial => "form_event_info", :locals => {:form => f} %>
-	
-<%= link_to "Back", :action => :index %>
-<%= f.submit 'Create' %>
-
+<%= form_for @event, :url => { :action => :edit, :eid => @event.event_id } do |f| %>
+	<%= render "shared/error_messages", :target => @event %>
+	<%= render "events/form_event_info", :form => f %>
+	<%= f.submit "Edit" %>
 <% end %>
+<%= button_to "Back", :controller => :main, :action => :profile %>

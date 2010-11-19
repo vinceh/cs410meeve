@@ -107,5 +107,4 @@ class AccountsController < ApplicationController
     	redirect_to :controller => :main, :action => :index  
     end
   end
- 
 end

@@ -1,0 +1,25 @@
+var title = "<%= @event.title %>";
+var content = "<%= escape_javascript(render "events/event_box", :event => @event) %>";
+
+var dialog = new goog.ui.Dialog(null, true);
+
+    dialog.setContent(content);
+    dialog.setTitle(title);
+ 
+    dialog.setButtonSet(goog.ui.Dialog.ButtonSet.NONE);
+
+    goog.events.listen(window, 'unload', function() {
+      goog.events.removeAll();
+    });
+
+dialog.setVisible(true);
+
+$(".commentBox").hintedInput("Write a comment...");
+
+$(document).ready(function () {
+	$(".close_event_box").bind('click', function() {
+		dialog.setVisible(false);
+		goog.events.removeAll();
+		$(this).unbind();
+	});
+});

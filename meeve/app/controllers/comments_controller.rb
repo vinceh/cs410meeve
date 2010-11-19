@@ -2,14 +2,16 @@ class CommentsController < ApplicationController
 
   def create
     if request.post?
-        @event = Event.find(params[:event_id])
-        @comment = @event.comments.create(params[:comment])
+
+        @user = Account.find(session[:id])
      end
 
     if request.xhr?  
+    	@comment = Comment.new(params[:comment])
+        @comment.save
       render "comments/create"     
     else
-      redirect_to :controller => :events
+      redirect_to :controller => :main, :action => :profile
     end
   end
 
@@ -22,7 +24,7 @@ class CommentsController < ApplicationController
     if request.xhr?
       render "comments/remove"
     else
-      redirect_to :controller => :events
+      redirect_to :controller => :main, :action => :profile
     end    
   end
 

@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    redirect_to :controller => :main, :action => :profile
   end
   
   def new
@@ -11,7 +11,7 @@ class EventsController < ApplicationController
       
       if @event.save
         flash[:success] = "Your event has been successfully posted!"
-        redirect_to(:action => :index)
+        redirect_to :controller => :main, :action => :profile
       end
     end
   end
@@ -22,35 +22,35 @@ class EventsController < ApplicationController
   
   def edit
     @event = Event.find(params[:eid])
-    
-    if request.put?
-      @event = Event.find(params[:eid])
+    if request.put?   
       @event.update_attributes(params[:event])
-      
-      redirect_to(:action => "index")
+      redirect_to :controller => :main, :action => :profile
     end
   end
   
-  def remove
+  def destroy
     @event = Event.find(params[:eid])
     
-    if request.put?
+    if request.post?
       @event = Event.find(params[:eid])
       if (@event != nil)
         @event.destroy
         flash[:success] = "Your event has been successfully removed."
-        redirect_to(:action => "index")
+        redirect_to :controller => :main, :action => :profile
       end
     end
   end
   
-  def show
+  def show_event
+    
+    @user = Account.find(session[:id])
     @event = Event.find(params[:eid])
+    @comment = Comment.new
     
     if request.xhr?
-      render "events/show"
+      render "events/show_event"
     else
-      redirect_to :controller => :events
+      redirect_to(:controller => :main, :action => :profile)
     end    
   end
 end
