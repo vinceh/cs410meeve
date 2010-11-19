@@ -15,12 +15,30 @@
 			<div id="map_canvas"></div>
 		</li>
 		<li>
+			<script type="text/javascript">
+			$(function() {
+					  $('#event_start_date').datetime({
+										userLang	: 'en',
+										americanMode: true,
+									});													
+				});
+			</script>
+			
 			<%= form.label :start_date, "Start Date:" %>
-			<%= form.datetime_select :start_date, :start_year => Time.now.year , :minute_step => 15 %>			
+			<%= form.text_field :start_date, :value => @datetime.to_s %>
 		</li>
-		<li>
+ 		
+ 		<li>
+ 			<script type="text/javascript">
+			$(function() {
+					  $('#event_end_date').datetime({
+										userLang	: 'en',
+										americanMode: true,
+									});													
+				});
+			</script>
 			<%= form.label :end_date, "End Date:" %>
-			<%= form.datetime_select :end_date, :start_year => Time.now.year , :minute_step => 15 %>
+			<%= form.text_field :end_date, :value => @datetime.to_s %>
 		</li>
 	</ul>
 </fieldset>

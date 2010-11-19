@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   
   def new
     @event = Event.new
+    @datetime = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
     
     if request.post?
       @event = Event.new(params[:event])
