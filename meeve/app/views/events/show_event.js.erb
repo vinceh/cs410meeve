@@ -14,12 +14,17 @@ var dialog = new goog.ui.Dialog(null, true);
 
 dialog.setVisible(true);
 
-$(".commentBox").hintedInput("Write a comment...");
-
 $(document).ready(function () {
-	$(".close_event_box").bind('click', function() {
+	$("input.close_event_box").bind('click', function() {
 		dialog.setVisible(false);
 		goog.events.removeAll();
 		$(this).unbind();
 	});
+	
+	mapView();
 });
+
+
+
+//Doesn't work for now
+$(".commentBox").hintedInput("Write a comment...");

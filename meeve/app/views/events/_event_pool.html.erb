@@ -8,7 +8,7 @@
 <h1>Events</h1>
 <h3><%= link_to 'Create an Event', :controller => :events, :action => :new %></h3>
 <%= flash[:msg] unless flash[:msg] == nil%>
-<% @events.each do |event| %>
+<% @events.reverse.each do |event| %>
 
 	<%= link_to event.title, {:controller => :events, :action => :show_event, :eid => event.event_id}, :remote => true %>
 	<br/>

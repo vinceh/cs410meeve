@@ -2,7 +2,7 @@
 	<legend>Event Information</legend>
 	<ul>
 		<li>
-			<%= form.label :title, "Title:" %>
+			<%= form.label :title, "Title" %>
 			<%= form.text_field :title %>
 		</li>
 		<li>
@@ -15,7 +15,7 @@
 				});
 			</script>
 			
-			<%= form.label :start_date, "Start Date:" %>
+			<%= form.label :start_date, "Start Date" %>
 			<%= form.text_field :start_date, :value => @datetime.to_s %>
 		</li>
  		
@@ -28,17 +28,19 @@
 									});													
 				});
 			</script>
-			<%= form.label :end_date, "End Date:" %>
+			<%= form.label :end_date, "End Date" %>
 			<%= form.text_field :end_date, :value => @datetime.to_s %>
 		</li>
 		<li>
-			<%= form.label :desc, "Description:" %>
-			<%= form.text_field :desc %>
+			<%= form.label :desc, "Description" %>
+			<%= form.text_area :desc, :rows => 3 %>
 		</li>
 		<li>
-			<%= form.label :location, "Location:" %>
+			<%= form.label :location, "Location" %>
 			<%= form.text_field :location %>
 			<div id="map_canvas"></div>
+			<%= form.hidden_field :marker_lat %>
+			<%= form.hidden_field :marker_lng %>
 		</li>
 	</ul>
 </fieldset>

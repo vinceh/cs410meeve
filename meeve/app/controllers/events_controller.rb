@@ -29,17 +29,20 @@ class EventsController < ApplicationController
     end
   end
   
-  def destroy
+  def remove
     @event = Event.find(params[:eid])
     
-    if request.post?
+    if request.put?
       @event = Event.find(params[:eid])
       if (@event != nil)
-        @event.destroy
+        @event.comments.each do |c|
+          c.destroy
+        end
+        @event.destroy        
         flash[:success] = "Your event has been successfully removed."
         redirect_to :controller => :main, :action => :profile
       end
-    end
+    end    
   end
   
   def show_event
