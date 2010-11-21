@@ -73,6 +73,14 @@ var marker = null;		// The red marker on the map, set to null
 	// Add an eventListener to the drag event
 	google.maps.event.addListener(map, 'drag', function() { checkBounds() });
 	
+	// Set max zoom level
+	var maxZoomLevel = 15;	
+	google.maps.event.addListener(map, 'zoom_changed', function() {
+    	if (map.getZoom() < maxZoomLevel) {
+			map.setZoom(maxZoomLevel);
+		}
+   	});
+	
 	if (enable_marker) {
 		// Add an eventListener that makes a marker on the map
 		google.maps.event.addListener(map, 'click', function(event){

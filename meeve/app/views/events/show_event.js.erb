@@ -1,3 +1,5 @@
+$("#map_canvas").remove();
+
 var title = "<%= @event.title %>";
 var content = "<%= escape_javascript(render "events/event_box", :event => @event) %>";
 
