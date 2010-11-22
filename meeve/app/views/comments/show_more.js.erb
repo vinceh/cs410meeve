@@ -1,0 +1,5 @@
+var eid = <%= @event.event_id %>;
+var more_comments = "<%= escape_javascript (render "comments/more_comments") %>";
+
+$("div#comment_block_" + eid).append("<p>" + more_comments + "</p>");
+

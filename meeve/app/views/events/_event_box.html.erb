@@ -15,8 +15,17 @@
 			<div id="map_canvas"></div>
 		</td>
 		<td>
+			<%= form_for @comment, :url => { :controller => :comments, :action => :create }, :remote => true do |f| %>
+				<%= f.hidden_field :event_id, :value => event.event_id %>
+				<%= f.hidden_field :commenter, :value => @user.first_name + " " + @user.last_name %>
+				<%= f.text_field :body, :class => "comment_field" %>
+				<%= f.hidden_field :timestamp, :value => Time.now %>
+				<br/>
+				<%= f.submit "Comment", :class => "submit" %>
+			<% end %>
+			
 			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
-				<% event.comments.each do |c| %>
+				<% event.comments.reverse.each do |c| %>
 					<%= content_tag :div, :id => "comment" + c.cid.to_s do %>
 						<b><%= c.commenter %></b>
 						<%= c.body %>
@@ -24,15 +33,25 @@
 					<% end %>
 				<% end %>
 			<% end %>
-			
-			<%= form_for @comment, :url => { :controller => :comments, :action => :create }, :remote => true do |f| %>
-				<%= f.hidden_field :event_id, :value => event.event_id %>
-				<%= f.hidden_field :commenter, :value => @user.first_name + " " + @user.last_name %>
-				<%= f.text_field :body, :class => "commentBox" %>
-				<%= f.hidden_field :timestamp, :value => Time.now %>
-				<br/>
-				<%= f.submit "Comment", :class => "submit" %>
+
+		<!-- show more later	
+			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
+				<% for i in 0..4 do %>
+						<% @c = event.comments.reverse.at(i) %>
+						<% if @c != nil then %>
+							<%= content_tag :div, :id => "comment" + @c.cid.to_s do %>
+								<b><%= @c.commenter %></b>
+								<%= @c.body %>
+								<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => @c.cid }, :remote => true %><br/>
+							<% end %>
+						<% end %>
+				<% end %>
 			<% end %>
+			<% if event.comments.reverse.size > 5 then %>
+				<%= hidden_field_tag 'num_of_comments', 5 %>
+				<%= link_to "Show more", {:controller => :comments, :action => :show_more, :eid => event.event_id}, :remote => true %>
+			<% end %>
+		-->
 		</td>
 	</tr>
 	<tr>

@@ -27,5 +27,13 @@ class CommentsController < ApplicationController
       redirect_to :controller => :main, :action => :profile
     end    
   end
+  
+  def show_more
+  @event = Event.find(params[:eid])
+    if request.xhr?
+      @num = params[:num_of_comments]
+      render "comments/show_more"
+    end 
+  end
 
 end
