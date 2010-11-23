@@ -38,6 +38,7 @@
 		<li>
 			<%= form.label :location, "Location" %>
 			<%= form.text_field :location %>
+			<%= check_box_tag 'google_map_option' %> add Google map
 			<div id="map_canvas"></div>
 			<%= form.hidden_field :marker_lat %>
 			<%= form.hidden_field :marker_lng %>

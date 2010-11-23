@@ -6,7 +6,9 @@ Hi, welcome to your profile.
 <div class="profile_main">
 	<%= render :partial => "events/event_pool" %>
 </div>
+
 <div class="profile_right">
+	Following
 	<% @following.each do |follow| %>
 		<li><%= follow.first_name %></li>
 	<% end %>
@@ -27,8 +29,7 @@ Hi, welcome to your profile.
 
 ----------- matching isn't working yet ---------------
 <%= link_to 'Who\'s free now?', :controller => :accounts, :action => :matching %>
-
-
+<%= link_to 'Log out', :controller => :main, :action => :logout %>
 
 
 

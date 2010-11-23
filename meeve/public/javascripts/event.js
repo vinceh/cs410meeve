@@ -1,7 +1,23 @@
 /*
+ * Event Create
+ */
+$(document).ready(function () {
+	$("div#map_canvas").hide();
+	$("input#google_map_option").click(function () {
+		var cb = $(this)
+		if (cb.is(':checked')) {
+			$("div#map_canvas").show();
+			mapNew();
+		}
+		else {
+			$("div#map_canvas").hide();
+		};
+	});
+});
+
+/*
 	Functions for Google map
 */
-
 var map;
 var marker = null;		// The red marker on the map, set to null
 // var geocoder;
@@ -193,12 +209,8 @@ goog.require('goog.ui.Dialog');
             $(this).find("textarea").trigger("success");
         });
 
-        this.autoResize();
+//        this.autoResize();
         
         return this;
-    }
+    };
 })(jQuery);
-
-//$(window).load(function () {
-//    $(".commentBox").hintedInput("Write a comment...");
-//});

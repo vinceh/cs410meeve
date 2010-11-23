@@ -12,6 +12,7 @@ class EventsController < ApplicationController
     
     if request.post?
       @event = Event.new(params[:event])
+      @event.aid = session[:id]
       
       if @event.save
         flash[:success] = "Your event has been successfully posted!"
@@ -20,13 +21,9 @@ class EventsController < ApplicationController
     end
   end
   
-#  def create
-#    @event = Event.create(params[:event])
-#  end
-  
   def edit
     @event = Event.find(params[:eid])
-    @datetime = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
+    #@datetime = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
     
     @start_dt = @event.start_date
     @end_dt = @event.end_date

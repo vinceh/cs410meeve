@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   add_index "follows", ["followee"], :name => "followee"
 
   create_table "events", :primary_key => "event_id", :force => true do |t|
-    t.integer   "aid"                          
+    t.integer   "aid",                          :null => false
     t.string    "pic"
     t.string    "title",                        :null => false
     t.string    "desc",     :default => "",     :null => false

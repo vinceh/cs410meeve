@@ -3,7 +3,8 @@ class MainController < ApplicationController
   before_filter :login_required, :except => [:index, :recover_password]
   before_filter :checkLogin, :only => [:index]
   
-  def index
+  def index   
+    
   	if request.post?
   		user = Account.find_by_email(params[:account][:email])
   		
@@ -39,58 +40,80 @@ class MainController < ApplicationController
     end
   end
   
-  def profile	
-  	@events = findAllEvents(session[:id])
+  def profile
+    
+    if session[:id] == nil
+      redirect_to :action => index
+    end
+    
+    @events = Array.new
+    
+    @followees = findAllFollowing(session[:id])
+    @followees.each do |f|
+      @followee_events = Event.find_all_by_aid(f.aid)
+      @followee_events.each do |e|
+        if e != nil
+          @events.push(e)
+        end
+      end
+    end
+ 
+    @my_events = Event.find_all_by_aid(session[:id])
+    @my_events.each do |e|
+      if e != nil
+        @events.push(e)  
+      end      
+    end
+    
   	@following = findAllFollowing(session[:id])
     @user = Account.find(session[:id])
     @comment = Comment.new
   end
   
-  #def searching
-  #	@temp = Account.all
-  #	@own_temp = Account.find_by_aid(session[:id])
-  #	@temp.delete(@own_temp)
-  #	
-  #	@after_lowercase = (params[:search][:search_input]).downcase
-  #	@splited = @after_lowercase.split
-  #	@first_s = params[:search]
-  #	@second_s = params[:search_input]
+  def searching
+  	@temp = Account.all
+  	@own_temp = Account.find_by_aid(session[:id])
+  	@temp.delete(@own_temp)
+  	
+  	@after_lowercase = (params[:search][:search_input]).downcase
+  	@splited = @after_lowercase.split
+  	@first_s = params[:search]
+  	@second_s = params[:search_input]
   
-  #	@result = Array.new
-#  	
- #	if (@splited.size() > 2)
- # 			flash[:error] = "Too many arguments... follow this format : first_name last_name"
- # 			redirect_to :action => :profile
- # 	elsif (@splited.size() == 0)
- # 			flash[:error] = "I need at least one argument!!"
- # 			redirect_to :action => :profile
- # 			/(jon){1}/
- # 			
- #  	elsif (@splited.size() == 1)  	
- # 		@temp.each do |re| 
- # 			if (re.first_name.downcase =~ /#{@splited[0]}{1}/)
- # 				@result.push(re)
- # 			elsif (re.last_name.downcase =~ /#{@splited[0]}{1}/ && false == @result.include?(re))
- # 				@result.push(re)
- # 			end
- # 		end
- # 	elsif (@splited.size() == 2)	
- # 		@temp.each do |re|
- # 			if (re.first_name.downcase =~ /#{@splited[0]}{1}/ || re.last_name.downcase =~ /#{@splited[1]}{1}/)
- # 				@result.push(re)
- # 			end
- # 		end
- # 	
- # 	end
+  	@result = Array.new
   	
+ 	if (@splited.size() > 2)
+  			flash[:error] = "Too many arguments... follow this format : first_name last_name"
+  			redirect_to :action => :profile
+  	elsif (@splited.size() == 0)
+  			flash[:error] = "I need at least one argument!!"
+  			redirect_to :action => :profile
+  			/(jon){1}/
+  			
+   	elsif (@splited.size() == 1)  	
+  		@temp.each do |re| 
+  			if (re.first_name.downcase =~ /#{@splited[0]}{1}/)
+  				@result.push(re)
+  			elsif (re.last_name.downcase =~ /#{@splited[0]}{1}/ && false == @result.include?(re))
+  				@result.push(re)
+  			end
+  		end
+  	elsif (@splited.size() == 2)	
+  		@temp.each do |re|
+  			if (re.first_name.downcase =~ /#{@splited[0]}{1}/ || re.last_name.downcase =~ /#{@splited[1]}{1}/)
+  				@result.push(re)
+  			end
+  		end
   	
+  	end
   	
-  #	if @result == nil
-  #			flash[:error] = "no match"
-  #			redirect_to :action => :profile
-  #	end
 
-  #end
+  	if @result == nil
+  			flash[:error] = "no match"
+  			redirect_to :action => :profile
+  	end
+
+  end
   
   
   def change_password
