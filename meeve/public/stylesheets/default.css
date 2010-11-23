@@ -2,13 +2,58 @@ body {
 	margin: 0px;
 	padding 0px;
 }
-
-.profile_bar {
+.bar {
 	width: 100%;
 	height: 30px;
-	background-color: red;
-	position: fixed;
+	border-bottom: 1px solid gray;
 }
+	.bar img {
+		padding: 6px 0px 0px 5px;
+	}
+.profile_bar {
+	width: 500px;
+	height: 30px;
+	position: absolute;
+	top: 0px;
+	margin-left: 60%;
+}
+	.profile_bar #tools {
+		direction: ltr;
+		display: block;
+		margin-left: 800px;
+	}
+	.profile_bar #floatleft {
+		display: block;
+		float: left;
+		width: 300px;
+	}
+	
+	.profile_bar form {
+		width: 258px;
+		margin-top: 2px;
+		padding: 2px;
+		display: block;
+		border: 1px solid gray;
+	}
+	
+	.profile_bar #search_sub {
+		width: 22px;
+		height: 19px;
+		background-image: url("../images/search.png");
+		border: none;
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.profile_bar form #search_search_input {
+		font-family: "Calibri";
+		padding: 2px;
+		margin: 0px;
+		border-radius: 2px;
+		border: none;
+		outline-style: none;
+	}
+	
 .profile_main {
 	margin-top: 100px;
 	width: 755px;

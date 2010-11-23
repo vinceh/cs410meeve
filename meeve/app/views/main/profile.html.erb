@@ -1,29 +1,30 @@
 <link rel="stylesheet" href="/css/event.css">
-<div class="profile_bar">
-	
+<div class="bar">
+	<%= image_tag("logo/meevesmaller.png", :id => "profile_logo") %>
+	<div class="profile_bar">
+			<div id="floatleft">
+				<%= form_tag(:action => :searching) do -%>
+				
+					<%= text_field :search, :search_input %>
+					<%= submit_tag "", :id => "search_sub" %>
+					
+				<% end -%>	
+			</div>
+	</div>
 </div>
-Hi, welcome to your profile. 
 <div class="profile_main">
 	<%= render :partial => "events/event_pool" %>
 </div>
 
+<!-- >
 <div class="profile_right">
 	Following
 	<% @following.each do |follow| %>
 		<li><%= follow.first_name %></li>
 	<% end %>
 </div>
+-->
 
-<%= form_tag(:action => :searching) do -%>
-	
-	<fieldset>
-	<legend>Search People</legend>
-	<ul>
-		<%= text_field :search, :search_input %>
-		<%= submit_tag "Find" %>
-	</ul>
-	</fieldset>
-<% end -%>
 <br>
 <br>
 
