@@ -1,18 +1,23 @@
+<p> <%= @hits.length %> people are free now </p>
+<br>
 <table>
   <tr>
-    <th>Last Name</th>
-    <th>First Name</th>
-   
+    <th>Here comes the List!</th>
   </tr>
-
-<% @hits.each do |me| %>
+<% @hits.each do |hit| %>
   <tr>
-    <td>
-		<%=me.last_name %>
-	</td>
-	<td>
-		<%=me.first_name %>
-	</td>
+  	<td>
+  	<% if (hit[1] <= 60) %> 
+  		<%= hit[0] + " is free for less than 1 minute :(" %>
+  	<% elsif ((hit[1] > 60) && (hit[1] <= 3600)) %>
+  		<%= hit[0] + " is free for about " + (hit[1]/60).round.to_s + " minutes." %>
+  	<% elsif (hit[1] > 3600) %>
+  		<%= hit[0] + " is free for about " + (hit[1]/3600).round.to_s + " hours." %>
+  	<% end %>
+ 	</td>
   </tr>
 <% end %>
 </table>
+
+<br><br><br>
+<%= link_to 'Back', :controller => :main, :action => :profile %>

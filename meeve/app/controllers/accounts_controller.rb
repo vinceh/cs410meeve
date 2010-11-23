@@ -59,21 +59,37 @@ class AccountsController < ApplicationController
 
   def matching
   	
-  	@hits = Array.new
+  
+  	@hits = Hash.new
+  	@following = Follow.find_all_by_follower(session[:id])
   	
-  	@following = Follow.find_by_follower(session[:id])
   	if @following == nil
   		flash[:error] = "No one to match your schedule to. You MUST be following someone first to use this function."
   	else
   		@following.each do |people| 
-  			@events = Event.find_by_user_id(people.followee)
+  			add = 1
+  			@freefor = 18000
+  			@freefor = @freefor.to_f
+  			@timenow = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+  			@events = Event.find_all_by_aid(people.followee)
   			@events.each do |eve|
-  				if (!(@eve.start_date <= Time.now && Time.now < @eve.end_date))
-  					@hits.push(Account.find_by_aid(people.followee))
+				if (eve.start_date.to_s <= @timenow && @timenow < eve.end_date.to_s)
+  					add = 0
+  					break;
+  				elsif (@timenow < eve.start_date.to_s)
+  					if ((eve.start_date.to_time - @timenow.to_time) < @freefor)
+  						@freefor = eve.start_date.to_time - @timenow.to_time
+  					end
   				end
+  			
   			end
+  			if (add == 1)
+  				@tempo = Account.find_by_aid(people.followee)
+  			 	@hits.store(@tempo.first_name + " " + @tempo.last_name, @freefor.to_i )
+  			end
+  			
   		end
-  		
+  		@hits.sort {|a,b| a[1] <=> b[1]}
   	end
   	
   end
