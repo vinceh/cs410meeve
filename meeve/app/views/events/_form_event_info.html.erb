@@ -16,7 +16,7 @@
 			</script>
 			
 			<%= form.label :start_date, "Start Date" %>
-			<%= form.text_field :start_date, :value => @datetime.to_s %>
+			<%= form.text_field :start_date, :value => @start_dt.to_s %>
 		</li>
  		
  		<li>
@@ -29,7 +29,7 @@
 				});
 			</script>
 			<%= form.label :end_date, "End Date" %>
-			<%= form.text_field :end_date, :value => @datetime.to_s %>
+			<%= form.text_field :end_date, :value => @end_dt.to_s %>
 		</li>
 		<li>
 			<%= form.label :desc, "Description" %>

@@ -5,7 +5,10 @@ class EventsController < ApplicationController
   
   def new
     @event = Event.new
-    @datetime = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
+    @now = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
+        
+    @start_dt = @now
+    @end_dt = @now
     
     if request.post?
       @event = Event.new(params[:event])
@@ -23,6 +26,11 @@ class EventsController < ApplicationController
   
   def edit
     @event = Event.find(params[:eid])
+    @datetime = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
+    
+    @start_dt = @event.start_date
+    @end_dt = @event.end_date
+    
     if request.put?   
       @event.update_attributes(params[:event])
       redirect_to :controller => :main, :action => :profile
