@@ -5,16 +5,16 @@
 	});
 </script>
 <div class="event_pool">
-<h1>Events</h1>
-<h3><%= link_to 'Create an Event', :controller => :events, :action => :new %></h3>
-<%= flash[:msg] unless flash[:msg] == nil%>
-<% @events.reverse.each do |event| %>
-
-	<%= link_to event.title, {:controller => :events, :action => :show_event, :eid => event.event_id}, :remote => true %>
-	<br/>
-	<%= event.desc %><br/><br/>
-
-<% end %>
+	<span id="pool_title">events feed</span>
+	<!--<h3><%= link_to 'Create an Event', :controller => :events, :action => :new %></h3>
+	-->
+	<% @events.reverse.each do |event| %>
+		<div class="timestamp"><%= event.start_date.strftime("%H:%M") %></div>
+		<div class="event">
+			<%= link_to event.title, {:controller => :events, :action => :show_event, :eid => event.event_id}, :class => "event_link", :remote => true %>
+			
+			<span class="event_desc"><%= event.desc %></span>
+		</div>
 	
-		
+	<% end %>	
 </div>
