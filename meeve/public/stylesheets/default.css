@@ -20,11 +20,10 @@ body {
 		color: #282828 ;
 		/*color: #5fb6ed;*/
 		height: 15px;
-		padding: 5px 5px 7px 5px;
+		padding: 5px 0px 7px 3px;
 		display: inline-block;
 		text-decoration: none;
 		font: 17px "Calibri";
-		font-weight: bold;
 	}
 	.toolbar_link:hover {
 
@@ -40,7 +39,7 @@ body {
 	.profile_bar #floatleft {
 		display: block;
 		float: left;
-		margin-right: 80px;
+		margin-right: 5px;
 	}
 	.profile_bar #search_form {
 		
@@ -111,7 +110,7 @@ body {
 }
 .main_title {
 	display: block;
-	font-size: 30px;
+	font-size: 24px;
 	font-family: arial;
 	margin-bottom: 20px;
 	color: #7db6ed;
@@ -145,8 +144,11 @@ body {
 		color: #e83fae;
 	}
 	.event_pool .event {
-		padding-bottom: 10px;
-		margin-bottom: 10px;
+		padding: 4px 3px 7px 3px;
+	}
+	.event_pool .event:hover {
+		border-radius: 3px;
+		background: #f7f7f7;
 	}
 	.event_pool .timestamp {
 		margin-left: -50px;
