@@ -1,24 +1,59 @@
 <link rel="stylesheet" href="/css/event.css">
-<div class="bar">
-	<%= image_tag("logo/meevesmaller.png", :id => "profile_logo") %> |
-	<%= link_to 'Who\'s free now?', :controller => :accounts, :action => :matching %> |
-		<%= link_to 'Log out', :controller => :main, :action => :logout %>
+
+<div class="profile_bar_container">
 	<div class="profile_bar">
-	
-		
-	
+		<%= image_tag("logo/meevesmaller.png", :id => "profile_logo") %>
+		<div id="toolbox">
 			<div id="floatleft">
-			
+					<%= form_tag( {:action => :searching}, :id => "search_form" ) do -%>
+					
+						<%= text_field :search, :search_input %>
+						<%= submit_tag "", :id => "search_sub" %>
+						
+					<% end -%>	
+			</div>
+			<%= link_to 'Account', {:controller => :main, :action => :logout}, :class => "toolbar_link" %>
+			<%= link_to 'Log out', {:controller => :main, :action => :logout}, :class => "toolbar_link" %>
+		</div>
+	</div>
+</div>
+<!-- 
+<div class="bar">
+	<div class="inner_profile_bar">
+		<%= image_tag("logo/meevesmaller.png", :id => "profile_logo") %>
+		<div id="floatleft">
 				<%= form_tag(:action => :searching) do -%>
 				
 					<%= text_field :search, :search_input %>
 					<%= submit_tag "", :id => "search_sub" %>
 					
 				<% end -%>	
+		</div>
+	</div>
+	
+	<div class="testbar">
+		<div id="floatleft">
+				<%= form_tag(:action => :searching) do -%>
 				
+					<%= text_field :search, :search_input %>
+					<%= submit_tag "", :id => "search_sub" %>
+					
+				<% end -%>	
 			</div>
 	</div>
+	<div class="profile_bar">
+			<div id="floatleft">
+				<%= form_tag(:action => :searching) do -%>
+				
+					<%= text_field :search, :search_input %>
+					<%= submit_tag "", :id => "search_sub" %>
+					
+				<% end -%>	
+			</div>
+	</div>
+	
 </div>
+-->
 <div class="profile_main">
 	<%= render :partial => "events/event_pool" %>
 </div>
@@ -35,9 +70,9 @@
 <br>
 <br>
 
-
-
-
+----------- matching isn't working yet ---------------
+<%= link_to 'Who\'s free now?', :controller => :accounts, :action => :matching %>
+<%= link_to 'Log out', :controller => :main, :action => :logout %>
 
 
 

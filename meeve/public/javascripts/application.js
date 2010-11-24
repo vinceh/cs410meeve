@@ -17,19 +17,21 @@ $(window).load(function () {
             $(this).css("height","");
         }
     );
-    $(".profile_bar form #search_search_input").val("search");
-    $(this).css("color","gray");
+    
+    // search box javascript
+    $(".profile_bar form #search_search_input").val("Search");
+    $(".profile_bar form #search_search_input").css("color","gray");
     $(".profile_bar form #search_search_input").bind({
 		focusin: function(){
 		  $(this).css("color","black");
-          if ( $(this).val() == "search" ) {
+          if ( $(this).val() == "Search" ) {
       	  	$(this).val("");
       	  }
       },
       	focusout: function(){
       	  if ( !$(this).val() ) {
       	  	$(this).css("color","gray");
-      	  	$(this).val("search");
+      	  	$(this).val("Search");
       	  }
       }
 	});
