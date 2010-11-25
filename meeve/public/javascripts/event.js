@@ -3,7 +3,11 @@
  */
 $(document).ready(function () {
 	$("div#map_canvas").hide();
-	$("input#google_map_option").click(function () {
+	setMapCanvas();
+});
+
+  function setMapCanvas() {
+  	$("input#google_map_option").click(function () {
 		var cb = $(this)
 		if (cb.is(':checked')) {
 			$("div#map_canvas").show();
@@ -11,9 +15,10 @@ $(document).ready(function () {
 		}
 		else {
 			$("div#map_canvas").hide();
+			mapDelete();
 		};
 	});
-});
+  };
 
 /*
 	Functions for Google map
@@ -28,6 +33,8 @@ var marker = null;		// The red marker on the map, set to null
   };
   
   function mapEdit() {
+  	$("input#google_map_option").attr('checked', true);
+	$("div#map_canvas").show();
   	var lat = Number($("input#event_marker_lat").val());
 	var lng = Number($("input#event_marker_lng").val());
 	var latlng = new google.maps.LatLng(lat,lng);
@@ -35,13 +42,25 @@ var marker = null;		// The red marker on the map, set to null
 	placeMarker(latlng);
   };
   
+  function mapDelete() {
+  	$("input#event_marker_lat").val("");
+	$("input#event_marker_lng").val("");
+  }
+  
   function mapView() {
   	map = null;
   	var lat = Number($("input#marker_lat").val());
 	var lng = Number($("input#marker_lng").val());
-	var latlng = new google.maps.LatLng(lat,lng);
-	setMap(latlng, false);
-	placeMarker(latlng);
+	
+	if (lat != 0 && lng != 0) {
+		var latlng = new google.maps.LatLng(lat, lng);
+		setMap(latlng, false);
+		placeMarker(latlng);
+	}
+	else
+	{
+		$("#map_canvas").hide();
+	}
   }
 
   // Initializes a Google map

@@ -52,7 +52,7 @@ class MainController < ApplicationController
     @followees.each do |f|
       @followee_events = Event.find_all_by_aid(f.aid)
       @followee_events.each do |e|
-        if e != nil
+        if e != nil && Time.now < e.end_date && Time.now.yday == e.start_date.yday
           @events.push(e)
         end
       end
@@ -60,10 +60,12 @@ class MainController < ApplicationController
  
     @my_events = Event.find_all_by_aid(session[:id])
     @my_events.each do |e|
-      if e != nil
+      if e != nil && Time.now.utc < e.end_date
         @events.push(e)  
       end      
     end
+    
+    @events = @events.sort_by { |e| e['start_date'] }
     
   	@following = findAllFollowing(session[:id])
     @user = Account.find(session[:id])

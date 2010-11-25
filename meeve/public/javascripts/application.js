@@ -35,4 +35,10 @@ $(window).load(function () {
       	  }
       }
 	});
+	
+	// events feed javascript
+//	$("div.event").click(function () {
+//		window.location = $(this).find("a").attr("data-remote");
+//     	return false;
+//	});
 });

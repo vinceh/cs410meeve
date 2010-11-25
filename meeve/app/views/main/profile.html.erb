@@ -22,15 +22,17 @@
 	<%= render :partial => "events/event_pool" %>
 	<div class="right_pool">
 		<span class="main_title">followers</span>
-		<%= link_to 'Who\'s free?', {:controller => :accounts, :action => :matching}, :method => :get, :target => "_blank", :class => "gray_submit" %>
 		<% @following.each do |follow| %>
 			<li><%= follow.first_name %></li>
 		<% end %>
 	</div>
 </div>
 
+<span class="who_is_free">
+	<%= link_to 'Who\'s free now?', :controller => :accounts, :action => :matching %>
+</span>
 <!--
-<%= link_to 'Who\'s free now?', :controller => :accounts, :action => :matching %>
+
 <%= link_to 'Log out', :controller => :main, :action => :logout %>
 -->
 
