@@ -243,6 +243,18 @@ body {
 	font-family: 'Lucida Grande', sans-serif;
 	
 }
+	.signup_form textarea {
+		outline-style: none;
+		font-family: 'Lucida Grande', sans-serif;
+		padding: 5px;
+		border-radius: 5px;
+		border: 1px solid #A0A0A0 ;
+	}
+	
+	.signup_form textarea:focus {
+		border: 1px solid black ;
+	}
+	
 	.signup_form #piglet {
 		position: relative;
 		left: 480px;
