@@ -1,20 +1,33 @@
-<table border="1">
+<table border="1", class="dialogue">
 	<tr>
-		<td>
-			<%= link_to 'Edit', :controller => :events, :action => :edit, :eid => event.event_id %>
-			<%= link_to 'Remove', :controller => :events, :action => :remove, :eid => event.event_id %><br/>
+		<td class="content_dia">
 			
-			<br/>
 			
-			Description: <%= event.desc %><br/>
-			Where: <%= event.location %><br/>
-			From: <%= event.start_date %><br/>
-			Until: <%= event.end_date %><br/>
+			<span class="event_bold">Time</span>
+			<p class="event_time"><%= event.start_date.strftime("%A, %b %d, %I:%M")+event.start_date.strftime("%p").downcase %> - <%= event.end_date.strftime("%A, %b %d, %I:%M")+event.end_date.strftime("%p").downcase %></p>
+			<span class="event_bold">Where</span>
+			<p class="event_loca"><%= event.location %></p>
+			<span class="event_bold">Info</span>
+			<p class="event_desc"><%= event.desc %></p>
+			
+			
 			<%= hidden_field_tag "marker_lat", event.marker_lat %>
 			<%= hidden_field_tag "marker_lng", event.marker_lng %>
+			<%= link_to 'Edit', :controller => :events, :action => :edit, :eid => event.event_id %>
+			<%= link_to 'Remove', :controller => :events, :action => :remove, :eid => event.event_id %>
 			<div id="map_canvas"></div>
 		</td>
-		<td>
+		<td class="comments_dia">
+			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
+				<% event.comments.reverse.each do |c| %>
+					<%= content_tag :div, :id => "comment" + c.cid.to_s, :class => "diag_comment" do %>
+						<span class="commenter"><%= c.commenter %></span>
+						<%= c.body %>
+						<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %><br/>
+						<span class="time_hint"><%= time_ago_in_words(c.timestamp) %> ago</span>
+					<% end %>
+				<% end %>
+			<% end %>
 			<%= form_for @comment, :url => { :controller => :comments, :action => :create }, :remote => true do |f| %>
 				<%= f.hidden_field :event_id, :value => event.event_id %>
 				<%= f.hidden_field :commenter, :value => @user.first_name + " " + @user.last_name %>
@@ -23,17 +36,6 @@
 				<br/>
 				<%= f.submit "Comment", :class => "submit" %>
 			<% end %>
-			
-			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
-				<% event.comments.reverse.each do |c| %>
-					<%= content_tag :div, :id => "comment" + c.cid.to_s do %>
-						<b><%= c.commenter %></b>
-						<%= c.body %>
-						<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %><br/>
-					<% end %>
-				<% end %>
-			<% end %>
-
 		<!-- show more later	
 			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
 				<% for i in 0..4 do %>
@@ -55,7 +57,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td><input type="button" value="OK" class="close_event_box" /></td>
 		<td></td>
+		<td><input type="button" value="Close" class="close_event_box" /></td>
 	</tr>
 </table>

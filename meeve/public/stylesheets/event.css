@@ -6,15 +6,82 @@
  */
 
 #map_canvas { 
-	height: 400px; width: 600px 
+	margin-top: 10px;
+	height: 300px; width: 450px;
 }
 
+.close_event_box {
+	float: right;
+	border-radius: 3px;
+	margin: 0px 10px 0px 0px;
+	padding: 4px 10px;
+	font: 12px arial;
+	height: auto;
+	width: auto;
+	border: 1px solid #C8C8C8 ;
+	background: url('../images/button3.png');
+	color: black;
+	text-decoration: none;
+}
+.close_event_box:hover {
+	border: 1px solid gray;
+	cursor: pointer;
+}
+.dialogue {
+	border-collapse: collapse;
+	border-spacing: 0px;
+	border: 1px solid white;
+}
+.diag_comment {
+	
+	padding: 5px;
+}
+.diag_comment:hover {
+	background-color: #ececec;
+}
+.content_dia {
+	border-top-right-radius: 5px;
+	padding-right: 20px;
+	width: 450px;
+	font-size: 13px;
+}
+.event_bold {
+	color: #646464;
+	display: block;
+	font-weight: bold;
+	padding-bottom: 4px;
+}
+
+.event_time,
+.event_loca,
+.event_desc {
+	margin: 0px 0px 4px 0px;
+	padding: 0px;
+}
+.time_hint {
+	color: #6c6c6c;
+	font-size: 11px;
+}
+.comments_dia {
+	vertical-align: text-top;
+	border-left: 1px solid #e3e3e3;
+	font-size: 12px;
+	background-attachment: scroll;
+	max-height: 350px;
+	max-width: 223px;
+}
+	.comments_dia .commenter {
+		font-weight: bold;
+		color: #66cc99;
+	}
 .modal-dialog {
-  background: #c1d9ff;
-  border: 1px solid #3a5774;
-  color: #000;
-  padding: 4px;
-  position: absolute;
+
+	margin-top: 15px;
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+	outline-style: none;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+  	position: absolute;
 }
 
 .modal-dialog a,
@@ -32,12 +99,14 @@
 }
 
 .modal-dialog-title {
-  background: #e0edfe;
-  color: #000;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+  background: white;
+  color: #5fb6ed;
   cursor: pointer;
-  font-size: 120%;
+  font-size: 25px;
   font-weight: bold;
-  padding: 8px 15px 8px 8px;
+  padding: 15px 15px 0px 15px;
   position: relative;
   _zoom: 1; /* Ensures proper width in IE6 RTL. */
 }
@@ -48,16 +117,22 @@
   cursor: default;
   height: 15px;
   position: absolute;
-  right: 10px;
-  top: 8px;
+  right: 15px;
+  top: 15px;
   width: 15px;
   vertical-align: middle;
 }
 
-.modal-dialog-buttons,
-.modal-dialog-content {
-  background-color: #fff;
+.modal-dialog-buttons {
+	border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+background-color: #fff;
   padding: 8px;
+}
+.modal-dialog-content {
+	
+  background-color: #fff;
+  padding: 3px 0px 0px 15px;
 }
 
 .goog-buttonset-default {
