@@ -6,8 +6,7 @@
 </script>
 <div class="event_pool">
 	<span id="pool_title">events feed</span>
-	<!--<h3><%= link_to 'Create an Event', :controller => :events, :action => :new %></h3>
-	-->
+	<%= button_to 'Create an Event', {:controller => :events, :action => :new}, :method => :get, :class => "gray_submit" %>
 	<% @events.reverse.each do |event| %>
 		<div class="timestamp"><%= event.start_date.strftime("%H:%M") %></div>
 		<div class="event">
