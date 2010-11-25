@@ -7,7 +7,6 @@
 			<th><%= form.label "Email"%></th>
 			<td><%= form.text_field :email %></td>
 			<%= render("shared/signup_error", :error => "Email "+target.errors[:email][0]) if !target.errors[:password] %>
-			<!-- <%= render "shared/error_messages", :target => target %> -->
 		</tr>
 		<tr>
 			<th></th>
@@ -48,7 +47,7 @@
 		</tr>
 		<tr>
 			<th></th>
-			<td><%= form.submit 'Create my account', :id => "signup_submit" %></td>
+			<td><%= form.submit submit_value, :id => "signup_submit" %></td>
 		</tr>
 	</tbody>
 </table>

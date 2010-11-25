@@ -1,8 +1,5 @@
 <%= javascript_tag "$(document).ready(function() { mapEdit() });" %>
 
 <%= form_for @event, :url => { :action => :edit, :eid => @event.event_id } do |f| %>
-	<%= render "shared/error_messages", :target => @event %>
-	<%= render "events/form_event_info", :form => f %>
-	<%= f.submit "Edit" %>
+	<%= render "events/form_event_info", :form => f, :sub_val => "Edit" %>
 <% end %>
-<%= button_to "Back", :controller => :main, :action => :profile %>
