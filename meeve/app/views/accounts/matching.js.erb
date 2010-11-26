@@ -1,2 +1,4 @@
 $("#who_is_free").hide();
-$("#matching_results_box").append("<%= escape_javascript (render "accounts/matching_results", :results => @hits) %>");
+$("#matching_results").children().remove()
+$("#matching_results").append("<%= escape_javascript (render "accounts/matching_results", :results => @hits) %>");
+slide_matching();

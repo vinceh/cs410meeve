@@ -149,11 +149,19 @@ body {
 }
 
 #matching_results_box {
-	position: absolute;
-	top: 30%;
-	right: 2%;
+	position: fixed;
+	top: 20%;
+	right: 0%;
+	width: 300px;
+	height: 400px;
+}
+
+#matching_results {
+	position: fixed;
+	margin-left: 300px;
 	border: 1px solid #C8C8C8;
 	border-radius: 2px, 2px;
+	width: 300px;
 }
 
 .main_title {

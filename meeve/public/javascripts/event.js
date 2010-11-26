@@ -33,13 +33,15 @@ var marker = null;		// The red marker on the map, set to null
   };
   
   function mapEdit() {
-  	$("input#google_map_option").attr('checked', true);
-	$("div#map_canvas").show();
   	var lat = Number($("input#event_marker_lat").val());
 	var lng = Number($("input#event_marker_lng").val());
-	var latlng = new google.maps.LatLng(lat,lng);
-	setMap(latlng, true);
-	placeMarker(latlng);
+  	if (lat != 0 && lng != 0) {
+		$("input#google_map_option").attr('checked', true);
+		$("div#map_canvas").show();
+		var latlng = new google.maps.LatLng(lat, lng);
+		setMap(latlng, true);
+		placeMarker(latlng);
+	}
   };
   
   function mapDelete() {

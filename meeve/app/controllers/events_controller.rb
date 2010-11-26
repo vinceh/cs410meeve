@@ -12,18 +12,18 @@ class EventsController <  ApplicationController
     @start_dt = @now
     @end_dt = @now
 	
-	@service = GCal4Ruby::Service.new
-	#TODO: ideal way of setting up google calendar + where gcal password is stored
-	#Note if you want to visit this page, temporarily put in your gmail or something cause this will cause an error. 
-	if @service.authenticate("some_user@gmail.com", "some_pwd")		
-		@Gcal = @service.to_iframe(:all)
-	else
-		#failure to authenticate throws error
-		#TODO: Need to catch error and inform user to de-link google calendar
-		@Gcal = "Your Google Calendar didn't authenticate properly. Please check your settings."
-	end
-	
-	@calendars = GCal4Ruby::Calendar.new(@service)
+#	@service = GCal4Ruby::Service.new
+#	#TODO: ideal way of setting up google calendar + where gcal password is stored
+#	#Note if you want to visit this page, temporarily put in your gmail or something cause this will cause an error. 
+#	if @service.authenticate("jtantongco@gmail.com", "")		
+#		@Gcal = @service.to_iframe(:all)
+#	else
+#		#failure to authenticate throws error
+#		#TODO: Need to catch error and inform user to de-link google calendar
+#		@Gcal = "Your Google Calendar didn't authenticate properly. Please check your settings."
+#	end
+#	
+#	@calendars = GCal4Ruby::Calendar.new(@service)
 	
 	if request.post?
       @event = Event.new(params[:event])
