@@ -1,6 +1,5 @@
 <%= form_for @event, :url => { :action => :remove, :eid => @event.event_id } do |f| %>
-	<%= render "shared/error_messages", :target => @event %>
-	Are you sure you want to remove this event from the pool?
+Are you sure you want to remove this event from the pool?
 	<%= f.submit 'Yes' %>
-	<%= link_to "No", :action => :index %>
+	<%= link_to "No", :controller, :action => :profile %>
 <% end %>

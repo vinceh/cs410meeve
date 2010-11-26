@@ -175,7 +175,6 @@ goog.require('goog.events');
 goog.require('goog.events.EventType');
 goog.require('goog.ui.Dialog');
 
-
 /*
  *  Comment box hinted input
  */

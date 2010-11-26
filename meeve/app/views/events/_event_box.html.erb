@@ -23,7 +23,9 @@
 					<%= content_tag :div, :id => "comment" + c.cid.to_s, :class => "diag_comment" do %>
 						<span class="commenter"><%= c.commenter %></span>
 						<%= c.body %>
-						<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %><br/>
+						<span class="comment_remove">
+							<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %><br/>
+						</span>
 						<span class="time_hint"><%= time_ago_in_words(c.timestamp) %> ago</span>
 					<% end %>
 				<% end %>

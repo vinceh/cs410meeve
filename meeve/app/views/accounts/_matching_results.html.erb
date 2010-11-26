@@ -1,10 +1,10 @@
-<p> <%= @hits.length %> people are free now </p>
+<p> <%= results.length %> people are free now </p>
 <br>
 <table>
   <tr>
     <th>Here comes the List!</th>
   </tr>
-<% @hits.each do |hit| %>
+<% results.each do |hit| %>
   <tr>
   	<td>
   	<% if (hit[1] <= 60) %> 
@@ -20,4 +20,4 @@
 </table>
 
 <br><br><br>
-<%= link_to 'Back', :controller => :main, :action => :profile %>
+<input id="close_matching" type="button" value="Close" onclick="close_matching()" />
