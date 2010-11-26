@@ -5,9 +5,13 @@
 
 
 <% form_for @account, :url => {:action => :edit, :aid => @account.aid} do |f| %>
-
-	<%= render :partial => "form_account_info", :locals => {:target => @account, :form => f, :pass => false}%>
+	
+<div class="signup_form">
+	<div class="edit_title">
+		<span class="red">edit your </span><span class="blue">account</span>
+	</div>
+	<%= render :partial => "form_account_info", :locals => {:target => @account, :form => f, :pass => false, :submit_value => "Save my account", :cancel => true}%>
+	</div>
 <% end %>
 
-<%= link_to 'Back',  :controller => :main %>
 <%= link_to 'Change password',  :controller => :main, :action => :change_password %>

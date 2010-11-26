@@ -7,11 +7,10 @@
 			<th><%= form.label "Email"%></th>
 			<td><%= form.text_field :email %></td>
 			<%= render("shared/signup_error", :error => "Email "+target.errors[:email][0]) if !target.errors[:password] %>
-			<!-- <%= render "shared/error_messages", :target => target %> -->
 		</tr>
 		<tr>
 			<th></th>
-			<td id="hint">You will use this to log in</td>
+			<td id="hint">You use this to log in</td>
 		</tr>
 		<% if pass %>
 			<tr>
@@ -48,7 +47,7 @@
 		</tr>
 		<tr>
 			<th></th>
-			<td><%= form.submit 'Create my account', :id => "signup_submit" %></td>
+			<td><%= form.submit submit_value, :id => "signup_submit" %><%= link_to("Cancel", {:controller => :main, :action => :profile}, :class => "event_cancel") if cancel %></td>
 		</tr>
 	</tbody>
 </table>

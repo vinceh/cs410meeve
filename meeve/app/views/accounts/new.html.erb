@@ -7,7 +7,7 @@
 <div class="signup_form">
 	<div id="signup_title"><span id="spon">mpontaneous.</span> <span id="simp">mimple.</span>  <span id="meeve">meeve.</span> </div>
 <% form_for @account, :url => {:action => :new} do |f| %>
-	<%= render :partial => "form_account_info", :locals => {:target => @account, :form => f, :pass => true}%>
+	<%= render :partial => "form_account_info", :locals => {:target => @account, :form => f, :pass => true, :submit_value => "Create my account", :cancel => false}%>
 <% end %>
 
 <%= image_tag("piglet.png", :id => "piglet" ) %>

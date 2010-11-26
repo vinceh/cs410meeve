@@ -7,8 +7,6 @@
 <div class="event_pool">
 	<span id="pool_title">events feed</span>
 	<%= button_to 'Create an Event', {:controller => :events, :action => :new}, :method => :get, :class => "gray_submit" %>
-	<% @hour = Time.now.strftime("%H:00") %>
-	<%= @hour %>
 	<% @events.each do |event| %>	
 		<% if @hour != event.start_date.strftime("%H:00") %>
 			<% @hour = event.start_date.strftime("%H:00") %>
