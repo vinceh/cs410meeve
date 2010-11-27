@@ -1,6 +1,6 @@
 function close_matching() {
 	slide_matching();
-	$("#who_is_free").show();
+	setTimeout("$('#who_is_free').show();", 400);
 };
 
 function slide_matching() {

@@ -220,6 +220,7 @@ body {
 		color: #e83fae;
 	}
 	.event_pool .event {
+		position: relative;
 		padding: 4px 3px 7px 3px;
 	}
 	.event_pool .event:hover {
@@ -234,6 +235,21 @@ body {
 		width: 10px;
 		font: 12px verdana;
 		color: gray;
+	}
+	
+	.event_pool .event_creator {
+		font: 10px verdana;
+		color: gray;
+	}
+	
+	.event_pool .time_guide {
+		font: bold 20px verdana;
+	}
+	
+	.event_pool .join {
+		position: absolute;
+		top: 20%;
+		right: 2%;
 	}
 	
 .right_pool {

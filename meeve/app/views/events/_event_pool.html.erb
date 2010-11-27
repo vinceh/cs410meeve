@@ -7,14 +7,26 @@
 <div class="event_pool">
 	<span id="pool_title">events feed</span>
 	<%= button_to 'Create an Event', {:controller => :events, :action => :new}, :method => :get, :class => "gray_submit" %>
+	<% @hour = Time.now.strftime("%H:00") %>
+	<span class="time_guide"><%= @hour %></span>
 	<% @events.each do |event| %>	
 		<% if @hour != event.start_date.strftime("%H:00") %>
 			<% @hour = event.start_date.strftime("%H:00") %>
+			<span class="time_guide"><%= @hour %></span>
 		<% end %>
 		<div class="timestamp"><%= event.start_date.strftime("%H:%M") %></div>
 		<div class="event">
 			<%= link_to event.title, {:controller => :events, :action => :show_event, :eid => event.event_id}, :class => "event_link", :remote => true %>
-			
+			<% @creator = Account.find_by_aid(event.aid) %>
+			<span class="event_creator">
+				posted by <%= @creator.first_name + " " + @creator.last_name %>
+			</span>
+			<span class="join">
+				<%= content_tag :span, :id => "join_button" + event.event_id.to_s do %>
+						<%= button_to 'Join', {:controller => :events, :action => :join_event, :eid => event.event_id}, :class => "gray_submit", :remote => true %>
+				<% end -%>
+			</span>
+			</br>
 			<span class="event_desc"><%= event.desc %></span>
 		</div>
 	

@@ -1,7 +1,8 @@
 // delete all dynamically generated elements for further javascript
-$("#map_canvas").remove();
-$("input#marker_lat").remove();
-$("input#marker_lng").remove();
+$(".event_box").remove();
+//$("#map_canvas").remove();
+//$("input#marker_lat").remove();
+//$("input#marker_lng").remove();
 
 var title = "<%= @event.title %>";
 var content = "<%= escape_javascript(render "events/event_box", :event => @event) %>";

@@ -226,7 +226,7 @@ goog.require('goog.ui.Dialog');
         // pass the form's ajax:success event to the input field
         this.parent("form").bind("ajax:complete",function(e,data,status,xhr) {
             $(this).find("input").attr("disabled",false);
-            $(this).find("textarea").trigger("success");
+            $(this).find("text").trigger("success");
         });
 
 //        this.autoResize();
@@ -234,3 +234,7 @@ goog.require('goog.ui.Dialog');
         return this;
     };
 })(jQuery);
+
+$(document).ready(function () {
+	$("input.comment_field").hintedInput("Write a comment...");
+})

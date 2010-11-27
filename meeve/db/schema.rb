@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.datetime  "end_date",                     :null => false
     t.integer   "flag"
   end
+
+  create_table "joinevents", :id => false, :force => true do |t|
+    t.integer "aid", :null => false
+    t.integer "eid", :null => false
+  end
   
   create_table "tags", :primary_key => "tid", :force => true do |t|
   	t.string "tag",		:null => false
@@ -64,7 +69,8 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.string   "commenter", :null => false
     t.string   "body",      :null => false
     t.datetime "timestamp", :null => false
-    t.integer  "event_id",      :null => false
+    t.integer  "event_id",  :null => false
+    t.integer  "aid",       :null => false
   end
 
   create_table "user_events", :primary_key => "ue_id", :force => true do |t|

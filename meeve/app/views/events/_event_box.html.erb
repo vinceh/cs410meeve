@@ -1,3 +1,4 @@
+<div class="event_box">
 <table border="1", class="dialogue">
 	<tr>
 		<td class="content_dia">
@@ -13,8 +14,10 @@
 			
 			<%= hidden_field_tag "marker_lat", event.marker_lat %>
 			<%= hidden_field_tag "marker_lng", event.marker_lng %>
-			<%= link_to 'Edit', :controller => :events, :action => :edit, :eid => event.event_id %>
-			<%= link_to 'Remove', :controller => :events, :action => :remove, :eid => event.event_id %>
+			<% if event.aid == session[:id] %>
+				<%= link_to 'Edit', :controller => :events, :action => :edit, :eid => event.event_id %>
+				<%= link_to 'Remove', :controller => :events, :action => :remove, :eid => event.event_id %>
+			<% end %>
 			<div id="map_canvas"></div>
 		</td>
 		<td class="comments_dia">
@@ -23,9 +26,12 @@
 					<%= content_tag :div, :id => "comment" + c.cid.to_s, :class => "diag_comment" do %>
 						<span class="commenter"><%= c.commenter %></span>
 						<%= c.body %>
-						<span class="comment_remove">
-							<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %><br/>
-						</span>
+						<% if c.aid == session[:id] %>
+							<span class="comment_remove">
+								<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %>
+							</span>
+						<% end %>
+						<br/>
 						<span class="time_hint"><%= time_ago_in_words(c.timestamp) %> ago</span>
 					<% end %>
 				<% end %>
@@ -63,3 +69,4 @@
 		<td><input type="button" value="Close" class="close_event_box" /></td>
 	</tr>
 </table>
+</div>

@@ -1,5 +1,2 @@
-var commenter = "<%= @user.first_name %> <%= @user.last_name %>";
-var body = "<%= @comment.body %>";
-var id = <%= @comment.cid %>;
 var eid = <%= @comment.event_id %>;
-$("div#comment_block_" + eid).prepend("<div id=\"comment" + id + "\"><b>" + commenter + "</b> " + body + " <a href=\"/comments/remove?cid=" + id + "\" data-remote=\"true\">x</a><br/></div>")
+$("div#comment_block_" + eid).prepend("<%= escape_javascript (render 'comments/new_comment', :comment => @comment) %>");

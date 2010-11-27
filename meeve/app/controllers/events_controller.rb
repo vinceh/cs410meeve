@@ -76,4 +76,25 @@ class EventsController <  ApplicationController
       redirect_to(:controller => :main, :action => :profile)
     end    
   end
+  
+  def join_event
+    
+    @account = session[:id]
+    @event = Event.find(params[:eid]).event_id
+    
+    if request.xhr?
+      
+      @join = Joinevent.new
+      @join.aid = @account
+      @join.eid = @event
+      
+      if @join.save
+        render "events/join_event"
+      end
+    else
+      redirect_to(:controller => :main, :action => :profile)
+    end
+    
+    
+  end
 end

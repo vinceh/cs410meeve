@@ -1,0 +1,8 @@
+<%= content_tag :div, :id => "comment" + comment.cid.to_s, :class => "diag_comment" do %>
+	<span class="commenter"><%= comment.commenter %></span>
+	<%= comment.body %>
+	<span class="comment_remove">
+		<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => comment.cid }, :remote => true %><br/>
+	</span>
+	<span class="time_hint"><%= time_ago_in_words(comment.timestamp) %> ago</span>
+<% end %>

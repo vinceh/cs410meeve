@@ -1,13 +1,10 @@
 class CommentsController < ApplicationController
 
   def create
-    if request.post?
-
-        @user = Account.find(session[:id])
-     end
 
     if request.xhr?  
     	@comment = Comment.new(params[:comment])
+      @comment.aid = session[:id]
         @comment.save
       render "comments/create"     
     else

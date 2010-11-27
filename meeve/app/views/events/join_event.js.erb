@@ -1,0 +1,4 @@
+var id = "#join_button" + <%= @event %>;
+
+$(id).children().remove();
+$(id).append("<%= escape_javascript (button_to 'Quit', {:controller => :events, :action => :join_event, :eid => @event}, :class => "gray_submit", :remote => true) %>");
