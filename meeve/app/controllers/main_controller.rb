@@ -68,6 +68,7 @@ class MainController < ApplicationController
     @events = @events.sort_by { |e| e['start_date'] }
     
   	@following = findAllFollowing(session[:id])
+  	@followings = findAllFollowers(session[:id])
     @user = Account.find(session[:id])
     @comment = Comment.new
   end
@@ -155,6 +156,15 @@ class MainController < ApplicationController
   	return returnee
   end
   	 
+  def findAllFollowers( id )
+  	follows = Follow.find_all_by_followee(id)
+  	returnees = Array.new
+  	follows.each { |f|
+  		returnees.push(Account.find(f.follower))
+  	}
+  	return returnees
+  end
+  
   def findAllEvents( id )
   	Event.all
   end
