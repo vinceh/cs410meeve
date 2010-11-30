@@ -18,4 +18,10 @@ class Event < ActiveRecord::Base
   		errors.add(:event, ": You can't create a passed event.")
   	end
   end
+
+#  def not_0durationevent?
+#    if Time.parse(end_date.to_s) == Time.parse(start_date.to_s)
+#      errors.add(:event, ": Start date cannot be the same as end date.")
+#    end
+#  end
 end

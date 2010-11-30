@@ -1,6 +1,7 @@
 require 'gcal4ruby'
 
 class EventsController <  ApplicationController
+  
   def index
     redirect_to :controller => :main, :action => :profile
   end
@@ -11,25 +12,30 @@ class EventsController <  ApplicationController
         
     @start_dt = @now
     @end_dt = @now
-	
-#	@service = GCal4Ruby::Service.new
-#	#TODO: ideal way of setting up google calendar + where gcal password is stored
-#	#Note if you want to visit this page, temporarily put in your gmail or something cause this will cause an error. 
-#	if @service.authenticate("jtantongco@gmail.com", "")		
-#		@Gcal = @service.to_iframe(:all)
-#	else
-#		#failure to authenticate throws error
-#		#TODO: Need to catch error and inform user to de-link google calendar
-#		@Gcal = "Your Google Calendar didn't authenticate properly. Please check your settings."
-#	end
-#	
-#	@calendars = GCal4Ruby::Calendar.new(@service)
+
+	@Gcal = "Comment this out."
 	
 	if request.post?
       @event = Event.new(params[:event])
       @event.aid = session[:id]
       
+      account = Account.find(session[:id])
+      
+      service = GCal4Ruby::Service.new
+      service.authenticate("meevecalendar@gmail.com", "jtantongco")
+	  calendar = GCal4Ruby::Calendar.find(
+											service,
+											{:id => account.gcal})
+      gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
+											 	:title => @event.title,
+												:start_time => @event.start_date, 
+												:end_time => @event.end_date, 
+												:where => @event.location}) 	
       if @event.save
+      	gevent.save
+      	#gevent.id is empty string, until the event is committed to google calendar
+      	@event.gevent = gevent.id
+      	@event.save
         flash[:success] = "Your event has been successfully posted!"
         redirect_to :controller => :main, :action => :profile
       end
@@ -38,13 +44,30 @@ class EventsController <  ApplicationController
   
   def edit
     @event = Event.find(params[:eid])
-    
+    original_title = @event.title
     @start_dt = @event.start_date
     @end_dt = @event.end_date
     
-    if request.put?   
-      @event.update_attributes(params[:event])
-      redirect_to :controller => :main, :action => :profile
+    if request.put?   	
+      	@event.update_attributes(params[:event])
+      
+      	account = Account.find(session[:id])
+      
+      	service = GCal4Ruby::Service.new
+      	service.authenticate("meevecalendar@gmail.com", "jtantongco")
+	  	calendar = GCal4Ruby::Calendar.find(
+											service,
+											{:id => account.gcal})
+		gevent = GCal4Ruby::Event.find(
+										service, 
+										{:id => @event.gevent})
+		gevent.title = @event.title
+		gevent.start_time = @event.start_date
+		gevent.end_time = @event.end_date
+		gevent.where = @event.location
+		gevent.save
+		
+      	redirect_to :controller => :main, :action => :profile
     end
   end
   
@@ -57,8 +80,33 @@ class EventsController <  ApplicationController
         @event.comments.each do |c|
           c.destroy
         end
-        @event.destroy        
-        flash[:success] = "Your event has been successfully removed."
+    	account = Account.find(session[:id])
+      
+      	service = GCal4Ruby::Service.new
+      	service.authenticate("meevecalendar@gmail.com", "jtantongco")
+	  	calendar = GCal4Ruby::Calendar.find(
+											service,
+											{:id => account.gcal})
+		#trash_cal = GCal4Ruby::Calendar.find(
+		#									service,
+		#									{:id => "6h9ukoe7qac2aabimv18lk19k4@group.calendar.google.com"})
+		gevent = GCal4Ruby::Event.find(
+											service, 
+											{:id => @event.gevent})
+		
+		#no delete method in gem, .destroy doesn't seem to work
+		
+		#results from trying to move the event to a trash calendar are in-conclusive 
+		#gevent[0].calendar = trash_cal
+		
+		#settled on moving deleted events to January 31, 2000, at 12:30 pm to 12:31 pm
+		gevent.title = "Deleted"
+		gevent.start_time = Time.parse("31-01-2000 at 12:30 PM")
+		gevent.end_time = Time.parse("31-01-2000 at 12:31 PM")
+	  	gevent.where = "Deleted"
+		gevent.save
+		@event.destroy
+		flash[:success] = "Your event has been successfully removed."
         redirect_to :controller => :main, :action => :profile
       end
     end    
