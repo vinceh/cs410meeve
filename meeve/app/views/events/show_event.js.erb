@@ -1,8 +1,5 @@
 // delete all dynamically generated elements for further javascript
 $(".event_box").remove();
-//$("#map_canvas").remove();
-//$("input#marker_lat").remove();
-//$("input#marker_lng").remove();
 
 var title = "<%= @event.title %>";
 var content = "<%= escape_javascript(render "events/event_box", :event => @event) %>";
@@ -13,6 +10,7 @@ var dialog = new goog.ui.Dialog(null, true);
     dialog.setTitle(title);
  
     dialog.setButtonSet(goog.ui.Dialog.ButtonSet.NONE);
+	dialog.setDraggable(false);
 
     goog.events.listen(window, 'unload', function() {
       goog.events.removeAll();

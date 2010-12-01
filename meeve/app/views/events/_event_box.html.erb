@@ -15,7 +15,7 @@
 			<%= hidden_field_tag "marker_lng", event.marker_lng %>
 			<% if event.aid == session[:id] %>
 				<%= link_to 'Edit', :controller => :events, :action => :edit, :eid => event.event_id %>
-				<%= link_to 'Remove', :controller => :events, :action => :remove, :eid => event.event_id %>
+				<%= link_to 'Remove', {:controller => :events, :action => :remove, :eid => event.event_id}, :confirm => 'Are you sure?' %>
 			<% end %>
 			<div id="map_canvas"></div>
 		</td>

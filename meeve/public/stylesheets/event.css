@@ -138,3 +138,7 @@ background-color: #fff;
 .goog-buttonset-default {
   font-weight: bold;
 }
+
+#repeat_summary {
+	visibility: hidden;
+}

@@ -13,6 +13,7 @@
 					<% end -%>	
 			</div>
 			<%= link_to 'Account', {:controller => :accounts, :action => :edit}, :class => "toolbar_link" %>
+			<%= link_to 'Calendar', {:controller => :accounts, :action => :view_calendar}, :class => "toolbar_link" %> 
 			<%= link_to 'Log out', {:controller => :main, :action => :logout}, :class => "toolbar_link" %>
 		</div>
 	</div>

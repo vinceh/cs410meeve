@@ -1,0 +1,29 @@
+function day(a) {
+	this.d = a;
+	this.val = "0";
+}
+
+var sun = new day("sunday");
+var mon = new day("monday");
+var tue = new day("tuesday");
+var wed = new day("wednesday");
+var thu = new day("thursday");
+var fri = new day("friday");
+var sat = new day("saturday");
+
+function parse(day) {
+	if ($("input[name=" + day.d + "]").is(":checked")) {
+		day.val = "1";
+	}
+}
+
+parse(sun);
+parse(mon);
+parse(tue);
+parse(wed);
+parse(thu);
+parse(fri);
+parse(sat);
+
+var binRep = sun.val+mon.val+tue.val+wed.val+thu.val+fri.val+sat.val;
+$("#repeat_option_binary").val(binRep);

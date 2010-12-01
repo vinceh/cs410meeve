@@ -67,6 +67,7 @@ class MainController < ApplicationController
     
     @events = @events.sort_by { |e| e['start_date'] }
     
+    # For followings and followers
   	@following = findAllFollowing(session[:id])
   	@followings = findAllFollowers(session[:id])
     @user = Account.find(session[:id])
