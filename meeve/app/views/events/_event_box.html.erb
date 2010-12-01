@@ -11,7 +11,6 @@
 			<span class="event_bold">Info</span>
 			<p class="event_desc"><%= event.desc %></p>
 			
-			
 			<%= hidden_field_tag "marker_lat", event.marker_lat %>
 			<%= hidden_field_tag "marker_lng", event.marker_lng %>
 			<% if event.aid == session[:id] %>
