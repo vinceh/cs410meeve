@@ -76,8 +76,25 @@
 			<td id="hint"><%= check_box_tag 'google_map_option' %> add Google map</td>
 		</tr>
 		<tr>
-				<th/>
+				<th></th>
 				<td><div id="map_canvas"></div></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td id="hint"><%= check_box_tag 'repeat_option' %> repeat...</td>
+		</tr>
+		<tr>
+				<th></th>
+				<td id="repeat_option_link">
+					<%= text_field_tag 'repeat_option_binary' %>
+					<div id="repeat_summary">						
+						<%= link_to 'repeat_event', {:controller => :events, :action => :repeat_event}, :remote => true %>
+					</div>
+				</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td id="hint"><%= check_box_tag 'privacy_option' %> make it private</td>
 		</tr>
 		<tr>
 			
@@ -87,4 +104,4 @@
 		</tr>	
 				<%= form.hidden_field :marker_lat %>
 				<%= form.hidden_field :marker_lng %>
-	<table>
+	</table>

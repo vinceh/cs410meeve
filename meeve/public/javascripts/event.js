@@ -1,13 +1,22 @@
 /*
+ 	Google Closure Requirements
+ */
+goog.require('goog.events');
+goog.require('goog.events.EventType');
+goog.require('goog.ui.Dialog');
+goog.require('goog.ui.ComboBox');
+
+/*
  * Event Create
  */
 $(document).ready(function () {
 	$("div#map_canvas").hide();
 	setMapCanvas();
+	setRepeat();
 });
 
   function setMapCanvas() {
-  	$("input#google_map_option").click(function () {
+  	$("#google_map_option").click(function () {
 		var cb = $(this)
 		if (cb.is(':checked')) {
 			$("div#map_canvas").show();
@@ -19,6 +28,16 @@ $(document).ready(function () {
 		};
 	});
   };
+  
+  function setRepeat() {
+  	$("#repeat_option").click(function () {
+		var cb = $(this);
+		if (cb.is(':checked')) {
+			var $a = $("#repeat_option_link").find("a");
+			$a.click();
+		}
+	})
+  }
 
 /*
 	Functions for Google map
@@ -169,13 +188,6 @@ var marker = null;		// The red marker on the map, set to null
   }
 */
 
-
-/*
- 	Pop-up Dialog using Google Closure
- */
-goog.require('goog.events');
-goog.require('goog.events.EventType');
-goog.require('goog.ui.Dialog');
 
 /*
  *  Comment box hinted input

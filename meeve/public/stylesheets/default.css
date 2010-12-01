@@ -17,6 +17,19 @@ body {
 	width: 13px;
 	height: 13px;
 }
+
+#repeat_option {
+	padding-top: 3px !important;
+	width: 13px;
+	height: 13px;
+}
+
+#privacy_option {
+	padding-top: 3px !important;
+	width: 13px;
+	height: 13px;
+}
+
 .event_cancel {
 	margin-left: 5px;
 	color: black;

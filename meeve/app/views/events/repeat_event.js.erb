@@ -1,0 +1,33 @@
+$("#repeat_option_box").remove();
+
+var title = "Repeat";
+var content = "<%= escape_javascript(render "events/repeat_option_box") %>";
+
+var dialog = new goog.ui.Dialog(null, true);
+
+dialog.setContent(content);
+dialog.setTitle(title);
+
+dialog.setButtonSet(goog.ui.Dialog.ButtonSet.NONE);
+dialog.setDraggable(false);
+
+goog.events.listen(window, 'unload', function() {
+  goog.events.removeAll();
+});
+
+dialog.setVisible(true);
+
+$(document).ready(function () {
+	$("#repeat_option_cancel").click(function () {
+		goog.events.removeAll();
+		dialog.dispose();
+		$("#repeat_option").attr('checked', false);
+	});
+	
+	$('#repeat_option_end_date').val(<%= Time.now.year.to_s + '-' + Time.now.month.to_s + '-' + Time.now.day.to_s + ' ' + Time.now.hour.to_s + ':' + Time.now.min.to_s + ':00' %>);
+	
+	$('#repeat_option_end_date').datetime({
+		userLang	: 'en',
+		americanMode: true,
+	});	
+});

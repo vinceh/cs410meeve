@@ -1,0 +1,33 @@
+<div id="repeat_option_box">
+<table>
+	<tr>
+		<td>
+			Repeat on:
+		</td>
+		<td>
+			<%= check_box_tag 'sunday' %> S
+			<%= check_box_tag 'monday' %> M
+			<%= check_box_tag 'tuesday' %> T
+			<%= check_box_tag 'wednesday' %> W
+			<%= check_box_tag 'thursday' %> T
+			<%= check_box_tag 'friday' %> F
+			<%= check_box_tag 'saturday' %> S	
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Ends on:
+		</td>
+		<td>
+			<%= text_field_tag 'repeat_option_end_date', ''+@repeat_option_end_dt.to_s %>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<%= button_to 'Done', {:controller => :events, :action => :set_repeat}, :id => "repeat_option_done", :class => "gray_submit", :remote => true %>
+			<input type="button" value="Cancel" id="repeat_option_cancel" class="gray_submit" />
+		</td>
+	</tr>
+</table>
+</div>

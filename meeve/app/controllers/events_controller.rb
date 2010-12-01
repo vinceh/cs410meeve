@@ -13,7 +13,9 @@ class EventsController <  ApplicationController
     @start_dt = @now
     @end_dt = @now
 
-	@Gcal = "Comment this out."
+    @repeat_option_end_dt = @now
+	 
+    @Gcal = "Comment this out."
 	
 	if request.post?
       @event = Event.new(params[:event])
@@ -21,11 +23,10 @@ class EventsController <  ApplicationController
       
       account = Account.find(session[:id])
       
+      # Google calendar stuff
       service = GCal4Ruby::Service.new
       service.authenticate("meevecalendar@gmail.com", "jtantongco")
-	  calendar = GCal4Ruby::Calendar.find(
-											service,
-											{:id => account.gcal})
+	    calendar = GCal4Ruby::Calendar.find(service, {:id => account.gcal})
       gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
 											 	:title => @event.title,
 												:start_time => @event.start_date, 
@@ -55,26 +56,24 @@ class EventsController <  ApplicationController
       
       	service = GCal4Ruby::Service.new
       	service.authenticate("meevecalendar@gmail.com", "jtantongco")
-	  	calendar = GCal4Ruby::Calendar.find(
-											service,
-											{:id => account.gcal})
-		gevent = GCal4Ruby::Event.find(
-										service, 
-										{:id => @event.gevent})
-		gevent.title = @event.title
-		gevent.start_time = @event.start_date
-		gevent.end_time = @event.end_date
-		gevent.where = @event.location
-		gevent.save
+  	  	calendar = GCal4Ruby::Calendar.find(
+  											service,
+  											{:id => account.gcal})
+    		gevent = GCal4Ruby::Event.find(
+    										service, 
+    										{:id => @event.gevent})
+    		gevent.title = @event.title
+    		gevent.start_time = @event.start_date
+    		gevent.end_time = @event.end_date
+    		gevent.where = @event.location
+    		gevent.save
 		
       	redirect_to :controller => :main, :action => :profile
     end
   end
   
   def remove
-    @event = Event.find(params[:eid])
-    
-    if request.put?
+
       @event = Event.find(params[:eid])
       if (@event != nil)
         @event.comments.each do |c|
@@ -105,11 +104,12 @@ class EventsController <  ApplicationController
 		gevent.end_time = Time.parse("31-01-2000 at 12:31 PM")
 	  	gevent.where = "Deleted"
 		gevent.save
-		@event.destroy
-		flash[:success] = "Your event has been successfully removed."
-        redirect_to :controller => :main, :action => :profile
-      end
-    end    
+		    if @event.destroy
+  		    flash[:success] = "Your event has been successfully removed."
+          redirect_to :controller => :main, :action => :profile
+        end
+     end
+   
   end
   
   def show_event
@@ -149,15 +149,23 @@ class EventsController <  ApplicationController
     @event = Event.find(params[:eid]).event_id
     
     if request.xhr?
-      @joined_event = Joinevent.find_by_aid_and_eid(session[:id], params[:eid])
-      @je = Joinevent.find(@joined_event.jeid)
       
-      if (@je != nil)
-          @je.destroy
+      @joined_event = Joinevent.find_by_aid_and_eid(session[:id], params[:eid])
+
+      if (@joined_event != nil)
+          @joined_event.destroy
           render "events/quit_event"
       end
     else
       redirect_to(:controller => :main, :action => :profile)
     end
+  end
+  
+  def repeat_event
+    
+  end
+  
+  def set_repeat
+    
   end
 end
