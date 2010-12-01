@@ -8,7 +8,7 @@
 	<span id="pool_title">events feed</span>
 	<%= button_to 'Create an Event', {:controller => :events, :action => :new}, :method => :get, :class => "gray_submit" %>
 	<% @hour = Time.now.strftime("%H:00") %>
-	<span class="time_guide"><%= @hour %></span>
+	<span class="time_guide"><%= @hour %></span></br>
 	<% @events.each do |event| %>	
 		<% if @hour != event.start_date.strftime("%H:00") %>
 			<% @hour = event.start_date.strftime("%H:00") %>
@@ -23,7 +23,11 @@
 			</span>
 			<span class="join">
 				<%= content_tag :span, :id => "join_button" + event.event_id.to_s do %>
+					<% if joined( @joined_events, event.event_id ) %>
+						<%= button_to 'Quit', {:controller => :events, :action => :quit_event, :eid => event.event_id}, :class => "gray_submit", :remote => true %>
+					<% else %>
 						<%= button_to 'Join', {:controller => :events, :action => :join_event, :eid => event.event_id}, :class => "gray_submit", :remote => true %>
+					<% end %>
 				<% end -%>
 			</span>
 			</br>

@@ -71,6 +71,15 @@ class MainController < ApplicationController
   	@followings = findAllFollowers(session[:id])
     @user = Account.find(session[:id])
     @comment = Comment.new
+    
+    # Get all joined events of the user
+    @jevents = Joinevent.find_all_by_aid(session[:id])
+    @joined_events = Array.new
+    
+    @jevents.each do |e|
+      @joined_events.push(e.eid)
+    end
+    
   end
   
   def searching

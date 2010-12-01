@@ -94,7 +94,22 @@ class EventsController <  ApplicationController
     else
       redirect_to(:controller => :main, :action => :profile)
     end
+  end
+  
+  def quit_event
     
+    @event = Event.find(params[:eid]).event_id
     
+    if request.xhr?
+      @joined_event = Joinevent.find_by_aid_and_eid(session[:id], params[:eid])
+      @je = Joinevent.find(@joined_event.jeid)
+      
+      if (@je != nil)
+          @je.destroy
+          render "events/quit_event"
+      end
+    else
+      redirect_to(:controller => :main, :action => :profile)
+    end
   end
 end

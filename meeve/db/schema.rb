@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.integer   "flag"
   end
 
-  create_table "joinevents", :id => false, :force => true do |t|
+  create_table "joinevents", :primary_key => "jeid", :force => true do |t|
     t.integer "aid", :null => false
     t.integer "eid", :null => false
   end
