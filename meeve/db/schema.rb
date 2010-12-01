@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   	t.string "email", :default => ""
   	t.string "phone_number", :default => ""
   	t.boolean "facebook", :default => false, :null => false
+  	t.string "gcal", :default => "", :null => false
   end
   
 # A relationship table
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
     t.datetime  "start_date",                   :null => false
     t.datetime  "end_date",                     :null => false
     t.integer   "flag"
+    t.string "gevent", :default => "", :null => false
   end
 
   create_table "joinevents", :primary_key => "jeid", :force => true do |t|

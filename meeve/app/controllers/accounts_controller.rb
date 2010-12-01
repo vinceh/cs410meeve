@@ -1,3 +1,5 @@
+require 'gcal4ruby'
+
 class AccountsController < ApplicationController
   #before_filter :login_required_s, :except => [:new]
  
@@ -104,6 +106,22 @@ class AccountsController < ApplicationController
       @account.facebook = 0
 
       if @account.save
+      	####--------------- Calendar creation
+      	service = GCal4Ruby::Service.new
+		service.authenticate("meevecalendar@gmail.com", "jtantongco")
+      	
+      	calendar = GCal4Ruby::Calendar.new(service)
+		
+		calendar.summary = "This calendar was created on: " + Time.now.to_s
+		calendar.public = true
+      	calendar.save
+		
+		@account.gcal = calendar.id
+		@account.save
+		
+		calendar.title = "User#" + @account.aid.to_s
+		calendar.save
+      	####--------------- End Calendar Creation
       	
       	@account.update_attribute(:password, hash(@account.password))
         # @account.update_attribute(params[:account])  
@@ -122,5 +140,22 @@ class AccountsController < ApplicationController
 		flash[:success] = 'Account was successfully updated.'
     	redirect_to :controller => :main, :action => :index  
     end
+  end
+  
+  def view_calendar
+	 	@account = Account.find(session[:id])
+ 		
+		begin 
+			@service = GCal4Ruby::Service.new
+			@service.authenticate("meevecalendar@gmail.com", "jtantongco")		
+			@calendar = GCal4Ruby::Calendar.find(
+											@service,
+											{:id => @account.gcal.to_s}
+			)
+			@Gcal = @calendar.to_iframe
+			
+		rescue
+			@Gcal = "Your Google Calendar didn't authenticate properly. Please check your settings or contact support."
+		end
   end
 end
