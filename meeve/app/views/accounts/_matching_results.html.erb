@@ -1,25 +1,16 @@
-<p> <%= results.length %> people are free now </p>
-<br>
-<table>
-  <tr>
-    <th>Here comes the List!</th>
-  </tr>
+<div class="matching_title"><span class="blue">who's</span><span class="red"> free</span><span class="blue">?</span></div>
 <% results.each do |hit| %>
-  <tr>
-  	<td>
+  <div class="matching_each">
   	<% if (hit[1] <= 60) %> 
-  		<%= hit[0] + " is free for less than 1 minute :(" %>
+  		<span class="green"><%= hit[0] %></span> <span class="gray">is free for less than 1 minute</span>
   	<% elsif ((hit[1] > 60) && (hit[1] <= 3600)) %>
-  		<%= hit[0] + " is free for about " + (hit[1]/60).round.to_s + " minutes." %>
+  		<span class="green"><%= hit[0] %></span> is free for about <%= (hit[1]/60).round.to_s + " minutes." %>
   	<% elsif (hit[1] > 3600) && (hit[1] != 18000) %>
-  		<%= hit[0] + " is free for about " + (hit[1]/3600).round.to_s + " hours." %>
+  		<span class="green"><%= hit[0] %></span> is free for about <%= (hit[1]/3600).round.to_s + " hours." %>
 	<% elsif (hit[1] == 18000) %>
-		<%= hit[0] + " is free for more than 5 hours." %>
+		<span class="green"><%= hit[0] %></span><span class="gray"> is free for more than 5 hours </span>
   	<% end %>
- 	</td>
-  </tr>
+  </div>
 <% end %>
-</table>
 
-<br><br><br>
 <input id="close_matching" type="button" value="Close" onclick="close_matching()" />

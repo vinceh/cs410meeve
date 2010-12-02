@@ -1,43 +1,36 @@
-
-<p>Number of people found: <%= @result.count%></p>
-
-<br>
-<br>
-
-<table>
-  <tr>
-    <th>Last Name</th>
-    <th>First Name</th>
-   
-  </tr>
-
-<% @result.each do |result| %>
-  <tr>
-    <td>
-		<%=result.last_name %>
-	</td>
-	<td>
-		<%=result.first_name %>
-	</td>
-	
-	<% @alrdy_follow = Follow.find_by_follower_and_followee(session[:id], result.aid) %>
-	
-	<td>
-	<%= content_tag :div, :id => "linksz" + result.aid.to_s do %>
-		<% if (nil == @alrdy_follow) %> 
-			<%= link_to 'Follow', {:controller => :accounts, :action => :follow, :aid => result.aid}, :remote => true, :id => "follow_link" %>
-		<% else %>
-			<%= link_to 'Unfollow', {:controller => :accounts, :action => :unfollow, :aid => result.aid}, :remote => true, :id => "unfollow_link" %>
-		<% end %>
+<div class="search_results">
+	<div class="edit_title" id="search_title">
+	  	<span class="red">you found <span class="blue"><%= @result.count%></span> <%= if @result.count == 1 then "person" else "people" end %></span>
+	 </div>
+	<table>
+	  
+	<% @result.each do |result| %>
+	  <div class="search_border">
+		  <tr>
+		    <th>
+				<%= link_to "#{result.first_name+" "+result.last_name}", {:controller => :accounts, :action => :friend_profile, :aid => result.aid, :search => @first_s, :search_input => @second_s}, :class => "search_name" %> 
+			</th>
+			
+			<% @alrdy_follow = Follow.find_by_follower_and_followee(session[:id], result.aid) %>
+			
+			<td>
+				<%= content_tag :div, :class => "follow_link", :id => "linksz" + result.aid.to_s do %>
+					<% if (nil == @alrdy_follow) %> 
+						<%= link_to 'Follow', {:controller => :accounts, :action => :follow, :aid => result.aid}, :remote => true, :id => "follow_link" %>
+					<% else %>
+						<%= link_to 'Unfollow', {:controller => :accounts, :action => :unfollow, :aid => result.aid}, :remote => true, :id => "unfollow_link" %>
+					<% end %>
+				<% end %>
+			</td>
+		  </tr>
+	  </div>
+	  <tr class="table_spacing">
+	  	<th/>
+	  	<td/>
+	  </tr>
 	<% end %>
-	</td>
-	<td>
-    <%= link_to 'view profile', :controller => :accounts, :action => :friend_profile, :aid => result.aid, :search => @first_s, :search_input => @second_s %>
-    </td>
-  </tr>
-<% end %>
-</table>
+	</table>
+	
+	<%= button_to 'Back', {:action => :profile}, :class => "gray_submit", :id => "signup_submit"  %>
+</div>
 
-<br>
-<br>
-<%= link_to 'Back', :action => :profile %>

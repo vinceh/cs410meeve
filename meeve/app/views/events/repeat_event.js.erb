@@ -24,7 +24,7 @@ $(document).ready(function () {
 		$("#repeat_option").attr('checked', false);
 	});
 	
-	$('#repeat_option_end_date').val(<%= Time.now.year.to_s + '-' + Time.now.month.to_s + '-' + Time.now.day.to_s + ' ' + Time.now.hour.to_s + ':' + Time.now.min.to_s + ':00' %>);
+	//$('#repeat_option_end_date').val(<%= Time.now.year.to_s + '-' + Time.now.month.to_s + '-' + Time.now.day.to_s + ' ' + Time.now.hour.to_s + ':' + Time.now.min.to_s + ':00' %>);
 	
 	$('#repeat_option_end_date').datetime({
 		userLang	: 'en',

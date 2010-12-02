@@ -49,6 +49,10 @@
 			<th></th>
 			<td><%= form.submit submit_value, :id => "signup_submit" %><%= link_to("Cancel", {:controller => :main, :action => :profile}, :class => "event_cancel") if cancel %></td>
 		</tr>
+		<tr>
+			<th></th>
+			<td><%= link_to ('Change password', {:controller => :main, :action => :change_password}, :class => "event_cancel") if !pass %></td>
+		</tr>
 	</tbody>
 </table>
 
