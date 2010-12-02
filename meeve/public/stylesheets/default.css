@@ -324,6 +324,22 @@ body {
 	width: 200px;
 	min-height: 20px;
 }
+
+.right_pool li {
+	padding-left: 10px;
+	padding-bottom: 5px;
+	font-size: 13px;
+	list-style: none;
+}
+
+.right_pool .follow_friend_link {
+	text-decoration: none;
+	color: gray;
+}
+
+	.follow_friend_link:hover {
+		color: black;
+	}
 .signup {
 	margin: 0px 0px 0px 0px;
 }

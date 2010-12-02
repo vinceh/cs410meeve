@@ -22,11 +22,11 @@
 <div class="profile_main">
 	<%= render :partial => "events/event_pool" %>
 	<div class="right_pool">
-		<span class="main_title">Following</span>
+		<span class="main_title">following</span>
 		<% @following.each do |follow| %>
-			<li><%= follow.first_name %></li>
+			<li><%= link_to "#{follow.first_name+" "+follow.last_name}", {:controller => :accounts, :action => :friend_profile, :aid => follow.aid}, :class => "follow_friend_link" %></li>
 		<% end %>
-		<span class="main_title">Followers</span>
+		<span class="main_title">followers</span>
 		<% @followings.each do |follows| %>
 			<li><%= follows.first_name %></li>
 		<% end %>
