@@ -1,2 +1,7 @@
-<%= button_to 'Create an Event', {:controller => :events, :action => :new}, :method => :get, :class => "gray_submit" %>
-<%= raw @Gcal %>
+<div class="user_calendar_main">
+	<div id="calendar_title"><span class="blue">personalize your<span><span class="red"> calendar</span></div>
+	<%= button_to 'Create an Event', {:controller => :events, :action => :new}, :method => :get, :class => "gray_submit" %> <%= link_to "Back", {:controller => :main, :action => :profile}, :class => "event_cancel" %>
+<div class="user_calendar">
+	<%= raw @Gcal %>
+</div>
+</div>

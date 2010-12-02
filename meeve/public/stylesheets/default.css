@@ -340,6 +340,39 @@ body {
 	.follow_friend_link:hover {
 		color: black;
 	}
+	
+.user_calendar {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+.user_calendar_main {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+}
+	.user_calendar_main #calendar_title {
+		font-family: 'Lucida Grande', sans-serif;
+		font-size: 40px;
+		margin-bottom: 30px;
+	}
+	
+	.user_calendar_main .button_to {
+		float: left;
+	}
+	
+	.button_to input {
+		font-size: 16px;
+	}
+	.user_calendar_main a {
+		position: relative;
+		left: 5px;
+		top: 5px;
+		margin-top: 10px;
+		font-family: arial;
+	}
 .signup {
 	margin: 0px 0px 0px 0px;
 }
