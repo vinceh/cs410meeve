@@ -13,8 +13,6 @@ class EventsController <  ApplicationController
     @start_dt = @now
     @end_dt = @now
 
-    @repeat_option_end_dt = @now
-	 
     @Gcal = "Comment this out."
 	
 	if request.post?
@@ -31,12 +29,34 @@ class EventsController <  ApplicationController
 											 	:title => @event.title,
 												:start_time => @event.start_date, 
 												:end_time => @event.end_date, 
-												:where => @event.location}) 	
+												:where => @event.location})
+                        
+      # Check if the event is private
+      @user_event = nil;
+      
+      if params[:privacy_option]
+        @event.flag = 1;
+        if params[:repeat_option]
+          @user_event = User_event.new
+        end
+      end
+      
+      gevent.save
+      #gevent.id is empty string, until the event is committed to google calendar
+      @event.gevent = gevent.id
+      
       if @event.save
-      	gevent.save
-      	#gevent.id is empty string, until the event is committed to google calendar
-      	@event.gevent = gevent.id
-      	@event.save
+
+        if @user_event != nil
+          @user_event.recur_data = params[:repeat_option_binary_hidden]
+          @user_event.recur_end = params[:repeat_option_end_dt_hidden]
+          @user_event.eid = @event.event_id
+          @user_event.aid = session[:id]
+          if !(@user_event.save)
+            #error_message
+          end
+        end
+        
         flash[:success] = "Your event has been successfully posted!"
         redirect_to :controller => :main, :action => :profile
       end

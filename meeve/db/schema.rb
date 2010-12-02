@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   end
   
   add_index "joinevents", ["aid"], :name => "aid"
-  add_index "joinevnets", ["eid"], :name => "event_id"
+  add_index "joinevents", ["eid"], :name => "event_id"
   
   create_table "tags", :primary_key => "tid", :force => true do |t|
   	t.string "tag",		:null => false
@@ -79,12 +79,10 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   end
 
   create_table "user_events", :primary_key => "ue_id", :force => true do |t|
-    t.integer		"recur_type",  			:null => false
-    t.integer 		"recur_interval", 		:null => false
-    t.binary    	"recur_data",  			:null => false
-    t.date          "recur_end",        	:null => false
+    t.string 		  "recur_data", 		:null => false
+    t.date        "recur_end",        	:null => false
     t.integer 		"eid",					:null => false
-    t.integer		"aid",					:null => false
+    t.integer		  "aid",					:null => false
   end
   
   add_index "user_events", ["eid"], :name => "eid"
