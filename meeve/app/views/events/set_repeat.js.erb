@@ -25,5 +25,11 @@ parse(thu);
 parse(fri);
 parse(sat);
 
+// Set the value in a hidden field
 var binRep = sun.val+mon.val+tue.val+wed.val+thu.val+fri.val+sat.val;
-$("#repeat_option_binary").val(binRep);
+$("#repeat_option_binary_hidden").val(binRep);
+$("#repeat_option_end_dt_hidden").val($("#repeat_option_end_date").val());
+
+// Close the dialog
+goog.events.removeAll();
+dialog.dispose();

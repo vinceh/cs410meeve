@@ -12,6 +12,8 @@ goog.require('goog.ui.ComboBox');
 $(document).ready(function () {
 	$("div#map_canvas").hide();
 	setMapCanvas();
+	checkPrivacy();
+	setPrivacy();
 	setRepeat();
 });
 
@@ -29,12 +31,39 @@ $(document).ready(function () {
 	});
   };
   
+  function checkPrivacy() {
+  	var cb = $("#privacy_option");
+	var rof = $("#repeat_option_field");
+	if (cb.is(':checked')) {
+		rof.show();
+	}
+	else {
+		rof.hide();
+		clearRepeatOption();
+	}
+  };
+  
+  function setPrivacy() {
+  	$("#privacy_option").click(function () {
+		checkPrivacy();
+	})
+  };
+  
+  function clearRepeatOption() {
+	$("#repeat_option_binary_hidden").val("");
+	$("#repeat_option_end_dt_hidden").val("");
+	$("#repeat_option").attr('checked', false);
+  };
+  
   function setRepeat() {
   	$("#repeat_option").click(function () {
 		var cb = $(this);
 		if (cb.is(':checked')) {
 			var $a = $("#repeat_option_link").find("a");
 			$a.click();
+		}
+		else {
+			clearRepeatOption();
 		}
 	})
   }
