@@ -13,8 +13,6 @@ class EventsController <  ApplicationController
     @start_dt = @now
     @end_dt = @now
     
-    @Gcal = "Comment this out."
-	
 	if request.post?
       @event = Event.new(params[:event])
       @event.aid = session[:id]
@@ -24,7 +22,9 @@ class EventsController <  ApplicationController
       # Google calendar stuff
       service = GCal4Ruby::Service.new
       service.authenticate("meevecalendar@gmail.com", "jtantongco")
-	    calendar = GCal4Ruby::Calendar.find(service, {:id => account.gcal})
+	  calendar = GCal4Ruby::Calendar.find(
+											service, 
+											{:id => account.gcal})
       gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
 											 	:title => @event.title,
 												:start_time => @event.start_date, 
@@ -63,8 +63,10 @@ class EventsController <  ApplicationController
   def edit
     @event = Event.find(params[:eid])
     original_title = @event.title
-    @start_dt = @event.start_date
-    @end_dt = @event.end_date
+    
+    @start_dt = @event.start_date.year.to_s + "-" + @event.start_date.month.to_s + "-" + @event.start_date.day.to_s + " " + @event.start_date.hour.to_s + ":" + @event.start_date.min.to_s + ":00"
+    @end_dt = @event.end_date.year.to_s + "-" + @event.end_date.month.to_s + "-" + @event.end_date.day.to_s + " " + @event.end_date.hour.to_s + ":" + @event.end_date.min.to_s + ":00"
+    
     
     # if the event is private
     if @event.flag = 1
@@ -87,14 +89,14 @@ class EventsController <  ApplicationController
   	  	calendar = GCal4Ruby::Calendar.find(
   											service,
   											{:id => account.gcal})
-    		gevent = GCal4Ruby::Event.find(
+    	gevent = GCal4Ruby::Event.find(
     										service, 
     										{:id => @event.gevent})
-    		gevent.title = @event.title
-    		gevent.start_time = @event.start_date
-    		gevent.end_time = @event.end_date
-    		gevent.where = @event.location
-    		gevent.save
+    	gevent.title = @event.title
+    	gevent.start_time = @event.start_date
+    	gevent.end_time = @event.end_date
+    	gevent.where = @event.location
+    	gevent.save
 		
       	redirect_to :controller => :main, :action => :profile
     end
@@ -128,10 +130,8 @@ class EventsController <  ApplicationController
                                      {:id => @event.gevent})
       
       #no delete method in gem, .destroy doesn't seem to work
-      
       #results from trying to move the event to a trash calendar are in-conclusive 
       #gevent[0].calendar = trash_cal
-      
       #settled on moving deleted events to January 31, 2000, at 12:30 pm to 12:31 pm
       gevent.title = "Deleted"
       gevent.start_time = Time.parse("31-01-2000 at 12:30 PM")
@@ -169,11 +169,25 @@ class EventsController <  ApplicationController
     @event = Event.find(params[:eid]).event_id
     
     if request.xhr?
-      
+      account = Account.find(session[:id])
+      event = Event.find(@event)
+      service = GCal4Ruby::Service.new
+      service.authenticate("meevecalendar@gmail.com", "jtantongco")
+	  calendar = GCal4Ruby::Calendar.find(
+											service,
+											{:id => account.gcal})
+	  gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
+											 	:title => event.title,
+												:start_time => event.start_date, 
+												:end_time => event.end_date, 
+												:where => event.location}) 								
+	  										      
       @join = Joinevent.new
       @join.aid = @account
       @join.eid = @event
-      
+	  gevent.save
+	  @join.geventid = gevent.id
+
       if @join.save
         render "events/join_event"
       end
@@ -191,6 +205,17 @@ class EventsController <  ApplicationController
       @joined_event = Joinevent.find_by_aid_and_eid(session[:id], params[:eid])
 
       if (@joined_event != nil)
+	      account = Account.find(session[:id])
+	      service = GCal4Ruby::Service.new
+	      service.authenticate("meevecalendar@gmail.com", "jtantongco")
+		  gevent = GCal4Ruby::Event.find(
+										service, 
+										{:id => @joined_event.geventid})
+		  gevent.title = "Deleted"
+		  gevent.start_time = Time.parse("31-01-2000 at 12:30 PM")
+		  gevent.end_time = Time.parse("31-01-2000 at 12:31 PM")
+		  gevent.where = "Deleted"
+		  gevent.save
           @joined_event.destroy
           render "events/quit_event"
       end

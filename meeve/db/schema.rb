@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20101022022539) do
   create_table "joinevents", :primary_key => "jeid", :force => true do |t|
     t.integer "aid", :null => false
     t.integer "eid", :null => false
+	t.string "geventid", :default => "", :null => false
   end
   
   add_index "joinevents", ["aid"], :name => "aid"
