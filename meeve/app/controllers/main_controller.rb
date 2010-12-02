@@ -40,17 +40,13 @@ class MainController < ApplicationController
     end
   end
   
-  def profile
-    
-    if session[:id] == nil
-      redirect_to :action => index
-    end
+  def find_all_events_to_view
     
     @events = Array.new
     
     @followees = findAllFollowing(session[:id])
     @followees.each do |f|
-      @followee_events = Event.find_all_by_aid(f.aid)
+      @followee_events = Event.find_all_by_aid_and_flag(f.aid, 0)
       @followee_events.each do |e|
         if e != nil && Time.now < e.end_date && Time.now.yday == e.start_date.yday
           @events.push(e)
@@ -65,7 +61,16 @@ class MainController < ApplicationController
       end      
     end
     
-    @events = @events.sort_by { |e| e['start_date'] }
+    return @events.sort_by { |e| e['start_date'] }
+  end
+  
+  def profile
+    
+    if session[:id] == nil
+      redirect_to :action => index
+    end
+    
+    @events = find_all_events_to_view
     
     # For followings and followers
   	@following = findAllFollowing(session[:id])

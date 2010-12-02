@@ -11,8 +11,8 @@ goog.require('goog.ui.ComboBox');
  */
 $(document).ready(function () {
 	$("div#map_canvas").hide();
-	$("#repeat_option_field").hide();
 	setMapCanvas();
+	checkPrivacy();
 	setPrivacy();
 	setRepeat();
 });
@@ -31,17 +31,21 @@ $(document).ready(function () {
 	});
   };
   
+  function checkPrivacy() {
+  	var cb = $("#privacy_option");
+	var rof = $("#repeat_option_field");
+	if (cb.is(':checked')) {
+		rof.show();
+	}
+	else {
+		rof.hide();
+		clearRepeatOption();
+	}
+  };
+  
   function setPrivacy() {
   	$("#privacy_option").click(function () {
-		var cb = $(this);
-		var rof = $("#repeat_option_field");
-		if (cb.is(':checked')) {
-			rof.show();
-		}
-		else {
-			rof.hide();
-			clearRepeatOption();
-		}
+		checkPrivacy();
 	})
   };
   

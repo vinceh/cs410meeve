@@ -12,7 +12,7 @@ class EventsController <  ApplicationController
         
     @start_dt = @now
     @end_dt = @now
-
+    
     @Gcal = "Comment this out."
 	
 	if request.post?
@@ -34,11 +34,8 @@ class EventsController <  ApplicationController
       # Check if the event is private
       @user_event = nil;
       
-      if params[:privacy_option]
-        @event.flag = 1;
-        if params[:repeat_option]
-          @user_event = User_event.new
-        end
+      if params[:repeat_option]
+        @user_event = User_event.new
       end
       
       gevent.save
@@ -69,8 +66,19 @@ class EventsController <  ApplicationController
     @start_dt = @event.start_date
     @end_dt = @event.end_date
     
+    # if the event is private
+    if @event.flag = 1
+      @user_event = User_event.find_by_eid(params[:eid])
+    end
+    
     if request.put?   	
       	@event.update_attributes(params[:event])
+        
+        # If this is an user event, update the recurrsive table as well
+        if @user_event != nil
+          @user_event.update_attributes(:recur_data => params[:repeat_option_binary_hidden],
+                                        :recur_end => params[:repeat_option_end_dt_hidden])
+        end
       
       	account = Account.find(session[:id])
       
@@ -93,43 +101,53 @@ class EventsController <  ApplicationController
   end
   
   def remove
-
-      @event = Event.find(params[:eid])
-      if (@event != nil)
-        @event.comments.each do |c|
-          c.destroy
-        end
-    	account = Account.find(session[:id])
+    
+    @event = Event.find(params[:eid])
+    
+    # If the event is private
+    if @event.flag = 1
+      @user_event = User_event.find_by_eid(params[:eid])
+    end
+    
+    if (@event != nil)
+      @event.comments.each do |c|
+        c.destroy
+      end
+      account = Account.find(session[:id])
       
-      	service = GCal4Ruby::Service.new
-      	service.authenticate("meevecalendar@gmail.com", "jtantongco")
-	  	calendar = GCal4Ruby::Calendar.find(
-											service,
-											{:id => account.gcal})
-		#trash_cal = GCal4Ruby::Calendar.find(
-		#									service,
-		#									{:id => "6h9ukoe7qac2aabimv18lk19k4@group.calendar.google.com"})
-		gevent = GCal4Ruby::Event.find(
-											service, 
-											{:id => @event.gevent})
-		
-		#no delete method in gem, .destroy doesn't seem to work
-		
-		#results from trying to move the event to a trash calendar are in-conclusive 
-		#gevent[0].calendar = trash_cal
-		
-		#settled on moving deleted events to January 31, 2000, at 12:30 pm to 12:31 pm
-		gevent.title = "Deleted"
-		gevent.start_time = Time.parse("31-01-2000 at 12:30 PM")
-		gevent.end_time = Time.parse("31-01-2000 at 12:31 PM")
-	  	gevent.where = "Deleted"
-		gevent.save
-		    if @event.destroy
-  		    flash[:success] = "Your event has been successfully removed."
-          redirect_to :controller => :main, :action => :profile
+      service = GCal4Ruby::Service.new
+      service.authenticate("meevecalendar@gmail.com", "jtantongco")
+      calendar = GCal4Ruby::Calendar.find(
+                                          service,
+                                          {:id => account.gcal})
+      #trash_cal = GCal4Ruby::Calendar.find(
+      #									service,
+      #									{:id => "6h9ukoe7qac2aabimv18lk19k4@group.calendar.google.com"})
+      gevent = GCal4Ruby::Event.find(
+                                     service, 
+                                     {:id => @event.gevent})
+      
+      #no delete method in gem, .destroy doesn't seem to work
+      
+      #results from trying to move the event to a trash calendar are in-conclusive 
+      #gevent[0].calendar = trash_cal
+      
+      #settled on moving deleted events to January 31, 2000, at 12:30 pm to 12:31 pm
+      gevent.title = "Deleted"
+      gevent.start_time = Time.parse("31-01-2000 at 12:30 PM")
+      gevent.end_time = Time.parse("31-01-2000 at 12:31 PM")
+      gevent.where = "Deleted"
+      gevent.save
+      if @event.destroy
+        
+        if @user_event != nil
+          @user_event.destroy
         end
-     end
-   
+        flash[:success] = "Your event has been successfully removed."
+        redirect_to :controller => :main, :action => :profile
+      end
+    end
+    
   end
   
   def show_event
