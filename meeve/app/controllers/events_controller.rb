@@ -27,8 +27,8 @@ class EventsController <  ApplicationController
 											{:id => account.gcal})
       gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
 											 	:title => @event.title,
-												:start_time => @event.start_date, 
-												:end_time => @event.end_date, 
+												:start_time => Time.parse(@event.start_date.to_s), 
+												:end_time => Time.parse(@event.end_date.to_s), 
 												:where => @event.location})
                         
       # Check if the event is private
@@ -86,18 +86,71 @@ class EventsController <  ApplicationController
       
       	service = GCal4Ruby::Service.new
       	service.authenticate("meevecalendar@gmail.com", "jtantongco")
-  	  	calendar = GCal4Ruby::Calendar.find(
-  											service,
-  											{:id => account.gcal})
+      	
+      	calendar = GCal4Ruby::Calendar.find(
+											service,
+											{:id => account.gcal})
+    	
+    	#delete/edit the old one
     	gevent = GCal4Ruby::Event.find(
     										service, 
     										{:id => @event.gevent})
-    	gevent.title = @event.title
-    	gevent.start_time = @event.start_date
-    	gevent.end_time = @event.end_date
-    	gevent.where = @event.location
-    	gevent.save
+	    gevent.title = "Deleted"
+	    gevent.start_time = Time.parse("31-01-2000 at 12:30 PM")
+	    gevent.end_time = Time.parse("31-01-2000 at 12:31 PM")
+	    gevent.where = "Deleted"
+		gevent.save
+    	
+#    	gevent.title = @event.title
+#    	gevent.start_time = @event.start_date
+#    	gevent.end_time = @event.end_date
+#    	gevent.where = @event.location
+
+    	#start of the weird stuff
+    	#create a new copy
+    	newgevent = GCal4Ruby::Event.new(service, {:calendar => calendar, 
+											 	:title => @event.title.to_s,
+												:start_time => Time.parse(@event.start_date.to_s), 
+												:end_time => Time.parse(@event.end_date.to_s), 
+												:where => @event.location})
+    	newgevent.save
+    	@event.gevent = newgevent.id
+    	@event.save
+    	
+    	@joined = Joinevent.find(:all, :conditions => {:eid => @event.event_id})
 		
+		@joined.each{ |j|
+			joiner = Account.find(j.aid)
+			cal = GCal4Ruby::Calendar.find(
+											service, 
+											{:id => joiner.gcal})
+			#edit/erase the existing event    	
+			gev = GCal4Ruby::Event.find(
+											service, 
+											{:id => j.geventid})
+#			gev.title = @event.title
+#			gev.start_time = @event.start_date
+#			gev.end_time = @event.end_date
+#			gev.where = @event.location
+			gev.title = "Deleted"
+			gev.start_time = Time.parse("31-01-2000 at 12:30 PM")
+			gev.end_time = Time.parse("31-01-2000 at 12:31 PM")
+			gev.where = "Deleted"
+
+			gev.save
+			#end edit
+			
+			#create a new event with the updated details in the joiner's calendar
+			newgevent = GCal4Ruby::Event.new(service, {:calendar => cal, 
+											 	:title => @event.title,
+												:start_time => @event.start_date, 
+												:end_time => @event.end_date, 
+												:where => @event.location})
+			newgevent.save
+			j.geventid = newgevent.id
+			j.save				
+		}
+    	#end of the weird stuff
       	redirect_to :controller => :main, :action => :profile
     end
   end
@@ -178,8 +231,8 @@ class EventsController <  ApplicationController
 											{:id => account.gcal})
 	  gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
 											 	:title => event.title,
-												:start_time => event.start_date, 
-												:end_time => event.end_date, 
+												:start_time => Time.parse(event.start_date.to_s), 
+												:end_time => Time.parse(event.end_date.to_s), 
 												:where => event.location}) 								
 	  										      
       @join = Joinevent.new
