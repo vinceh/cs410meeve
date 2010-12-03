@@ -23,7 +23,7 @@
 			<!--<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
 				<% event.comments.reverse.each do |c| %>
 					<%= content_tag :div, :id => "comment" + c.cid.to_s, :class => "diag_comment" do %>
-						<span class="commenter"><%= c.commenter %></span>
+						<%= link_to c.commenter, {:controller => :accounts, :action => :friends_profile, :aid => c.aid}, :class => "commenter" %>
 						<%= c.body %>
 						<% if c.aid == session[:id] %>
 							<span class="comment_remove">

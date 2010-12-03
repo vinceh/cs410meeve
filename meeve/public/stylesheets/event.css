@@ -37,7 +37,7 @@
 	padding: 5px;
 }
 .diag_comment:hover {
-	background-color: #ececec;
+	background-color: #F7F7F7;
 }
 .content_dia {
 	word-break: break-all;
@@ -74,7 +74,8 @@
 }
 	.comments_dia .commenter {
 		font-weight: bold;
-		color: #66cc99;
+		color: #66cc99 !important;
+		text-decoration: none;
 	}
 .modal-dialog {
 
