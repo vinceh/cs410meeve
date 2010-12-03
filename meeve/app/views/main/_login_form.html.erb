@@ -12,9 +12,15 @@
 				<%= label 			object_name, "Password:"%>
 				<%= password_field 	object_name, password_field_name %>
 			</div>
+			<% if flash[:error] %>
+				<div class="login_error">
+					<%= flash[:error] %>
+				</div>
+			<% end %>
 			<div id="submit">
 				<%= link_to 'Forgot password?',  :action => :recover_password %>
 				<%= submit_tag "Log in", :id => "login_submit" %>
 			</div>
+
 	</div>
 <% end -%>

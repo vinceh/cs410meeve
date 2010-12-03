@@ -3,7 +3,7 @@
 		<%= link_to("profile", {:controller => :main, :action => :profile}, :id => "profile_logo") %>
 		<div id="toolbox">
 			<div id="floatleft">
-					<%= form_tag( {:action => :searching}, :id => "search_form" ) do -%>
+					<%= form_tag( {:controller => :main, :action => :searching}, :id => "search_form" ) do -%>
 					
 						<%= text_field :search, :search_input %>
 						<%= submit_tag "", :id => "search_sub" %>

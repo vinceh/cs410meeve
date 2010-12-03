@@ -16,11 +16,11 @@ class MainController < ApplicationController
   				user.update_attribute(:last_login,Time.now)
   				redirect_to :action => :profile
   			else
-  				flash[:error] = "Invalid login"
+  				flash[:error] = "Invalid email and password combination"
   				redirect_to :action => :index, :email => params[:account][:email]
   			end
   		else
-  			flash[:error] = "Invalid login"
+  			flash[:error] = "Invalid email and password combination"
   			redirect_to :action => :index, :email => params[:account][:email]
   		end
   	end

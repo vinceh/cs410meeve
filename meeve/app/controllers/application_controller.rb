@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   
   def login_required
   	if !session[:id]
-  		redirect_to :action => :index
+  		redirect_to :controller => :main, :action => :index
   	end
   end
   

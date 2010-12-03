@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_filter :login_required
+
   def create
 
     if request.xhr?  

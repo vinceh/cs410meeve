@@ -2,6 +2,8 @@ require 'gcal4ruby'
 
 class EventsController <  ApplicationController
   
+  before_filter :login_required
+  
   def index
     redirect_to :controller => :main, :action => :profile
   end

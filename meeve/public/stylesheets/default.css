@@ -582,6 +582,22 @@ body {
 		cursor: pointer;
 	}
 	
+.flash_close_button {
+	display: inline-block;
+}
+.flash_close_button a{
+	color: #ed5fbc;
+}
+.flash_success_login {
+	
+	color: #5fb6ed;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px 0px 10px 0px;
+	background-color: #f4f4f4;
+	margin-bottom: 20px;
+}
+
 .login_form {
 	display: block;
 	float: left;
@@ -600,10 +616,15 @@ body {
 	}
 	.login_form #submit {
 		display: inline-block;
-		float: right;
-		margin: 5px 57px 0px 0px;
+		margin: 5px 57px 0px 110px;
 		width: 185px;
 	}
+	.login_form .login_error {
+		color: red;
+		margin-left: 125px;
+		margin-bottom: -3px;
+	}
+
 	.login_form #login_submit {
 		font-family: verdana;
 		font-weight: bold;
