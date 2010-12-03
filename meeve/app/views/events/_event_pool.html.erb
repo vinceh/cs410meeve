@@ -14,20 +14,21 @@
 	<% if !friend %>
 		<%= button_to 'Create an Event', {:controller => :events, :action => :new}, :method => :get, :class => "gray_submit" %>
 	<% else %>
-		<div class="friend_follow_link">
-		<% if (nil == @alrdy_follow) %> 
-			<%= link_to 'Follow', {:action => :follow, :aid => @user.aid}, :remote => true, :id => "follow_link" %>
-		<% else %>
-			<%= link_to 'Unfollow', {:action => :unfollow, :aid => @user.aid}, :remote => true, :id => "unfollow_link" %>
-		<% end %>
-		</div>		
+    <div class="friend_follow_link">
+        <%= content_tag :div, :id => "linksz" + @user.aid.to_s do %>
+	        <% if (nil == @alrdy_follow) %>
+	        	<%= link_to 'Follow', {:controller => :accounts, :action => :follow, :aid => @user.aid}, :remote => true, :id => "follow_link" %>
+	        <% else %>
+	       		<%= link_to 'Unfollow', {:controller => :accounts, :action => :unfollow, :aid => @user.aid}, :remote => true, :id => "unfollow_link" %>
+	        <% end %>
+        <% end %>
+	</div>		
 	<% end %>
-	<% @hour = Time.now.strftime("%H:00") %>
-	<span class="time_guide"><%= @hour %></span></br>
+	<% @hour = nil %>
 	<% @events.each do |event| %>	
 		<% if @hour != event.start_date.strftime("%H:00") %>
 			<% @hour = event.start_date.strftime("%H:00") %>
-			<span class="time_guide"><%= @hour %></span>
+			<span class="time_guide"></span>
 		<% end %>
 		<div class="timestamp"><%= event.start_date.strftime("%H:%M") %></div>
 		<div class="event">

@@ -328,7 +328,10 @@ body {
 	}
 	
 	.event_pool .time_guide {
-		font: bold 20px verdana;
+		position: absolute;
+		border-top: 1px solid #D8D8D8;
+		width: 490px;
+		height: 1px;
 	}
 	
 	.event_pool .join {

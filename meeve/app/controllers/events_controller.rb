@@ -170,6 +170,7 @@ class EventsController <  ApplicationController
       @event.comments.each do |c|
         c.destroy
       end
+     
       account = Account.find(session[:id])
       
       service = GCal4Ruby::Service.new
