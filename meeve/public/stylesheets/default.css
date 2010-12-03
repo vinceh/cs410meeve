@@ -257,6 +257,10 @@ body {
 	font-size: 16px !important;
 }
 
+.join .gray_submit {
+	font-size: 12px !important;
+}
+
 .gray_submit, .friend_follow_link a{
 	border-radius: 3px;
 	margin: 0px 0px 10px 0px;
@@ -266,7 +270,7 @@ body {
 	width: auto;
 	border: 1px solid #C8C8C8 ;
 	background: url('../images/button3.png');
-	color: black;
+	color: #484848;
 	text-decoration: none;
 }
 .gray_submit:hover, .friend_follow_link a:hover {
@@ -275,6 +279,13 @@ body {
 	cursor: pointer;
 }
 
+.underline_hover {
+	text-decoration: none;
+}
+
+.underline_hover:hover {
+	text-decoration: underline;
+}
 .event_pool {
 	float: left;
 	display: block;
@@ -284,6 +295,9 @@ body {
 	border-right: 1px solid #D8D8D8;
 }
 
+	.event_pool .gray_submit {
+		margin-bottom: 20px;
+	}
 	.event_pool #pool_title {
 		display: block;
 		font-size: 30px;
@@ -308,6 +322,7 @@ body {
 	.event_pool .event {
 		position: relative;
 		padding: 4px 3px 7px 3px;
+		margin-top: 1px;
 	}
 	.event_pool .event:hover {
 		border-radius: 3px;
@@ -328,17 +343,21 @@ body {
 		color: gray;
 	}
 	
+	.event_creator .underline_hover {
+		color: gray;
+	}
 	.event_pool .time_guide {
 		position: absolute;
 		border-top: 1px solid #D8D8D8;
 		width: 490px;
 		height: 1px;
+		margin-bottom: 1px;
 	}
 	
 	.event_pool .join {
 		position: absolute;
-		top: 35%;
-		right: 2%;
+		top: 10px;
+		right: 10px;
 	}
 	
 .right_pool {

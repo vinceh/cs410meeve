@@ -26,7 +26,7 @@
 	<% end %>
 	<% @hour = nil %>
 	<% @events.each do |event| %>	
-		<% if @hour != event.start_date.strftime("%H:00") %>
+		<% if @hour != event.start_date.strftime("%H:00") && @events.index(event) != 0 %>
 			<% @hour = event.start_date.strftime("%H:00") %>
 			<span class="time_guide"></span>
 		<% end %>
@@ -35,7 +35,7 @@
 			<%= link_to event.title, {:controller => :events, :action => :show_event, :eid => event.event_id}, :class => "event_link", :remote => true %>
 			<% @creator = Account.find_by_aid(event.aid) %>
 			<span class="event_creator">
-				posted by <%= @creator.first_name + " " + @creator.last_name %>
+				posted by <%= link_to @creator.first_name + " " + @creator.last_name, {:controller => :accounts, :action => :friend_profile, :aid => @creator.aid}, :class => :underline_hover %>
 			</span>
 			<% if !friend %>
 				<span class="join">
