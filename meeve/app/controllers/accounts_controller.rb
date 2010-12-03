@@ -129,7 +129,7 @@ class AccountsController < ApplicationController
 		@account.gcal = calendar.id
 		@account.save
 		
-		calendar.title = "User#" + @account.aid.to_s
+		calendar.title = @account.first_name +  "'s Calendar"
 		calendar.save
       	####--------------- End Calendar Creation
       	

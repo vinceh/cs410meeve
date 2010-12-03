@@ -9,9 +9,11 @@ class EventsController <  ApplicationController
   def new
     @event = Event.new
     @now = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
+    nexthour = Time.now + 1.hours
+    @later = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + nexthour.hour.to_s + ":" + Time.now.min.to_s + ":00"
         
     @start_dt = @now
-    @end_dt = @now
+    @end_dt = @later
     
 	if request.post?
       @event = Event.new(params[:event])
