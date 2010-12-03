@@ -1,20 +1,18 @@
 require 'gcal4ruby'
 
 class AccountsController < ApplicationController
-  #before_filter :login_required_s, :except => [:new]
  
+  before_filter :login_required, :except => :new
   
   def index
     @accounts = Account.all
   end
-
   
   def friend_profile
   	
   	if params[:aid] == session[:id].to_s
   		redirect_to :controller => :main, :action => :profile
   	else
-  		flash[:error] = params[:aid] == session[:id]
 	  	@user = Account.find(params[:aid])
 	  	@events = find_all_events_to_view(params[:aid])
 	  	@alrdy_follow = Follow.find_by_follower_and_followee(session[:id], @user.aid)
@@ -26,7 +24,6 @@ class AccountsController < ApplicationController
   end
   
   def follow
-  	
   	
   	@follow = Follow.new
   	@follow.follower = session[:id]
