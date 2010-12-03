@@ -1,108 +1,135 @@
-	<table>
-		<tr>
-			<th>
-				<%= form.label :title, "Title" %>
-			</th>
-			<td>
-				<%= form.text_field :title %>
-			</td>
-		</tr>
-				<tr>
-			<th></th>
-			<td id="hint"></td>
-		</tr>
-		<tr>
-				<script type="text/javascript">
-				$(function() {
-						  $('#event_start_date').datetime({
-											userLang	: 'en',
-											americanMode: true,
-										});													
-					});
-				</script>
-				<th>
-				<%= form.label :start_date, "Start Date" %>
-				</th>
-				<td>
-				<%= form.text_field :start_date, :value => @start_dt.to_s %>
-				</td>
-		</tr>
-				<tr>
-			<th></th>
-			<td id="hint"></td>
-		</tr>
-		<tr>
-	 			<script type="text/javascript">
-				$(function() {
-						  $('#event_end_date').datetime({
-											userLang	: 'en',
-											americanMode: true,
-										});													
-					});
-				</script>
-				<th>
-					<%= form.label :end_date, "End Date" %>
-				</th>
-				<td>
-				<%= form.text_field :end_date, :value => @end_dt.to_s %>
-				</td>
-		</tr>
-				<tr>
-			<th></th>
-			<td id="hint"></td>
-		</tr>
-		<tr>
-				<th>
-					<%= form.label :desc, "Description" %>
-				</th>
-				<td>
-					<%= form.text_area :desc, :rows => 3 %>
-				</td>
-		</tr>
-		<tr>
-			<th></th>
-			<td id="hint"></td>
-		</tr>
-		<tr>
-			<th>
-				<%= form.label :location, "Location" %>
-			</th>
-			<td>
-				<%= form.text_field :location %>
-			</td>
-		</tr>
-		<tr>
-			<th></th>
-			<td id="hint"><%= check_box_tag 'google_map_option' %> add Google map</td>
-		</tr>
-		<tr>
-				<th></th>
-				<td><div id="map_canvas"></div></td>
-		</tr>
-		<tr>
-			<th></th>
-			<td id="hint">
-				<%= form.check_box :flag, {:id => 'privacy_option'} %> make it private
-			</td>			
-		</tr>
-		<tr>
-			<th></th>
-			<td id="hint">
-				<div id="repeat_option_field">
-					<%= check_box_tag 'repeat_option' %> repeat...<br/>
-					<%= hidden_field_tag 'repeat_option_binary_hidden' %>
-					<%= hidden_field_tag 'repeat_option_end_dt_hidden' %>
-					<div id="repeat_option_link">						
-						<%= link_to 'repeat_event', {:controller => :events, :action => :repeat_event}, :remote => true %>
-					</div>
-				</div>
-			</td>				
-		</tr>
-		<tr>
-				<th></th>			
-				<td><%= form.submit sub_val, :class => "gray_submit", :id => "signup_submit"%>  <%= link_to "Cancel", {:controller => :main, :action => :profile}, :class => "event_cancel" %></td>
-				<td></td>
-		</tr>	
-				<%= form.hidden_field :marker_lat %>
-				<%= form.hidden_field :marker_lng %>
-	</table>
+<table>
+    <tr>
+        <th>
+            <%= form.label :title, "Title" %>
+        </th>
+        <td>
+            <%= form.text_field :title %>
+        </td>
+    </tr>
+    <%= render("shared/signup_error", :error => "Title "+target.errors[:title][0]) if !target.errors[:title].empty? %>
+    <tr>
+        <th>
+        </th>
+        <td id="hint">
+        </td>
+    </tr>
+    <tr>
+        <script type="text/javascript">
+            $(function(){
+                $('#event_start_date').datetime({
+                    userLang: 'en',
+                    americanMode: true,
+                });
+            });
+        </script>
+        <th>
+            <%= form.label :start_date, "Start Date" %>
+        </th>
+        <td>
+            <%= form.text_field :start_date, :value => @start_dt.to_s %>
+        </td>
+    </tr>
+    <%= render("shared/signup_error", :error => target.errors[:start_date][0]) if !target.errors[:start_date].empty? %>
+    <tr>
+        <th>
+        </th>
+        <td id="hint">
+        </td>
+    </tr>
+    <tr>
+        <script type="text/javascript">
+            $(function(){
+                $('#event_end_date').datetime({
+                    userLang: 'en',
+                    americanMode: true,
+                });
+            });
+        </script>
+        <th>
+            <%= form.label :end_date, "End Date" %>
+        </th>
+        <td>
+            <%= form.text_field :end_date, :value => @end_dt.to_s %>
+        </td>
+    </tr>
+	<%= render("shared/signup_error", :error => "End date "+target.errors[:end_date][0]) if !target.errors[:end_date].empty? %>
+    <tr>
+        <th>
+        </th>
+        <td id="hint">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <%= form.label :desc, "Description" %>
+        </th>
+        <td>
+            <%= form.text_area :desc, :rows => 3 %>
+        </td>
+    </tr>
+	<%= render("shared/signup_error", :error => "Description "+target.errors[:desc][0]) if !target.errors[:desc].empty? %>
+    <tr>
+        <th>
+        </th>
+        <td id="hint">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <%= form.label :location, "Location" %>
+        </th>
+        <td>
+            <%= form.text_field :location %>
+        </td>
+    </tr>
+	<%= render("shared/signup_error", :error => "Location "+target.errors[:location][0]) if !target.errors[:location].empty? %>
+    <tr>
+        <th>
+        </th>
+        <td id="hint">
+            <%= check_box_tag 'google_map_option' %>add Google map
+        </td>
+    </tr>
+    <tr>
+        <th>
+        </th>
+        <td>
+            <div id="map_canvas">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+        </th>
+        <td id="hint">
+            <%= form.check_box :flag, {:id => 'privacy_option'} %>make it private
+        </td>
+    </tr>
+    <tr>
+        <th>
+        </th>
+        <td id="hint">
+            <div id="repeat_option_field">
+                <%= check_box_tag 'repeat_option' %>repeat...
+                <br/>
+                <%= hidden_field_tag 'repeat_option_binary_hidden' %>
+                <%= hidden_field_tag 'repeat_option_end_dt_hidden' %>
+                <div id="repeat_option_link">
+                    <%= link_to 'repeat_event', {:controller => :events, :action => :repeat_event}, :remote => true %>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>
+        </th>
+        <td>
+            <%= form.submit sub_val, :class => "gray_submit", :id => "signup_submit" %><%= link_to "Cancel", {:controller => :main, :action => :profile}, :class => "event_cancel" %>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <%= form.hidden_field :marker_lat %>
+    <%= form.hidden_field :marker_lng %>
+</table>

@@ -11,23 +11,40 @@ goog.require('goog.ui.ComboBox');
  */
 $(document).ready(function () {
 	$("div#map_canvas").hide();
+	checkMapCanvas();
 	setMapCanvas();
 	checkPrivacy();
 	setPrivacy();
 	setRepeat();
 });
 
-  function setMapCanvas() {
-  	$("#google_map_option").click(function () {
-		var cb = $(this)
-		if (cb.is(':checked')) {
-			$("div#map_canvas").show();
-			mapNew();
+  function checkMapCanvas(){
+  	
+	var latlngNotEmpty = ($("input#event_marker_lat").val() != "" || $("input#event_marker_lng").val() != "");
+  	
+    if (latlngNotEmpty) {
+        $("#google_map_option").attr("checked", true);
+    }
+	
+    var cb = $("#google_map_option");
+    if (cb.is(':checked')) {
+        $("div#map_canvas").show();
+		if (latlngNotEmpty) {
+			mapEdit();
 		}
 		else {
-			$("div#map_canvas").hide();
-			mapDelete();
-		};
+			mapNew();
+		}
+    }
+    else {
+        $("div#map_canvas").hide();
+        mapDelete();
+    };
+  };
+
+  function setMapCanvas() {
+  	$("#google_map_option").click(function () {
+		checkMapCanvas();
 	});
   };
   
@@ -267,7 +284,7 @@ var marker = null;		// The red marker on the map, set to null
         // pass the form's ajax:success event to the input field
         this.parent("form").bind("ajax:complete",function(e,data,status,xhr) {
             $(this).find("input").attr("disabled",false);
-            $(this).find("text").trigger("success");
+            $(this).find("#comment_body").trigger("success");
         });
 
 //        this.autoResize();

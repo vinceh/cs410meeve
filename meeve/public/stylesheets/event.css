@@ -33,13 +33,14 @@
 	border: 1px solid white;
 }
 .diag_comment {
-	
+	word-wrap: break-word;
 	padding: 5px;
 }
 .diag_comment:hover {
 	background-color: #ececec;
 }
 .content_dia {
+	word-break: break-all;
 	border-top-right-radius: 5px;
 	padding-right: 20px;
 	width: 450px;
@@ -57,6 +58,7 @@
 .event_desc {
 	margin: 0px 0px 4px 0px;
 	padding: 0px;
+	width: 88%;
 }
 .time_hint {
 	color: #6c6c6c;

@@ -167,8 +167,15 @@ class EventsController <  ApplicationController
     end
     
     if (@event != nil)
+      # remove all attached comments
       @event.comments.each do |c|
         c.destroy
+      end
+      
+      # remove all attached join events
+      @joinevents = Joinevent.find_all_by_eid(@event.event_id)
+      @joinevents.each do |je|
+        je.destroy
       end
      
       account = Account.find(session[:id])

@@ -300,6 +300,7 @@ body {
 	.event_pool .event_desc {
 		font-family: arial;
 		font-size: 12px;
+		word-wrap: break-word;
 	}
 	.event_pool .event_link:hover {
 		color: #e83fae;
@@ -336,7 +337,7 @@ body {
 	
 	.event_pool .join {
 		position: absolute;
-		top: 20%;
+		top: 35%;
 		right: 2%;
 	}
 	
