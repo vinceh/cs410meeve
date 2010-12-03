@@ -65,8 +65,8 @@ $(document).ready(function () {
 		else {
 			clearRepeatOption();
 		}
-	})
-  }
+	});
+  };
 
 /*
 	Functions for Google map

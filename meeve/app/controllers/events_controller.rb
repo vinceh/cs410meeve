@@ -226,21 +226,21 @@ class EventsController <  ApplicationController
       event = Event.find(@event)
       service = GCal4Ruby::Service.new
       service.authenticate("meevecalendar@gmail.com", "jtantongco")
-	  calendar = GCal4Ruby::Calendar.find(
-											service,
-											{:id => account.gcal})
-	  gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
+      calendar = GCal4Ruby::Calendar.find(
+                                          service,
+                                          {:id => account.gcal})
+      gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
 											 	:title => event.title,
 												:start_time => Time.parse(event.start_date.to_s), 
 												:end_time => Time.parse(event.end_date.to_s), 
 												:where => event.location}) 								
-	  										      
+      
       @join = Joinevent.new
       @join.aid = @account
       @join.eid = @event
-	  gevent.save
-	  @join.geventid = gevent.id
-
+      gevent.save
+      @join.geventid = gevent.id
+      
       if @join.save
         render "events/join_event"
       end
