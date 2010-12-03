@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   
   def login_required
   	if !session[:id]
-  		redirect_to :action => :index
+  		redirect_to :controller => :main, :action => :index
   	end
   end
   
@@ -90,9 +90,7 @@ class ApplicationController < ActionController::Base
     join.eid = @event
     gevent.save
     join.geventid = gevent.id
-    e = Event.find(eid)
-    e.gevent = gevent.id
-    e.save
+    
     join.save
   end
   

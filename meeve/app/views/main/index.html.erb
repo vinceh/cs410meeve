@@ -1,9 +1,17 @@
 <div class="main_container">
-
+	<% if flash[:success] != nil %>
+				<div class="flash_success_login">
+					<%= flash[:success]%>
+					<div class="flash_close_button">
+						<a href="#" onclick="$('.flash_success_login').hide(); return false">okay</a>
+					</div>
+				</div>
+	<% end %>
+		
 	<%= render :partial => 'main/login_form', :locals => { :object_name => 'account', :username_field_name => 'email', :password_field_name => 'password' }%>
 	<%= image_tag("logo/meeve2.png") %>
 	
-	<p id="main_para"> Meeve is a spontaneous, fun, and easy.  Decide how <b>you</b> want to spend your time.  Connet with friends and have fun.</p>
+	<p id="main_para"> Meeve is spontaneous, fun, and easy.  Decide how <b>you</b> want to spend your time.  Connet with friends and have fun.</p>
 		<%= button_to 'Sign Up!',  {:controller => :accounts, :action => :new}, :method => :get, :id => "sign_up" %>
 	
 
