@@ -10,11 +10,13 @@ class MainController < ApplicationController
   		
   		if user != nil
   			
-  			if user.password == hash(params[:account][:password])
+  			if user.password == hash(params[:account][:password]) && check_active( user )
+  				
   				session[:id] = user.aid
+  				user.update_attribute(:last_login,Time.now)
   				redirect_to :action => :profile
   			else
-  				flash[:error] = "Invalid login	"
+  				flash[:error] += "Invalid login"
   				redirect_to :action => :index, :email => params[:account][:email]
   			end
   		else
@@ -39,38 +41,14 @@ class MainController < ApplicationController
       end
     end
   end
-  
-  def find_all_events_to_view
-    
-    @events = Array.new
-    
-    @followees = findAllFollowing(session[:id])
-    @followees.each do |f|
-      @followee_events = Event.find_all_by_aid_and_flag(f.aid, 0)
-      @followee_events.each do |e|
-        if e != nil && Time.now < e.end_date && Time.now.yday == e.start_date.yday
-          @events.push(e)
-        end
-      end
-    end
- 
-    @my_events = Event.find_all_by_aid(session[:id])
-    @my_events.each do |e|
-      if e != nil && Time.now.utc < e.end_date
-        @events.push(e)  
-      end      
-    end
-    
-    return @events.sort_by { |e| e['start_date'] }
-  end
-  
+
   def profile
     
     if session[:id] == nil
       redirect_to :action => index
     end
     
-    @events = find_all_events_to_view
+    @events = find_all_events_to_view(session[:id])
     
     # For followings and followers
   	@following = findAllFollowing(session[:id])
@@ -162,25 +140,16 @@ class MainController < ApplicationController
   
   private
   
-  def findAllFollowing( id )
-  	follow = Follow.find_all_by_follower(id)
-  	returnee = Array.new
-  	follow.each { |f|
-  		returnee.push(Account.find(f.followee))
-  	}
-  	return returnee
-  end
-  	 
-  def findAllFollowers( id )
-  	follows = Follow.find_all_by_followee(id)
-  	returnees = Array.new
-  	follows.each { |f|
-  		returnees.push(Account.find(f.follower))
-  	}
-  	return returnees
-  end
-  
   def findAllEvents( id )
   	Event.all
+  end
+  
+  def check_active( user )
+  	if !user.active || Time.now - user.last_login > 6.months
+  		flash[:error] = "You've been inactive for more than 6 months. "
+  		false
+  	else 
+  		true
+  	end
   end
 end
