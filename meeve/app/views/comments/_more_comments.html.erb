@@ -1,1 +1,16 @@
-show more later
+<% for i in s_num..e_num  do %>
+	<% c = event.comments.reverse.at(i) %>
+	<% if c != nil then %>
+		<%= content_tag :div, :id => "comment" + c.cid.to_s, :class => "diag_comment" do %>
+			<span class="commenter"><%= c.commenter %></span>
+			<%= c.body %>
+			<% if c.aid == session[:id] %>
+				<span class="comment_remove">
+					<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %>
+				</span>
+			<% end %>
+			<br/>
+			<span class="time_hint"><%= time_ago_in_words(c.timestamp) %>ago</span>
+		<% end %>
+	<% end %>
+<% end %>

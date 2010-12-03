@@ -30,7 +30,12 @@ class CommentsController < ApplicationController
   def show_more
   @event = Event.find(params[:eid])
     if request.xhr?
-      @num = params[:num_of_comments]
+      @num = params[:num_of_comments].to_i
+      @end_num = @num + 5
+      if @event.comments.size-1 < @end_num
+        @end_num = @event.comments.size - 1
+      end
+
       render "comments/show_more"
     end 
   end

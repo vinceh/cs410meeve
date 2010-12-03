@@ -11,10 +11,16 @@ goog.require('goog.ui.ComboBox');
  */
 $(document).ready(function () {
 	$("div#map_canvas").hide();
+	
+	// Check and set map canvas
 	checkMapCanvas();
 	setMapCanvas();
+	
+	// Check and set privacy option
 	checkPrivacy();
 	setPrivacy();
+	
+	// Set repeat option
 	setRepeat();
 });
 

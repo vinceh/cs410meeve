@@ -44,10 +44,6 @@ class MainController < ApplicationController
 
   def profile
     
-    if session[:id] == nil
-      redirect_to :action => index
-    end
-    
     @events = find_all_events_to_view(session[:id])
     
     # For followings and followers

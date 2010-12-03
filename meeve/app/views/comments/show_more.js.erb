@@ -1,5 +1,7 @@
 var eid = <%= @event.event_id %>;
-var more_comments = "<%= escape_javascript (render "comments/more_comments") %>";
+var more_comments = "<%= escape_javascript (render "comments/more_comments", :event => @event, :s_num => @num, :e_num => @end_num) %>";
 
-$("div#comment_block_" + eid).append("<p>" + more_comments + "</p>");
+$("div#comment_block_" + eid).append(more_comments);
 
+var num = $("#num_of_comments").val();
+$("#num_of_comments").val(parseInt(num) + 5);

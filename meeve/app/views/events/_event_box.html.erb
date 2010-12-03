@@ -20,7 +20,7 @@
 			<div id="map_canvas"></div>
 		</td>
 		<td class="comments_dia">
-			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
+			<!--<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
 				<% event.comments.reverse.each do |c| %>
 					<%= content_tag :div, :id => "comment" + c.cid.to_s, :class => "diag_comment" do %>
 						<span class="commenter"><%= c.commenter %></span>
@@ -35,6 +35,33 @@
 					<% end %>
 				<% end %>
 			<% end %>
+			-->
+		
+			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
+				<% for i in 0..4 do %>
+						<% c = event.comments.reverse.at(i) %>
+						<% if c != nil then %>
+							<%= content_tag :div, :id => "comment" + c.cid.to_s, :class => "diag_comment" do %>
+								<span class="commenter"><%= c.commenter %></span>
+								<%= c.body %>
+								<% if c.aid == session[:id] %>
+								<span class="comment_remove">
+									<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => c.cid }, :remote => true %>
+								</span>
+								<% end %>
+								<br/>
+								<span class="time_hint"><%= time_ago_in_words(c.timestamp) %> ago</span>
+							<% end %>
+						<% end %>
+				<% end %>
+			<% end %>
+			<% if event.comments.reverse.size > 5 then %>
+				<%= form_tag( {:controller => :comments, :action => :show_more, :eid => event.event_id}, :remote => true ) do -%>					
+					<%= hidden_field_tag :num_of_comments, 5 %>					
+					<%= submit_tag "Show more" %>						
+				<% end -%>	
+			<% end %>
+
 			<%= form_for @comment, :url => { :controller => :comments, :action => :create }, :remote => true do |f| %>
 				<%= f.hidden_field :event_id, :value => event.event_id %>
 				<%= f.hidden_field :commenter, :value => @user.first_name + " " + @user.last_name %>
@@ -43,24 +70,6 @@
 				<br/>
 				<%= f.submit "Comment", :class => "submit" %>
 			<% end %>
-		<!-- show more later	
-			<%= content_tag :div, :id => "comment_block_" + event.event_id.to_s do %>
-				<% for i in 0..4 do %>
-						<% @c = event.comments.reverse.at(i) %>
-						<% if @c != nil then %>
-							<%= content_tag :div, :id => "comment" + @c.cid.to_s do %>
-								<b><%= @c.commenter %></b>
-								<%= @c.body %>
-								<%= link_to 'x', {:controller => :comments, :action => :remove, :cid => @c.cid }, :remote => true %><br/>
-							<% end %>
-						<% end %>
-				<% end %>
-			<% end %>
-			<% if event.comments.reverse.size > 5 then %>
-				<%= hidden_field_tag 'num_of_comments', 5 %>
-				<%= link_to "Show more", {:controller => :comments, :action => :show_more, :eid => event.event_id}, :remote => true %>
-			<% end %>
-		-->
 		</td>
 	</tr>
 	<tr>
