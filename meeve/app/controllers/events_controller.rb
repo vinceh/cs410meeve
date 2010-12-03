@@ -18,20 +18,6 @@ class EventsController <  ApplicationController
 	if request.post?
       @event = Event.new(params[:event])
       @event.aid = session[:id]
-      
-      account = Account.find(session[:id])
-      
-      # Google calendar stuff
-      service = GCal4Ruby::Service.new
-      service.authenticate("meevecalendar@gmail.com", "jtantongco")
-	  calendar = GCal4Ruby::Calendar.find(
-											service, 
-											{:id => account.gcal})
-      gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
-											 	:title => @event.title,
-												:start_time => Time.parse(@event.start_date.to_s), 
-												:end_time => Time.parse(@event.end_date.to_s), 
-												:where => @event.location})
                         
       # Check if the event is private
       @user_event = nil;
@@ -39,10 +25,6 @@ class EventsController <  ApplicationController
       if params[:repeat_option]
         @user_event = User_event.new
       end
-      
-      gevent.save
-      #gevent.id is empty string, until the event is committed to google calendar
-      @event.gevent = gevent.id
       
       if @event.save
 
@@ -196,6 +178,29 @@ class EventsController <  ApplicationController
       gevent.end_time = Time.parse("31-01-2000 at 12:31 PM")
       gevent.where = "Deleted"
       gevent.save
+      
+      @joined = Joinevent.find(:all, :conditions => {:eid => @event.event_id})
+	  @joined.each{ |j|
+			joiner = Account.find(j.aid)
+			cal = GCal4Ruby::Calendar.find(
+											service, 
+											{:id => joiner.gcal})
+			#edit/erase the existing event    	
+			gev = GCal4Ruby::Event.find(
+											service, 
+											{:id => j.geventid})
+			gev.title = "Deleted"
+			gev.start_time = Time.parse("31-01-2000 at 12:30 PM")
+			gev.end_time = Time.parse("31-01-2000 at 12:31 PM")
+			gev.where = "Deleted"
+
+			gev.save
+			#end edit
+			
+			j.destroy
+		}
+
+      
       if @event.destroy
         
         if @user_event != nil
