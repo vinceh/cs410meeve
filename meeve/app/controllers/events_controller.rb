@@ -54,6 +54,8 @@ class EventsController <  ApplicationController
           end
         end
         
+        join_event_save(@event.event_id)
+        
         flash[:success] = "Your event has been successfully posted!"
         redirect_to :controller => :main, :action => :profile
       end

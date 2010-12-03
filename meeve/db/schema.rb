@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(:version => 20101022022539) do
   
   create_table "accounts", :primary_key => "aid", :force => true do |t|
+  	t.datetime "last_login", :default => Time.now
   	t.string "login_name", :default => "", :null => false
   	t.string "password", :null => false
   	t.string "first_name", :default => "", :null => false

@@ -6,7 +6,7 @@
 		<tr>
 			<th><%= form.label "Email"%></th>
 			<td><%= form.text_field :email %></td>
-			<%= render("shared/signup_error", :error => "Email "+target.errors[:email][0]) if !target.errors[:password] %>
+			<%= render("shared/signup_error", :error => "Email "+target.errors[:email][0]) if !target.errors[:email].empty? %>
 		</tr>
 		<tr>
 			<th></th>
