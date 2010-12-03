@@ -16,7 +16,7 @@ class MainController < ApplicationController
   				user.update_attribute(:last_login,Time.now)
   				redirect_to :action => :profile
   			else
-  				flash[:error] += "Invalid login"
+  				flash[:error] = "Invalid login"
   				redirect_to :action => :index, :email => params[:account][:email]
   			end
   		else

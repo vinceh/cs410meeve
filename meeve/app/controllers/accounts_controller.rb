@@ -10,12 +10,18 @@ class AccountsController < ApplicationController
 
   
   def friend_profile
-  	@user = Account.find(params[:aid])
-  	@events = find_all_events_to_view(params[:aid])
-  	@alrdy_follow = Follow.find_by_follower_and_followee(session[:id], @user.aid)
   	
-  	@following = findAllFollowing(params[:aid])
-  	@followings = findAllFollowers(params[:aid])
+  	if params[:aid] == session[:id].to_s
+  		redirect_to :controller => :main, :action => :profile
+  	else
+  		flash[:error] = params[:aid] == session[:id]
+	  	@user = Account.find(params[:aid])
+	  	@events = find_all_events_to_view(params[:aid])
+	  	@alrdy_follow = Follow.find_by_follower_and_followee(session[:id], @user.aid)
+	  	
+	  	@following = findAllFollowing(params[:aid])
+	  	@followings = findAllFollowers(params[:aid])
+  	end
   	
   end
   
@@ -73,18 +79,21 @@ class AccountsController < ApplicationController
   			add = 1
   			@freefor = 18000
   			@freefor = @freefor.to_f
-  			@timenow = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-  			@events = Event.find_all_by_aid(people.followee)
-  			@events.each do |eve|
-				if (eve.start_date.to_s <= @timenow && @timenow < eve.end_date.to_s)
-  					add = 0
-  					break;
-  				elsif (@timenow < eve.start_date.to_s)
-  					if ((eve.start_date.to_time - @timenow.to_time) < @freefor)
-  						@freefor = eve.start_date.to_time - @timenow.to_time
+  			@timenow = Time.now.utc.strftime("%Y-%m-%d %H:%M:%S")
+  			@jevents = Joinevent.find_all_by_aid(people.followee)
+  			@jevents.each do |jeve|
+  				@events = Event.find_all_by_event_id(jeve.eid)
+  				@events.each do |eve|
+					if (eve.start_date.to_s <= @timenow && @timenow < eve.end_date.to_s)
+  						add = 0
+  						break;
+  					elsif (@timenow < eve.start_date.to_s)
+	  					if ((eve.start_date.to_time - @timenow.to_time) < @freefor)
+  							@freefor = eve.start_date.to_time - @timenow.to_time
+  						end
   					end
-  				end
   			
+  				end
   			end
   			if (add == 1)
   				@tempo = Account.find_by_aid(people.followee)
