@@ -1,0 +1,8 @@
+		<span class="main_title">following</span>
+		<% following.each do |follow| %>
+			<li><%= link_to "#{follow.first_name+" "+follow.last_name}", {:controller => :accounts, :action => :friend_profile, :aid => follow.aid}, :class => "follow_friend_link" %></li>
+		<% end %>
+		<span class="main_title">followers</span>
+		<% followings.each do |follows| %>
+			<li><%= link_to "#{follows.first_name+" "+follows.last_name}", {:controller => :accounts, :action => :friend_profile, :aid => follows.aid}, :class => "follow_friend_link" %></li>
+		<% end %>

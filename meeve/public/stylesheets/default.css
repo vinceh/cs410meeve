@@ -79,6 +79,18 @@ body {
 	height: 29px;
 	width: 700px;
 }
+	.profile_bar #profile_logo {
+		margin-top: 5px;
+		float: left;
+		display: block;
+		text-indent: -9999px;
+		width: 92px;
+		min-height: 5px;
+		background-image: url("../images/logo/meevesmaller.png");
+		background-repeat: no-repeat;
+		background-position: center;
+		padding: 6px 0px 6px 0px;
+	}
 	.profile_bar img {
 		padding: 6px 0px 6px 0px;
 	}
@@ -237,7 +249,15 @@ body {
 	color: #7db6ed;
 }
 
-.gray_submit {
+.friend_follow_link {
+	margin-bottom: 20px;
+}
+
+.friend_follow_link a {
+	font-size: 16px !important;
+}
+
+.gray_submit, .friend_follow_link a{
 	border-radius: 3px;
 	margin: 0px 0px 10px 0px;
 	padding: 4px 10px;
@@ -249,7 +269,7 @@ body {
 	color: black;
 	text-decoration: none;
 }
-.gray_submit:hover {
+.gray_submit:hover, .friend_follow_link a:hover {
 		
 	border: 1px solid #707070 ;
 	cursor: pointer;

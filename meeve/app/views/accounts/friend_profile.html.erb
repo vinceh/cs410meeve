@@ -1,48 +1,17 @@
-<table>
-  <tr>
-    <th>Last Name</th>
-    <td>
-    	<%=@friend.last_name %>
-    </td>
-  </tr>
-  
-  <tr>
-  	<th>First Name</th>
-  	<td>
-		<%=@friend.first_name %>
-	</td>
-  </tr>
-  
-  <tr>
-    <th>E-mail</th>
-    <td>
-		<a href="<%=@friend.email %>"><%= @friend.email %></a>
-	</td>
-  </tr>
-  
-  <tr>
-  	<th>Phone Number</th>
-  	<td>
-		<%=@friend.phone_number %>
-	</td>
-  </tr>
-  
+<%= render :partial => "main/profile_bar" %>
 
-</table>
+<div class="profile_main">
+	<%= render :partial => "events/event_pool", :locals => {:friend => true} %>
+	<div class="right_pool">
 
-	
-<br>
-	
-	
-<% if (nil == @alrdy_follow) %> 
-	
-	<div id="linksz">
-	<%= link_to 'Follow', {:action => :follow, :aid => @friend.aid}, :remote => true, :id => "follow_link" %>
-<% else %>
-	<%= link_to 'Unfollow', {:action => :unfollow, :aid => @friend.aid}, :remote => true, :id => "unfollow_link" %>
-<% end %>
-
+		<%= render :partial => "main/right_pool", :locals => {:following => @following, :followings => @followings} %>
+	</div>
 </div>
 
-<br>
-<%= link_to 'Back', :controller => :main, :action => :searching, :search => @first_s, :search_input => @second_s %><br>
+<div id="matching_results_box">
+	<div id="matching_results"></div>
+</div>
+
+<span id="who_is_free">
+	<%= link_to 'Who\'s free?', {:controller => :accounts, :action => :matching}, :remote => true %>
+</span>

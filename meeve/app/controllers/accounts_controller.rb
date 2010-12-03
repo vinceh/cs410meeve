@@ -10,11 +10,12 @@ class AccountsController < ApplicationController
 
   
   def friend_profile
-  	@friend = Account.find(params[:aid])
-  	@first_s = params[:search]
-  	@second_s = params[:search_input]
+  	@user = Account.find(params[:aid])
+  	@events = find_all_events_to_view(params[:aid])
+  	@alrdy_follow = Follow.find_by_follower_and_followee(session[:id], @user.aid)
   	
-  	@alrdy_follow = Follow.find_by_follower_and_followee(session[:id], @friend.aid)
+  	@following = findAllFollowing(params[:aid])
+  	@followings = findAllFollowers(params[:aid])
   	
   end
   
