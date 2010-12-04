@@ -58,7 +58,7 @@
 			<% if event.comments.reverse.size > 5 then %>
 				<%= form_tag( {:controller => :comments, :action => :show_more, :eid => event.event_id}, :remote => true ) do -%>					
 					<%= hidden_field_tag :num_of_comments, 5 %>					
-					<%= submit_tag "Show more" %>						
+					<%= submit_tag "Show more", :id => 'show_more_button' %>						
 				<% end -%>	
 			<% end %>
 

@@ -14,7 +14,7 @@ class AccountsController < ApplicationController
   		redirect_to :controller => :main, :action => :profile
   	else
 	  	@user = Account.find(params[:aid])
-	  	@events = find_all_events_to_view(params[:aid])
+	  	@events = find_all_friends_events(params[:aid])
 	  	@alrdy_follow = Follow.find_by_follower_and_followee(session[:id], @user.aid)
 	  	
 	  	@following = findAllFollowing(params[:aid])

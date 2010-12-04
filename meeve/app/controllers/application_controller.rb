@@ -25,7 +25,12 @@ class ApplicationController < ActionController::Base
     return newpass
   end
   
-  def find_all_events_to_view( id )
+  def find_all_friends_events( id )
+    @events = Event.find_all_by_aid_and_flag(id, 0)
+    return @events.sort_by { |e| e['start_date'] }
+  end
+  
+  def find_all_events_to_view( id )   
     
     @events = Array.new
     

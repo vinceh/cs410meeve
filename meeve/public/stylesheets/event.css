@@ -148,3 +148,15 @@ background-color: #fff;
 #repeat_option_link {
 	visibility: hidden;
 }
+
+#show_more_button {
+    background: white;
+    height: 30px;
+    width: 98%;
+    border-radius: 3px;
+    font: 12px arial;
+    border: 1px solid #C8C8C8;
+    background: url('../images/button3.png');
+    color: #5FB6ED;
+    text-decoration: none;
+}
