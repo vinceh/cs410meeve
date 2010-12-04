@@ -17,8 +17,8 @@ $(document).ready(function () {
 	setMapCanvas();
 	
 	// Check and set privacy option
-	//checkPrivacy();
-	//setPrivacy();
+	checkPrivacy();
+	setPrivacy();
 	
 	// Set repeat option
 	setRepeat();

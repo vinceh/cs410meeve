@@ -1,0 +1,28 @@
+.join_button {
+    border-radius: 3px;
+    font: 12px arial;
+    height: auto;
+    width: auto;
+    border: 1px solid #6C9;
+    background: #6C9;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.quit_button {
+    border-radius: 3px;
+    font: 12px arial;
+    height: auto;
+    width: auto;
+    border: 1px solid #ed5fbc;
+    background: #ed5fbc;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.join_button:hover, .quit_button:hover {		
+	border: 1px solid #707070 ;
+	cursor: pointer;
+}
