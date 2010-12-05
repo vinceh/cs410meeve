@@ -62,6 +62,9 @@ class MainController < ApplicationController
     
   end
   
+  #take the input and splits it into two parts(first part being the first name and the second being the last name)
+  #and then it tries to match those first names and last names with the users' names in the database using
+  #regular expressions.
   def searching
   	@temp = Account.all
   	@own_temp = Account.find_by_aid(session[:id])

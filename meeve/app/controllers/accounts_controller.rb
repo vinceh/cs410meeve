@@ -23,6 +23,7 @@ class AccountsController < ApplicationController
   	
   end
   
+  #creates a tuple in the follow table and allows the user who's currently logged in to follow another person
   def follow
   	
   	@follow = Follow.new
@@ -43,7 +44,7 @@ class AccountsController < ApplicationController
   	end
   	
   end
-  
+  #deletes a tuple in the follow table and disables the follow function on another person
   def unfollow
   	
   		@fol = Follow.find_by_follower_and_followee(session[:id], params[:aid])
@@ -63,6 +64,9 @@ class AccountsController < ApplicationController
   	  	
   end
 
+  #takes a list of people who the user is following and for each of those people, finds another list of events that he/she
+  #has created or joined and for each of those events, check if it's before/after/contains the current time.
+  #It then outputs a sorted map of people who do not have an event right now with the amount of time they are free for.
   def matching
   	
   
