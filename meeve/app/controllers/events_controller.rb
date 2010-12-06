@@ -61,6 +61,7 @@ class EventsController <  ApplicationController
     end
   end
   
+  # Edit a selected event
   def edit
     @event = Event.find(params[:eid])
     
@@ -188,6 +189,7 @@ class EventsController <  ApplicationController
     end
   end
   
+  # Remove a selected event
   def remove
     @event = Event.find(params[:eid])
     
@@ -284,6 +286,7 @@ class EventsController <  ApplicationController
     
   end
   
+  # Show an individual event
   def show_event
     
     @user = Account.find(session[:id])
@@ -297,6 +300,7 @@ class EventsController <  ApplicationController
     end    
   end
   
+  # Join an event to attend
   def join_event
     
     @account = session[:id]
@@ -332,6 +336,7 @@ class EventsController <  ApplicationController
     end
   end
   
+  # Set not to attend a selected event
   def quit_event
     
     @event = Event.find(params[:eid]).event_id
@@ -361,10 +366,12 @@ class EventsController <  ApplicationController
     end
   end
   
+  # Dummy controller for repeat_event view
   def repeat_event
     
   end
   
+  # Dummy controller for set_repeat view
   def set_repeat
     
   end
