@@ -56,16 +56,8 @@ $(document).ready(function () {
   
   function checkPrivacy() {
   	
-//	var po = $("name=[event[flag]]").val();
-
   	var cb = $("#privacy_option");
 	
-//	if (po == 1) {
-//		cb.attr("checked", true);
-//	}
-//	else {
-//		cb.attr("checked", false);
-//	}
 	var rof = $("#repeat_option_field");
 	if (cb.is(':checked')) {
 		rof.show();

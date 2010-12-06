@@ -26,7 +26,8 @@ class CommentsController < ApplicationController
       redirect_to :controller => :main, :action => :profile
     end    
   end
-  
+
+  # Show more comment if comments to be displayed are more than 5
   def show_more
   @event = Event.find(params[:eid])
     if request.xhr?
