@@ -118,6 +118,7 @@ class AccountsController < ApplicationController
 
       if @account.save
       	####--------------- Calendar creation
+      	#creates a new gcalendar for each person that joins the meeve system and saves it to their tuple data
       	service = GCal4Ruby::Service.new
 		service.authenticate("meevecalendar@gmail.com", "jtantongco")
       	

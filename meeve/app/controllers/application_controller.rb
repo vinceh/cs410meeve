@@ -73,6 +73,8 @@ class ApplicationController < ActionController::Base
  end
   
    # When user creates an event, the user will automatically join the event.
+   # this method will create the corresponding event in the currently logged in user's google calendar
+   # this method for non-recurring events
    def join_event_save(eid)
     
     @event = Event.find(eid).event_id
@@ -101,6 +103,9 @@ class ApplicationController < ActionController::Base
     join.save
   end
   
+  # When user creates an event, the user will automatically join the event.
+  # this method will create the corresponding event in the currently logged in user's google calendar
+  # this method for recurring events
   def join_private_event_save(eid, array)
   	@event = Event.find(eid)
   	account = Account.find(session[:id])
@@ -129,6 +134,10 @@ class ApplicationController < ActionController::Base
 	join.save
   end
   
+  #helper method that processes the input recurrence data from the view 
+  # into the appropriate plug-in accepted format
+  # Ex: recurring every sunday and saturday is represented from the view as: 1000001
+  # plugin in will accept that as ["SU", "SA"]
   def process_recurrence(str)
   		result = Array.new
 		if str[0] == 49
