@@ -95,8 +95,63 @@ class ApplicationController < ActionController::Base
     join.eid = @event
     gevent.save
     join.geventid = gevent.id
-    
+    e = Event.find(eid)
+    e.gevent = gevent.id
+    e.save
     join.save
   end
   
+  def join_private_event_save(eid, array)
+  	@event = Event.find(eid)
+  	account = Account.find(session[:id])
+  	service = GCal4Ruby::Service.new
+    service.authenticate("meevecalendar@gmail.com", "jtantongco")
+	calendar = GCal4Ruby::Calendar.find(
+                                        service,
+                                        {:id => account.gcal})
+    gevent = GCal4Ruby::Event.new(service, { :calendar => calendar ,  
+												:title => @event.title,
+												:where => @event.location})
+	gevent.recurrence = GCal4Ruby::Recurrence.new
+	gevent.recurrence.start_time = Time.parse(@event.start_date.to_s)
+	gevent.recurrence.end_time = Time.parse(@event.end_date.to_s)
+	result = process_recurrence(array)
+	gevent.recurrence.frequency = {"weekly" => result}
+	gevent.save
+	
+	@event.gevent = gevent.id
+	@event.save
+	
+	join = Joinevent.new
+	join.aid = session[:id]
+	join.eid = eid
+	join.geventid = gevent.id
+	join.save
+  end
+  
+  def process_recurrence(str)
+  		result = Array.new
+		if str[0] == 49
+			result.push("SU")
+		end
+		if str[1] == 49
+			result.push("MO")
+		end
+		if str[2] == 49
+			result.push("TU")
+		end
+		if str[3] == 49
+			result.push("WE")
+		end
+		if str[4] == 49
+			result.push("TH")
+		end
+		if str[5] == 49
+			result.push("FR")
+		end
+		if str[6] == 49
+			result.push("SA")
+		end
+		return result
+   end  
 end

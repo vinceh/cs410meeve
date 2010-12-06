@@ -12,29 +12,18 @@ class EventsController <  ApplicationController
   # Creates a new event
   def new
     @event = Event.new
+    @now = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"
+    nexthour = Time.now + 1.hours
+    @later = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + nexthour.hour.to_s + ":" + Time.now.min.to_s + ":00"
     
     @now = Time.now.year.to_s + "-" + Time.now.month.to_s + "-" + Time.now.day.to_s + " " + Time.now.hour.to_s + ":" + Time.now.min.to_s + ":00"    
     @start_dt = @now
-    @end_dt = @now
+    @end_dt = @later
     
     if request.post?
       @event = Event.new(params[:event])
       @event.aid = session[:id]
-      
-      account = Account.find(session[:id])
-      
-      # Google calendar stuff
-      service = GCal4Ruby::Service.new
-      service.authenticate("meevecalendar@gmail.com", "jtantongco")
-      calendar = GCal4Ruby::Calendar.find(
-                                          service, 
-                                          {:id => account.gcal})
-      gevent = GCal4Ruby::Event.new(service, { 	:calendar => calendar , 
-											 	:title => @event.title,
-												:start_time => Time.parse(@event.start_date.to_s), 
-												:end_time => Time.parse(@event.end_date.to_s), 
-												:where => @event.location})
-      
+
       # Check if the event is private
       @user_event = nil;
       
@@ -42,10 +31,6 @@ class EventsController <  ApplicationController
       if params[:repeat_option]
         @user_event = User_event.new
       end
-      
-      gevent.save
-      #gevent.id is empty string, until the event is committed to google calendar
-      @event.gevent = gevent.id
       
       if @event.save
         
@@ -57,9 +42,10 @@ class EventsController <  ApplicationController
           if !(@user_event.save)
             #error_message
           end
+          join_private_event_save(@event.event_id, @user_event.recur_data.to_s)
+    	else 
+    	  join_event_save(@event.event_id)
         end
-        
-        join_event_save(@event.event_id)
         
         flash[:success] = "Your event has been successfully posted!"
         redirect_to :controller => :main, :action => :profile
@@ -69,7 +55,6 @@ class EventsController <  ApplicationController
   
   def edit
     @event = Event.find(params[:eid])
-    original_title = @event.title
     
     @start_dt = @event.start_date.year.to_s + "-" + @event.start_date.month.to_s + "-" + @event.start_date.day.to_s + " " + @event.start_date.hour.to_s + ":" + @event.start_date.min.to_s + ":00"
     @end_dt = @event.end_date.year.to_s + "-" + @event.end_date.month.to_s + "-" + @event.end_date.day.to_s + " " + @event.end_date.hour.to_s + ":" + @event.end_date.min.to_s + ":00"
@@ -81,6 +66,14 @@ class EventsController <  ApplicationController
     end
     
     if request.put?   	
+      	@event.update_attributes(params[:event])
+        original_id = @event.gevent
+        # If this is an user event, update the recurrsive table as well
+        if @user_event != nil
+          @user_event.update_attributes(:recur_data => params[:repeat_option_binary_hidden],
+										 :recur_end => params[:repeat_option_end_dt_hidden])
+		end
+
       @event.update_attributes(params[:event])
       
       # If this is an user event, update the recurrsive table as well
@@ -167,7 +160,7 @@ class EventsController <  ApplicationController
     @event = Event.find(params[:eid])
     
     # If the event is private
-    if @event.flag = 1
+    if @event.flag == 1
       @user_event = User_event.find_by_eid(params[:eid])
     end
     
